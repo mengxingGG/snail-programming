@@ -67,6 +67,7 @@ const ch12: Chapter = {
   sections: [
     {
       id: '12.1',
+      kind: 'demo',
       chapterId: 'ch12',
       title: 'Node.js 是什么',
       content: `## Node.js：在浏览器之外运行 JavaScript
@@ -134,6 +135,7 @@ console.log(\`百万次循环耗时：\${elapsed}ms\`)`,
     },
     {
       id: '12.2',
+      kind: 'demo',
       chapterId: 'ch12',
       title: '读写文件 — fs 模块',
       content: `## fs 模块：和文件系统打交道
@@ -203,6 +205,7 @@ console.log("临时文件已清理")`,
     },
     {
       id: '12.3',
+      kind: 'exercise',
       chapterId: 'ch12',
       title: '路径操作 — path 模块',
       content: `## path 模块：处理文件路径的利器
@@ -256,6 +259,7 @@ console.log("拼接结果：", joined)`,
     },
     {
       id: '12.4',
+      kind: 'demo',
       chapterId: 'ch12',
       title: '环境变量 — process.env',
       content: `## 环境变量：配置和秘密的存储地
@@ -332,6 +336,7 @@ const ch13: Chapter = {
   sections: [
     {
       id: '13.1',
+      kind: 'demo',
       chapterId: 'ch13',
       title: 'HTTP 是什么 — 浏览器怎么和服务器说话',
       content: `## HTTP：浏览器和服务器的对话方式
@@ -452,6 +457,7 @@ GET /users → 404 { message: 'Not Found' }`,
     },
     {
       id: '13.2',
+      kind: 'demo',
       chapterId: 'ch13',
       title: 'Express 最小应用 — 3 行启动',
       content: `## Express：最流行的 Node.js Web 框架
@@ -525,6 +531,7 @@ GET /articles/5 → { status: 200, data: { id: 5, title: '文章 5' } }`,
     },
     {
       id: '13.3',
+      kind: 'demo',
       chapterId: 'ch13',
       title: '路由 — 不同路径不同回应',
       content: `## 路由：根据请求路径，决定做什么
@@ -616,6 +623,7 @@ console.log(matchRoute(routes, "GET", "/notfound"))`,
     },
     {
       id: '13.4',
+      kind: 'exercise',
       chapterId: 'ch13',
       title: '请求和响应 — 收数据、发数据',
       content: `## req 和 res：收发数据的两个对象
@@ -703,6 +711,7 @@ console.log(\`状态: \${r3.status}\`, r3.data)`,
     },
     {
       id: '13.5',
+      kind: 'demo',
       chapterId: 'ch13',
       title: '中间件 — 请求的流水线',
       content: `## 中间件：请求经过的每一道关卡
@@ -784,6 +793,7 @@ ctx.logs.forEach(log => console.log(log))`,
     },
     {
       id: '13.5a',
+      kind: 'demo',
       chapterId: 'ch13',
       title: 'CORS — 跨域请求',
       content: `## CORS：浏览器的安全检查
@@ -847,6 +857,7 @@ console.log("  外部: " + (checkCors(prod, "https://evil.com") ? "\u2705 允许
     },
     {
       id: '13.6',
+      kind: 'demo',
       chapterId: 'ch13',
       title: '静态文件 + JSON 接口',
       content: `## 两种最常见的服务器响应
@@ -942,6 +953,7 @@ const ch14: Chapter = {
   sections: [
     {
       id: '14.1',
+      kind: 'demo',
       chapterId: 'ch14',
       title: '数据库是什么 — 比文件好在哪',
       content: `## 为什么用数据库？
@@ -1017,6 +1029,7 @@ young.forEach(u => console.log(\`  \${u.id}. \${u.name}\`))`,
     },
     {
       id: '14.2',
+      kind: 'demo',
       chapterId: 'ch14',
       title: '创建表 — 设计数据格式',
       content: `## CREATE TABLE：定义数据结构
@@ -1094,6 +1107,7 @@ console.log(\`共 \${users.length} 条记录\`)`,
     },
     {
       id: '14.3',
+      kind: 'demo',
       chapterId: 'ch14',
       title: '插入数据 — 往表里加记录',
       content: `## INSERT：插入一行数据
@@ -1173,6 +1187,7 @@ repo.all().forEach(a => console.log(\`  [\${a.id}] \${a.title}\`))`,
     },
     {
       id: '14.4',
+      kind: 'demo',
       chapterId: 'ch14',
       title: '查询数据 — 把想要的找出来',
       content: `## SELECT：查询数据
@@ -1252,6 +1267,7 @@ console.log(\`\\n共 \${total} 篇，平均浏览 \${avg} 次\`)`,
     },
     {
       id: '14.5',
+      kind: 'demo',
       chapterId: 'ch14',
       title: '更新和删除',
       content: `## UPDATE 和 DELETE：修改和删除数据
@@ -1338,6 +1354,7 @@ const ch15: Chapter = {
   sections: [
     {
       id: '15.1',
+      kind: 'demo',
       chapterId: 'ch15',
       title: 'REST 是什么 — 一套约定',
       content: `## REST：让 API 更有规律
@@ -1410,6 +1427,7 @@ DELETE  /articles/:id       删除文章`,
     },
     {
       id: '15.2',
+      kind: 'demo',
       chapterId: 'ch15',
       title: 'GET — 获取资源',
       content: `## GET：最常用的 HTTP 方法
@@ -1478,6 +1496,7 @@ console.log(\`搜索"TypeScript"：\${r2.total} 条\`)`,
     },
     {
       id: '15.3',
+      kind: 'demo',
       chapterId: 'ch15',
       title: 'POST — 创建资源',
       content: `## POST：提交数据，创建新记录
@@ -1559,6 +1578,7 @@ console.log(\`数据库共 \${db.length} 篇文章\`)`,
     },
     {
       id: '15.4',
+      kind: 'demo',
       chapterId: 'ch15',
       title: '数据验证 + 错误响应规范',
       content: `## 统一的数据验证和错误格式
@@ -1648,6 +1668,7 @@ const ch15a: Chapter = {
   sections: [
     {
       id: '15a.1',
+      kind: 'demo',
       chapterId: 'ch15a',
       title: '认证 vs 授权 — 你是谁？你能做什么？',
       content: `## 认证 (Authentication) vs 授权 (Authorization)
@@ -1742,6 +1763,7 @@ if (user) {
     },
     {
       id: '15a.2',
+      kind: 'demo',
       chapterId: 'ch15a',
       title: '密码安全 — 为什么不能存明文？',
       content: `## 密码哈希：你永远不知道用户的密码
@@ -1847,6 +1869,7 @@ console.log("错误密码验证：" + (wrong ? "⛔ 通过了(问题！)" : "✅
     },
     {
       id: '15a.3',
+      kind: 'demo',
       chapterId: 'ch15a',
       title: 'JWT — JSON Web Token',
       content: `## JWT：一张"数字身份证"
@@ -1980,6 +2003,7 @@ export const part3Chapters: Chapter[] = [ch12, ch13, ch14, ch15, ch15a,
     sections: [
       {
         id: 'p3.1',
+        kind: 'demo',
         chapterId: 'p3',
         title: '项目搭建 + 路由设计',
         content: `## 搭建 Express REST API 项目
@@ -2080,6 +2104,7 @@ console.log(\`\\n共 \${routes.length} 个端点\`)`,
       },
       {
         id: 'p3.2',
+        kind: 'demo',
         chapterId: 'p3',
         title: '数据库 + CRUD',
         content: `## 用 better-sqlite3 实现 CRUD
@@ -2197,6 +2222,7 @@ id=2：学习笔记
       },
       {
         id: 'p3.3',
+        kind: 'demo',
         chapterId: 'p3',
         title: '中间件 + 错误处理 + 测试',
         content: `## 中间件、错误处理和 API 测试

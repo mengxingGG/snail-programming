@@ -11,15 +11,15 @@ import { allQuestions } from './exams';
 import { applyCourseAuthoring } from '../course-authoring';
 import { enrichCourseChapters } from '../course-metadata';
 
-const chapters = enrichCourseChapters(
-  applyCourseAuthoring([
-    ...part1Chapters,
-    ...part2Chapters,
-    ...part3Chapters,
-    ...part4Chapters,
-    ...part5Chapters,
-  ], 'python'),
-);
+export const rawPythonCourseChapters = [
+  ...part1Chapters,
+  ...part2Chapters,
+  ...part3Chapters,
+  ...part4Chapters,
+  ...part5Chapters,
+];
+
+const chapters = enrichCourseChapters(applyCourseAuthoring(rawPythonCourseChapters, 'python'));
 
 export const pythonCourseData: CourseData = {
   chapters,

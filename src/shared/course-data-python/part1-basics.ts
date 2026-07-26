@@ -165,6 +165,7 @@ const chMinus1: Chapter = {
   sections: [
     {
       id: '-1.1',
+      kind: 'demo',
       chapterId: 'ch-1',
       title: '计算机是什么？—— 硬件与软件',
       content: `## 计算机是什么？
@@ -219,6 +220,7 @@ Python 版本：3.13.0
     },
     {
       id: '-1.2',
+      kind: 'demo',
       chapterId: 'ch-1',
       title: '什么是代码？编程到底在干什么？',
       content: `## 什么是代码？
@@ -287,6 +289,7 @@ print("\\n💡 这就是编程的本质：输入 → 处理 → 输出")`,
     },
     {
       id: '-1.3',
+      kind: 'demo',
       chapterId: 'ch-1',
       title: '什么是文件？什么是程序？',
       content: `## 文件：计算机世界的"容器"
@@ -367,6 +370,7 @@ print("💡 运行它：python 文件名.py")`,
     },
     {
       id: '-1.4',
+      kind: 'demo',
       chapterId: 'ch-1',
       title: '第一次运行 Python —— 不需要懂代码！',
       content: `## 你的第一个 Python 程序
@@ -454,6 +458,7 @@ print("✨ 这就编程——你告诉计算机做什么，它就照做！")`,
     },
     {
       id: '-1.5',
+      kind: 'demo',
       chapterId: 'ch-1',
       title: '键盘操作与编程常用快捷键',
       content: `## 编程中常用的键盘操作
@@ -535,6 +540,7 @@ print(f"✅ 太棒了！{name}，你已经在用键盘和程序交互了！")`,
     },
     {
       id: '-1.6',
+      kind: 'demo',
       chapterId: 'ch-1',
       title: '融会贯通：你的第一个"编程思维"练习',
       content: `## 融会贯通：把今天学的连起来
@@ -617,6 +623,7 @@ const ch0: Chapter = {
   sections: [
     {
       id: '0.1',
+      kind: 'demo',
       chapterId: 'ch0',
       title: '编程环境介绍：你的编程工作台',
       content: `## 欢迎来到编程世界！
@@ -691,6 +698,7 @@ print("📌 提示：修改上面的文字，然后重新运行，看看变化�
     },
     {
       id: '0.2',
+      kind: 'demo',
       chapterId: 'ch0',
       title: '安装 Python 与 VS Code',
       content: `## 安装 Python 和 VS Code
@@ -754,6 +762,7 @@ Python 版本：3.13.0（**版本号会不同**）
     },
     {
       id: '0.3',
+      kind: 'demo',
       chapterId: 'ch0',
       title: '终端基础：cd, ls, mkdir, python 命令',
       content: `## 终端基础操作
@@ -836,6 +845,7 @@ print("  python my_script.py（Windows）")`,
     },
     {
       id: '0.4',
+      kind: 'demo',
       chapterId: 'ch0',
       title: '虚拟环境 venv 入门',
       content: `## 虚拟环境：每个项目独立的"隔离房间"
@@ -946,6 +956,7 @@ myenv/
     },
     {
       id: '0.5',
+      kind: 'demo',
       chapterId: 'ch0',
       title: 'pip 与包管理',
       content: `## pip：Python 的"应用商店"
@@ -1060,6 +1071,7 @@ const ch1: Chapter = {
   sections: [
     {
       id: '1.1',
+      kind: 'demo',
       chapterId: 'ch1',
       title: 'Python 是什么？和 TypeScript 有什么不同',
       content: `## Python 是什么？
@@ -1097,6 +1109,7 @@ print("我今年", age, "岁")`,
     },
     {
       id: '1.2',
+      kind: 'demo',
       chapterId: 'ch1',
       title: '安装 Python + 我们的工具',
       content: `## 安装 Python 和我们的工具
@@ -1139,6 +1152,7 @@ print("一切就绪，开始学习吧！🐍")`,
     },
     {
       id: '1.3',
+      kind: 'exercise',
       chapterId: 'ch1',
       title: 'Hello, World! — print() 的第一声问候',
       content: `## Hello, World!
@@ -1186,7 +1200,7 @@ print("你好，Python！")
 print("我的名字叫：小明")`,
       expectedOutput: `Hello, World!
 你好，Python！
-我的名字叫：小明`,
+我的名字叫：你的名字`,
       hint: '把"小明"换成你的名字，再点运行——Python 不需要编译，改完立刻跑！',
       validation: pythonIntroRenameValidation,
     },
@@ -1203,6 +1217,7 @@ const ch2: Chapter = {
   sections: [
     {
       id: '2.1',
+      kind: 'exercise',
       chapterId: 'ch2',
       title: '变量 — Python 不需要声明类型',
       content: `## 变量：给数据起个名字
@@ -1265,6 +1280,7 @@ print("明年年龄：", age)`,
     },
     {
       id: '2.2',
+      kind: 'exercise',
       chapterId: 'ch2',
       title: '字符串 — 单引号双引号三引号',
       content: `## 字符串：装文字的容器
@@ -1324,6 +1340,7 @@ print("取[0:1]：", full[0:1])`,
     },
     {
       id: '2.3',
+      kind: 'exercise',
       chapterId: 'ch2',
       title: '数字 — int/float + 算术运算',
       content: `## 数字类型：计算器超级版
@@ -1386,6 +1403,7 @@ print("幂：", a ** b)`,
     },
     {
       id: '2.4',
+      kind: 'exercise',
       chapterId: 'ch2',
       title: '布尔值 + type() 查看类型',
       content: `## 布尔值：只有两个答案
@@ -1463,6 +1481,7 @@ const ch3: Chapter = {
   sections: [
     {
       id: '3.1',
+      kind: 'exercise',
       chapterId: 'ch3',
       title: 'if/elif/else — Python 用缩进代替花括号',
       content: `## 条件判断：if 语句
@@ -1528,6 +1547,7 @@ print("评定结束")`,
     },
     {
       id: '3.2',
+      kind: 'exercise',
       chapterId: 'ch3',
       title: '比较运算符 — ==, !=, >, <, in',
       content: `## 比较运算符：判断真假
@@ -1589,6 +1609,7 @@ x < 90: True
     },
     {
       id: '3.3',
+      kind: 'exercise',
       chapterId: 'ch3',
       title: '三元表达式 — Python 风格的一行 if',
       content: `## 三元表达式：一行搞定条件赋值
@@ -1659,6 +1680,7 @@ const ch4: Chapter = {
   sections: [
     {
       id: '4.1',
+      kind: 'exercise',
       chapterId: 'ch4',
       title: 'for 循环 — Python 的 for 就是遍历',
       content: `## for 循环：遍历一切可遍历的东西
@@ -1731,6 +1753,7 @@ for ch in "Python":
     },
     {
       id: '4.2',
+      kind: 'exercise',
       chapterId: 'ch4',
       title: 'range() — 生成数字序列',
       content: `## range()：生成一串数字
@@ -1797,6 +1820,7 @@ range(1, 10, 3)：
     },
     {
       id: '4.3',
+      kind: 'exercise',
       chapterId: 'ch4',
       title: 'while 循环 + break/continue',
       content: `## while 循环：条件满足就一直跑
@@ -1874,6 +1898,7 @@ while + break：
     },
     {
       id: '4.3a',
+      kind: 'exercise',
       chapterId: 'ch4',
       title: '循环的实用模式 — 累加器、收集器、过滤器',
       content: `## 循环的三大实用模式
@@ -1948,6 +1973,7 @@ print("长度≥4的单词：", long_words)`,
     },
     {
       id: '4.4',
+      kind: 'exercise',
       chapterId: 'ch4',
       title: '列表推导式 — 把循环浓缩成一行',
       content: `## 列表推导式：Python 的魔法 ✨
@@ -2027,6 +2053,7 @@ const ch5: Chapter = {
   sections: [
     {
       id: '5.1',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: '字符串基础回顾 — 创建、拼接、索引',
       content: `## 字符串：快速回顾
@@ -2098,6 +2125,7 @@ print("新字符串：", upper_s)`,
     },
     {
       id: '5.2',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: '字符串方法 — upper/lower/strip/replace',
       content: `## 字符串方法：Python 的瑞士军刀
@@ -2154,6 +2182,7 @@ join： Hello, | Python | World!`,
     },
     {
       id: '5.3',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: 'f-string — 最优雅的字符串拼接',
       content: `## f-string：Python 最优雅的字符串拼接
@@ -2226,6 +2255,7 @@ print(f"总价：¥{price * count}")`,
     },
     {
       id: '5.4',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: '切片 — 取字符串的一段',
       content: `## 切片：取字符串的任意部分
@@ -2293,6 +2323,7 @@ print("[:-1]：", s[:-1])`,
     },
     {
       id: '5.5',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: '编码与原始字符串 — str vs bytes、r"..."',
       content: `## 字符串进阶：编码与原始字符串
@@ -2384,6 +2415,7 @@ bytes长度： 10
     },
     {
       id: '5.6',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: '字符串方法进阶 — startswith/endswith/isdigit/join/splitlines',
       content: `## 字符串方法进阶：更多实用工具
@@ -2493,6 +2525,7 @@ print(f"  无分隔符：{''.join(words)}")`,
     },
     {
       id: '5.7',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: '编码实践 — 常见编码问题与解决',
       content: `## 编码实战：中文乱码怎么办？
@@ -2603,6 +2636,7 @@ const ch6: Chapter = {
   sections: [
     {
       id: '6.1',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '列表是什么 — Python 最常用的容器',
       content: `## 列表：Python 最常用的容器
@@ -2668,6 +2702,7 @@ print("追加后：", fruits)`,
     },
     {
       id: '6.2',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '列表方法 — append/insert/remove/pop',
       content: `## 列表方法：增删改查
@@ -2749,6 +2784,7 @@ pop 最后一项： ['A', 'B', 'X', 'C', 'E']
     },
     {
       id: '6.3',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '排序 — sort() vs sorted()',
       content: `## 排序：sort() vs sorted()
@@ -2828,6 +2864,7 @@ sort()后原列表： [1, 2, 3, 5, 8]
     },
     {
       id: '6.4',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '切片 + 列表推导式',
       content: `## 列表切片 + 推导式 = 超级组合
@@ -2899,6 +2936,7 @@ print("切片赋值后：", nums)`,
     },
     {
       id: '6.5',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '元组 — 不可变的列表',
       content: `## 元组：不可变的列表
@@ -2968,6 +3006,7 @@ R = 255 G = 128 B = 0
     },
     {
       id: '6.6',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '列表方法进阶 — index, count, extend, clear',
       content: `## 列表方法进阶：更多实用操作
@@ -3062,6 +3101,7 @@ append [3,4]：[1, 2, [3, 4]]
     },
     {
       id: '6.7',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '列表复制 — 浅拷贝 vs 深拷贝',
       content: `## 浅拷贝 vs 深拷贝：列表复制的陷阱
@@ -3169,6 +3209,7 @@ copy.copy： [10, 20, 30]`,
     },
     {
       id: '6.8',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: 'enumerate() 与 zip() — 遍历技巧',
       content: `## enumerate() 和 zip()：Python 的遍历利器
@@ -3301,6 +3342,7 @@ const ch7: Chapter = {
   sections: [
     {
       id: '7.1',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '字典是什么 — 键值对的威力',
       content: `## 字典：Python 最强数据结构
@@ -3372,6 +3414,7 @@ print("整个字典：", student)`,
     },
     {
       id: '7.2',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '字典操作 — get/items/keys/values',
       content: `## 字典常用操作
@@ -3454,6 +3497,7 @@ phone: 无
     },
     {
       id: '7.3',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '嵌套字典 — 字典里放字典',
       content: `## 嵌套字典：组织复杂数据
@@ -3531,6 +3575,7 @@ print(f"\\n总分最高：{best['name']}")`,
     },
     {
       id: '7.4',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '集合 — 去重 + 交并差运算',
       content: `## 集合：自动去重的容器
@@ -3615,6 +3660,7 @@ const ch8: Chapter = {
   sections: [
     {
       id: '8.1',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: 'def — 定义你的第一个函数',
       content: `## def：定义函数
@@ -3695,6 +3741,7 @@ for i in range(3):
     },
     {
       id: '8.2',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '参数 — 位置参数、默认参数、关键字参数',
       content: `## 参数：给函数传数据
@@ -3769,6 +3816,7 @@ order("鼠标", 149, discount=0.1)`,
     },
     {
       id: '8.3',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '返回值 — return 的妙用',
       content: `## return：函数把结果"交出来"
@@ -3847,6 +3895,7 @@ for s in scores:
     },
     {
       id: '8.4',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '*args 和 **kwargs — 接收任意数量的参数',
       content: `## *args 和 **kwargs：灵活的参数收集
@@ -3935,6 +3984,7 @@ sum(): 0
     },
     {
       id: '8.5',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '函数是一等对象 — 把函数当参数传递',
       content: `## 函数是一等对象：函数可以当变量用
@@ -4030,6 +4080,7 @@ multiply(3,5) = 15
     },
     {
       id: '8.6',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '作用域 — 局部变量 vs 全局变量',
       content: `## 作用域：变量的"势力范围"
@@ -4117,6 +4168,7 @@ show_info()`,
     },
     {
       id: '8.7',
+      kind: 'demo',
       chapterId: 'ch8',
       title: '生成器与 yield — 惰性产生数据',
       content: `## 生成器：按需生产数据的"工厂"
@@ -4245,6 +4297,7 @@ const ch9: Chapter = {
   sections: [
     {
       id: '9.1',
+      kind: 'demo',
       chapterId: 'ch9',
       title: '读文件 — open() + with 语句',
       content: `## 读文件：Python 最经典的模式
@@ -4323,6 +4376,7 @@ except Exception as e:
     },
     {
       id: '9.2',
+      kind: 'demo',
       chapterId: 'ch9',
       title: '写文件 — 写入和追加',
       content: `## 写文件：写入和追加
@@ -4397,6 +4451,7 @@ with open("log.txt", "r", encoding="utf-8") as f:
     },
     {
       id: '9.3',
+      kind: 'demo',
       chapterId: 'ch9',
       title: '文件路径 — os.path + pathlib',
       content: `## 文件路径处理
@@ -4492,6 +4547,7 @@ const ch9a: Chapter = {
   sections: [
     {
       id: '9a.1',
+      kind: 'demo',
       chapterId: 'ch9a',
       title: '常见错误类型 — SyntaxError/NameError/TypeError/IndexError/KeyError',
       content: `## 常见错误类型：认识你的"敌人"
@@ -4574,6 +4630,7 @@ print("\\n✅ 以上都是故意触发的——实际编程中，知道错误类
     },
     {
       id: '9a.2',
+      kind: 'demo',
       chapterId: 'ch9a',
       title: '读懂 Traceback — 从下往上读',
       content: `## Traceback：Python 的"破案线索"
@@ -4670,6 +4727,7 @@ print("   Traceback 会从 divide() → calculate() → main() 逐层上报")`,
     },
     {
       id: '9a.3',
+      kind: 'demo',
       chapterId: 'ch9a',
       title: 'try/except/else/finally — 优雅的错误处理',
       content: `## try/except/else/finally：完整的错误处理
@@ -4790,6 +4848,7 @@ print("\\n✅ 观察 finally——它在每种情况下都执行了！")`,
     },
     {
       id: '9a.4',
+      kind: 'exercise',
       chapterId: 'ch9a',
       title: 'print 调试法 + VS Code 断点调试',
       content: `## 调试实战：找到并修复 bug
@@ -4882,6 +4941,7 @@ print("中位数 [1,2,3,4]：", median([1, 2, 3, 4]))`,
     },
     {
       id: '9a.5',
+      kind: 'demo',
       chapterId: 'ch9a',
       title: '橡皮鸭调试法 + 防御性编程',
       content: `## 橡皮鸭调试法与防御性编程
@@ -4993,6 +5053,7 @@ const ch9b: Chapter = {
   sections: [
     {
       id: '9b.1',
+      kind: 'exercise',
       chapterId: 'ch9b',
       title: '为什么需要类型提示？',
       content: `## 类型提示：Python 的"可选安全带"
@@ -5061,6 +5122,7 @@ print(process_data_typed([1.5, 2.0, 3.5], 2.0))`,
     },
     {
       id: '9b.2',
+      kind: 'exercise',
       chapterId: 'ch9b',
       title: '基础类型注解：int, str, float, bool',
       content: `## 基础类型注解
@@ -5148,6 +5210,7 @@ print(f"小刚的分数：{find_score('小刚')}")`,
     },
     {
       id: '9b.3',
+      kind: 'exercise',
       chapterId: 'ch9b',
       title: 'Union, Any, 与类型别名',
       content: `## 更灵活的类型注解
@@ -5244,6 +5307,7 @@ double(3.14) = 6.28
     },
     {
       id: '9b.4',
+      kind: 'exercise',
       chapterId: 'ch9b',
       title: '实战：给之前的代码加上类型提示',
       content: `## 实战练习：给备忘录代码加类型
@@ -5341,6 +5405,7 @@ const p1: Chapter = {
   sections: [
     {
       id: 'p1.1',
+      kind: 'demo',
       chapterId: 'p1',
       title: '需求分析 + 数据结构设计',
       content: `## 需求分析：我们要做什么？
@@ -5440,6 +5505,7 @@ for m in memos:
     },
     {
       id: 'p1.2',
+      kind: 'demo',
       chapterId: 'p1',
       title: '实现核心功能 — add/list/delete/search',
       content: `## 实现核心功能
@@ -5549,6 +5615,7 @@ list_all(memos)`,
     },
     {
       id: 'p1.3',
+      kind: 'demo',
       chapterId: 'p1',
       title: '保存到文件 + 启动加载',
       content: `## 持久化：让数据活过程序关闭

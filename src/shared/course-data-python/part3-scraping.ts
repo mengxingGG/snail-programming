@@ -133,6 +133,7 @@ const ch13: Chapter = {
   sections: [
     {
       id: '13.1',
+      kind: 'demo',
       chapterId: 'ch13',
       title: 'HTTP 是什么 — GET/POST 请求',
       content: `## 🌐 HTTP：互联网的通用语言
@@ -195,6 +196,7 @@ print("🌐 HTTP 是爬虫的基础 —— 理解了它，就理解了爬虫的�
     },
     {
       id: '13.2',
+      kind: 'demo',
       chapterId: 'ch13',
       title: 'requests.get() — 获取网页内容',
       content: `## 📥 requests.get()：一行代码拿下网页
@@ -277,6 +279,7 @@ print(response.text)
     },
     {
       id: '13.3',
+      kind: 'demo',
       chapterId: 'ch13',
       title: '状态码与响应头 — 判断是否成功',
       content: `## 🚦 状态码：服务器给你的「暗号」
@@ -363,6 +366,7 @@ https://httpbin.org/status/404 → status: 404
     },
     {
       id: '13.4',
+      kind: 'demo',
       chapterId: 'ch13',
       title: '带参数的请求 — headers/user-agent',
       content: `## 🎭 带参数的请求：伪装成「人」
@@ -477,6 +481,7 @@ const ch14: Chapter = {
   sections: [
     {
       id: '14.1',
+      kind: 'demo',
       chapterId: 'ch14',
       title: 'HTML 结构速览 — 标签/属性/选择器',
       content: `## 🏗️ HTML：网页的骨架
@@ -561,6 +566,7 @@ print("🏗️ HTML 是一棵标签树，学会定位标签就学会了提取数
     },
     {
       id: '14.2',
+      kind: 'demo',
       chapterId: 'ch14',
       title: 'BeautifulSoup — 解析 HTML',
       content: `## 🍜 BeautifulSoup：把混乱的 HTML 变成"靓汤"
@@ -660,6 +666,7 @@ print('链接:', soup.a['href'])
     },
     {
       id: '14.3',
+      kind: 'demo',
       chapterId: 'ch14',
       title: 'find/find_all — 精准定位元素',
       content: `## 🔍 find / find_all：你的精准搜索工具
@@ -781,6 +788,7 @@ Python Cookbook — ¥108.00
     },
     {
       id: '14.4',
+      kind: 'demo',
       chapterId: 'ch14',
       title: '提取数据 — 文字/链接/属性',
       content: `## 📦 提取数据：把网页内容变成 Python 数据
@@ -922,6 +930,7 @@ const ch15: Chapter = {
   sections: [
     {
       id: '15.1',
+      kind: 'demo',
       chapterId: 'ch15',
       title: 'Selenium 是什么 — 操控真实浏览器',
       content: `## 🤖 Selenium：让你的 Python 像人一样「用」浏览器
@@ -1008,6 +1017,7 @@ print("🤖 Selenium = 浏览器的遥控器，让 Python 像真人一样操作�
     },
     {
       id: '15.2',
+      kind: 'demo',
       chapterId: 'ch15',
       title: '打开网页 + 查找元素',
       content: `## 🌍 打开网页 + 查找元素
@@ -1121,6 +1131,7 @@ driver.quit()
     },
     {
       id: '15.3',
+      kind: 'demo',
       chapterId: 'ch15',
       title: '点击/输入/等待 — 模拟真人操作',
       content: `## 🎮 模拟真人操作：点击、输入、等待
@@ -1326,6 +1337,7 @@ driver.quit()
     },
     {
       id: '15.4',
+      kind: 'demo',
       chapterId: 'ch15',
       title: '无头模式 + 等待策略详解',
       content: `## 👻 无头模式 + 等待策略：爬虫的「隐身」与「耐心」
@@ -1468,6 +1480,7 @@ const ch16: Chapter = {
   sections: [
     {
       id: '16.1',
+      kind: 'demo',
       chapterId: 'ch16',
       title: 'CSV — 表格数据最通用的格式',
       content: `## 📊 CSV：最朴素也最可靠的存储格式
@@ -1569,6 +1582,7 @@ with open('books.csv', 'r', encoding='utf-8-sig') as f:
     },
     {
       id: '16.2',
+      kind: 'demo',
       chapterId: 'ch16',
       title: 'JSON — 和 API 打交道必备',
       content: `## 📦 JSON：数据交换的「世界语」
@@ -1713,6 +1727,7 @@ for post in data['posts']:
     },
     {
       id: '16.3',
+      kind: 'demo',
       chapterId: 'ch16',
       title: 'SQLite — 轻量数据库入门',
       content: `## 🗄️ SQLite：口袋里的小型数据库
@@ -1900,6 +1915,7 @@ conn.close()
     },
     {
       id: '16.4',
+      kind: 'demo',
       chapterId: 'ch16',
       title: 'pandas 预览 — 数据分析的瑞士军刀',
       content: `## 🐼 pandas 预览：数据分析的瑞士军刀
@@ -2072,6 +2088,7 @@ const p3: Chapter = {
   sections: [
     {
       id: 'p3.1',
+      kind: 'demo',
       chapterId: 'p3',
       title: '需求分析 + 爬取商品页面',
       content: `## 🛒 项目目标：做一个电商价格监控器
@@ -2181,6 +2198,7 @@ print(f'节省金额: ¥{original_price - current_price:.2f}')
     },
     {
       id: 'p3.2',
+      kind: 'demo',
       chapterId: 'p3',
       title: '价格比对 + 写入 CSV',
       content: `## 📊 历史价格记录 + 降价检测
@@ -2311,6 +2329,7 @@ os.remove(CSV_FILE)  # 清理测试文件
     },
     {
       id: 'p3.3',
+      kind: 'demo',
       chapterId: 'p3',
       title: '定时检查 + 降价通知',
       content: `## ⏰ 定时检查：让爬虫自动「站岗」

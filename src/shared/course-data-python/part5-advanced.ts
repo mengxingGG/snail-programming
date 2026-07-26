@@ -199,6 +199,7 @@ const ch21: Chapter = {
   sections: [
     {
       id: '21.1',
+      kind: 'demo',
       chapterId: 'ch21',
       title: 'Tkinter 是什么 — Python 自带的 GUI 库',
       content: `## 🖼️ Tkinter：Python 自带的图形界面库
@@ -241,6 +242,7 @@ print("Tkinter 已就绪！")`,
     },
     {
       id: '21.2',
+      kind: 'demo',
       chapterId: 'ch21',
       title: '窗口 + 按钮 + 标签 — 第一个 GUI 程序',
       content: `## 🪟 第一个 GUI 程序：窗口 + 按钮 + 标签
@@ -304,6 +306,7 @@ root.mainloop()`,
     },
     {
       id: '21.3',
+      kind: 'demo',
       chapterId: 'ch21',
       title: '输入框 + 事件绑定 — 和用户交互',
       content: `## ⌨️ 输入框 + 事件绑定：真正和用户互动
@@ -369,6 +372,7 @@ root.mainloop()`,
     },
     {
       id: '21.4',
+      kind: 'demo',
       chapterId: 'ch21',
       title: '布局 — pack / grid / place',
       content: `## 📐 Tkinter 三大布局方式
@@ -436,6 +440,7 @@ root.mainloop()`,
     },
     {
       id: '21.5',
+      kind: 'demo',
       chapterId: 'ch21',
       title: '实战：做一个计算器 — 综合应用',
       content: `## 🔢 实战：用 Tkinter 做一个计算器
@@ -565,6 +570,7 @@ const ch22: Chapter = {
   sections: [
     {
       id: '22.1',
+      kind: 'demo',
       chapterId: 'ch22',
       title: 'Pygame 是什么 — 游戏循环与精灵',
       content: `## 🎮 Pygame：用 Python 写真正的游戏
@@ -624,6 +630,7 @@ Pygame 已就绪！`,
     },
     {
       id: '22.2',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '创建窗口 + 画形状 — 第一帧画面',
       content: `## 🖼️ 创建 Pygame 窗口并画形状
@@ -707,6 +714,7 @@ pygame.quit()`,
     },
     {
       id: '22.3',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '键盘事件 — 让角色动起来',
       content: `## ⌨️ 键盘事件：让角色动起来
@@ -795,6 +803,7 @@ pygame.quit()`,
     },
     {
       id: '22.4',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '碰撞检测 + 分数 — 游戏的核心',
       content: `## 💥 碰撞检测 + 分数：游戏有输赢了
@@ -898,6 +907,7 @@ pygame.quit()`,
     },
     {
       id: '22.5',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '音效 + 动画 — 让游戏活起来',
       content: `## 🔊 音效 + 动画：给游戏注入灵魂
@@ -996,6 +1006,7 @@ pygame.quit()`,
     },
     {
       id: '22.6',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '精灵与精灵组 — 批量管理游戏角色',
       content: `## 👾 精灵与精灵组：批量管理游戏角色
@@ -1139,6 +1150,7 @@ pygame.quit()`,
     },
     {
       id: '22.7',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '游戏状态管理 — 标题/游玩/结束',
       content: `## 🔄 游戏状态管理：标题 → 游玩 → 结束
@@ -1289,6 +1301,7 @@ const p5: Chapter = {
   sections: [
     {
       id: 'p5.1',
+      kind: 'demo',
       chapterId: 'p5',
       title: '设计蛇的移动逻辑 + 食物生成',
       content: `## 🐍 贪吃蛇（一）：蛇的移动 + 食物生成
@@ -1422,6 +1435,7 @@ pygame.quit()`,
     },
     {
       id: 'p5.2',
+      kind: 'demo',
       chapterId: 'p5',
       title: '碰撞检测 + 分数面板',
       content: `## 🐍 贪吃蛇（二）：碰撞检测 + 分数面板
@@ -1572,6 +1586,7 @@ pygame.quit()`,
     },
     {
       id: 'p5.3',
+      kind: 'demo',
       chapterId: 'p5',
       title: '完善：加速 + 结束画面 + 重玩',
       content: `## 🐍 贪吃蛇（三）：加速 + 结束画面 + 重玩
@@ -1736,6 +1751,7 @@ const ch23: Chapter = {
   sections: [
     {
       id: '23.1',
+      kind: 'demo',
       chapterId: 'ch23',
       title: 'pandas 是什么 — DataFrame 的世界',
       content: `## 🐼 pandas：Python 数据分析的王者
@@ -1827,6 +1843,7 @@ print(f"平均分数：{df['分数'].mean():.1f}")`,
     },
     {
       id: '23.2',
+      kind: 'demo',
       chapterId: 'ch23',
       title: '读取数据 — CSV / Excel / JSON 一把梭',
       content: `## 📂 读取数据：CSV / Excel / JSON 全搞定
@@ -1917,6 +1934,7 @@ print(f"最高工资：{df['工资'].max()} 元")`,
     },
     {
       id: '23.3',
+      kind: 'demo',
       chapterId: 'ch23',
       title: '数据清洗 — 去重 / 填空 / 筛选',
       content: `## 🧹 数据清洗：把"脏数据"变干净
@@ -2028,6 +2046,7 @@ dtype: int64
     },
     {
       id: '23.4',
+      kind: 'demo',
       chapterId: 'ch23',
       title: '数据可视化 — matplotlib 画图',
       content: `## 📈 数据可视化：让数字会说话
@@ -2126,6 +2145,7 @@ print(f"总利润：{df['利润'].sum()} 元")`,
     },
     {
       id: '23.5',
+      kind: 'demo',
       chapterId: 'ch23',
       title: '实战：分析一份天气数据',
       content: `## 🌤️ 实战：用 pandas 分析天气数据
@@ -2274,6 +2294,7 @@ const ch24: Chapter = {
   sections: [
     {
       id: '24.1',
+      kind: 'demo',
       chapterId: 'ch24',
       title: 'Django vs Flask — 什么时候用重量级',
       content: `## 🏗️ Django vs Flask：选大还是选小？
@@ -2348,6 +2369,7 @@ Django = 全栈框架（拎包入住）
     },
     {
       id: '24.2',
+      kind: 'demo',
       chapterId: 'ch24',
       title: '创建项目 + Admin 后台 — 10 分钟建站',
       content: `## 🚀 创建 Django 项目 + Admin 后台
@@ -2460,6 +2482,7 @@ print("\\n然后访问 http://127.0.0.1:8000/admin 进入后台！")`,
     },
     {
       id: '24.3',
+      kind: 'demo',
       chapterId: 'ch24',
       title: 'Model + ORM — 不需要写 SQL',
       content: `## 🗄️ Django ORM：用 Python 操作数据库
@@ -2567,6 +2590,7 @@ Delete: Post.objects.filter(id=1).delete()
     },
     {
       id: '24.4',
+      kind: 'demo',
       chapterId: 'ch24',
       title: 'View + Template — MTV 模式',
       content: `## 🎨 View + Template：Django 的 MTV 模式实战
@@ -2682,6 +2706,7 @@ templates/  → HTML模板（Template层）
     },
     {
       id: '24.5',
+      kind: 'demo',
       chapterId: 'ch24',
       title: '用户认证 + 表单 — 自带登录系统',
       content: `## 🔐 用户认证 + 表单：Django 自带登录系统
@@ -2803,6 +2828,7 @@ print("\\n💡 <form> 标签在模板中写，Django 自动处理 CSRF 保护！
     },
     {
       id: '24.6',
+      kind: 'demo',
       chapterId: 'ch24',
       title: 'Django 中间件与信号 — 解耦利器',
       content: `## 🔗 Django 中间件与信号：请求管道的秘密
@@ -2949,6 +2975,7 @@ const ch25: Chapter = {
   sections: [
     {
       id: '25.1',
+      kind: 'demo',
       chapterId: 'ch25',
       title: 'FastAPI 是什么 — 比 Flask 快 5 倍',
       content: `## ⚡ FastAPI：Python 最快的 Web 框架
@@ -3039,6 +3066,7 @@ print("📖 ReDoc：http://127.0.0.1:8000/redoc")`,
     },
     {
       id: '25.2',
+      kind: 'demo',
       chapterId: 'ch25',
       title: '类型提示驱动 — 自动生成 API 文档',
       content: `## 📝 类型提示驱动：用 Python 类型定义 API
@@ -3148,6 +3176,7 @@ print("\\n💡 FastAPI 会在请求到达时就自动验证，不合法的请求
     },
     {
       id: '25.3',
+      kind: 'demo',
       chapterId: 'ch25',
       title: 'async/await — Python 的异步编程',
       content: `## ⏳ async/await：Python 的异步编程
@@ -3286,6 +3315,7 @@ const ch26: Chapter = {
   sections: [
     {
       id: '26.1',
+      kind: 'demo',
       chapterId: 'ch26',
       title: 'Scrapy 是什么 — 企业级爬虫框架',
       content: `## 🕷️ Scrapy：企业级爬虫框架
@@ -3397,6 +3427,7 @@ print("\\n⚡ 异步引擎：默认 16 并发，自带去重、重试、限速�
     },
     {
       id: '26.2',
+      kind: 'demo',
       chapterId: 'ch26',
       title: '创建 Spider — 爬取整个网站',
       content: `## 🕸️ 创建 Spider：爬取整个网站
@@ -3510,6 +3541,7 @@ print("\\n⚡ Scrapy 自动处理：并发、去重、重试、限速！")`,
     },
     {
       id: '26.3',
+      kind: 'demo',
       chapterId: 'ch26',
       title: 'Pipeline — 自动保存到数据库',
       content: `## 🔧 Pipeline：自动处理爬取的数据
@@ -3660,6 +3692,7 @@ const ch27: Chapter = {
   sections: [
     {
       id: '27.1',
+      kind: 'demo',
       chapterId: 'ch27',
       title: '服务器基础 — Linux / Nginx / Gunicorn',
       content: `## 🖥️ 服务器基础：让你的应用被全世界访问
@@ -3765,6 +3798,7 @@ print("\\n⚠️ 生产环境必须：DEBUG=False, 更换 SECRET_KEY, 设置 ALL
     },
     {
       id: '27.2',
+      kind: 'demo',
       chapterId: 'ch27',
       title: 'Docker — 一次打包到处运行',
       content: `## 🐳 Docker：一次打包，到处运行
@@ -3900,6 +3934,7 @@ print("\\n💡 Docker Hub 上有官方 Python、PostgreSQL、Redis 等镜像")`,
     },
     {
       id: '27.3',
+      kind: 'demo',
       chapterId: 'ch27',
       title: '部署你的 Flask / Django 应用',
       content: `## 🚀 实战：把你的应用部署到云端
@@ -4052,6 +4087,7 @@ const p6: Chapter = {
   sections: [
     {
       id: 'p6.1',
+      kind: 'demo',
       chapterId: 'p6',
       title: '需求分析 + 数据库设计',
       content: `## 📋 全栈管理系统（一）：需求分析 + 数据库设计
@@ -4164,6 +4200,7 @@ Department（部门）  ← 1对多 →  Employee（员工）
     },
     {
       id: 'p6.2',
+      kind: 'demo',
       chapterId: 'p6',
       title: 'Django 项目搭建 + Admin 定制',
       content: `## 🏗️ 全栈管理系统（二）：项目搭建 + Admin 定制
@@ -4295,6 +4332,7 @@ print("  python manage.py runserver")`,
     },
     {
       id: 'p6.3',
+      kind: 'demo',
       chapterId: 'p6',
       title: '业务逻辑 + 前端页面',
       content: `## 🎨 全栈管理系统（三）：CBV 视图 + Bootstrap 前端
@@ -4451,6 +4489,7 @@ print("  导航栏 + 表格 + 分页 + 表单 + 响应式")`,
     },
     {
       id: 'p6.4',
+      kind: 'demo',
       chapterId: 'p6',
       title: '部署准备 — 生产配置 + Gunicorn',
       content: `## 🚀 全栈管理系统（四）：部署准备
@@ -4622,6 +4661,7 @@ const ch25a: Chapter = {
   sections: [
     {
       id: '25a.1',
+      kind: 'demo',
       chapterId: 'ch25a',
       title: '为什么需要并发？—— 同步 vs 并发',
       content: `## 并发：让程序"一心多用"
@@ -4702,6 +4742,7 @@ print(f"加速比：{sync_time/thread_time:.1f}x（多线程让等待时间重�
     },
     {
       id: '25a.2',
+      kind: 'demo',
       chapterId: 'ch25a',
       title: 'threading 模块 — 多线程实战',
       content: `## 用 threading 实现并发
@@ -4834,6 +4875,7 @@ with ThreadPoolExecutor(max_workers=4) as ex:
     },
     {
       id: '25a.3',
+      kind: 'demo',
       chapterId: 'ch25a',
       title: 'asyncio — 异步编程入门',
       content: `## async/await：单线程高并发
@@ -4945,6 +4987,7 @@ asyncio.run(main())`,
     },
     {
       id: '25a.4',
+      kind: 'demo',
       chapterId: 'ch25a',
       title: '实战：并发爬虫 + 三种方案对比',
       content: `## 实战：用并发加速爬虫
@@ -5058,6 +5101,7 @@ const ch27a: Chapter = {
   sections: [
     {
       id: '27a.1',
+      kind: 'demo',
       chapterId: 'ch27a',
       title: '算法复杂度：大 O 表示法',
       content: `## 算法快不快？大 O 告诉你
@@ -5151,6 +5195,7 @@ n= 1000:  O(1)=0.000001s | O(n)=0.000020s | O(n²)=0.040000s`,
     },
     {
       id: '27a.2',
+      kind: 'demo',
       chapterId: 'ch27a',
       title: '常用数据结构速览',
       content: `## Python 内置数据结构的性能
@@ -5263,6 +5308,7 @@ print(f"  尾部追加（append）：{tail_append:.6f} 秒 — O(1)")`,
     },
     {
       id: '27a.3',
+      kind: 'demo',
       chapterId: 'ch27a',
       title: '二分查找 — 从 O(n) 到 O(log n)',
       content: `## 二分查找：每次排除一半
@@ -5370,6 +5416,7 @@ print(f"二分查找快 {linear_time/binary_time:.0f} 倍！")`,
     },
     {
       id: '27a.4',
+      kind: 'demo',
       chapterId: 'ch27a',
       title: '冒泡排序与选择排序 — 理解排序原理',
       content: `## 排序算法入门
@@ -5475,6 +5522,7 @@ print(f"按末字母排序：{words}")`,
     },
     {
       id: '27a.5',
+      kind: 'demo',
       chapterId: 'ch27a',
       title: '快速排序 — 分治思想实战',
       content: `## 快速排序：面试最常考的排序

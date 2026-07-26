@@ -19,7 +19,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "audit:prod": "node scripts/audit-gate.mjs",
-    "verify": "npm run typecheck && npm run lint && npm test"
+    "verify": "npm run typecheck && npm run lint && npm test",
+    "verify:exercises": "npx tsx scripts/verify-exercises.ts"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.1",

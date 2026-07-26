@@ -13,6 +13,7 @@ const ch9: Chapter = {
   sections: [
     {
       id: '9.1',
+      kind: 'demo',
       chapterId: 'ch9',
       title: '基础类型回顾 + null 和 undefined',
       content: `## 类型系统进阶
@@ -72,6 +73,7 @@ printLength("蜗牛编程")`,
     },
     {
       id: '9.2',
+      kind: 'exercise',
       chapterId: 'ch9',
       title: '联合类型 — 可以是 A 或 B',
       content: `## 联合类型：一个值可以有多种类型
@@ -140,6 +142,7 @@ console.log(describe("hello"))`,
     },
     {
       id: '9.3',
+      kind: 'demo',
       chapterId: 'ch9',
       title: 'type 别名 — 给类型起名字',
       content: `## type 别名：给复杂类型起一个简短的名字
@@ -211,6 +214,7 @@ console.log(colorLabel("blue"))`,
     },
     {
       id: '9.4',
+      kind: 'demo',
       chapterId: 'ch9',
       title: 'interface vs type — 什么时候用哪个',
       content: `## interface 可以扩展和合并
@@ -288,6 +292,7 @@ console.log(\`矩形面积：\${rect.area()}\`)`,
     },
     {
       id: '9.5',
+      kind: 'exercise',
       chapterId: 'ch9',
       title: '泛型入门 — 会变形的类型',
       content: `## 泛型：让类型"自适应"
@@ -388,6 +393,7 @@ undefined
     },
     {
       id: '9.6',
+      kind: 'exercise',
       chapterId: 'ch9',
       title: '类型断言与类型守卫',
       content: `## 告诉 TypeScript "相信我，我知道这是什么类型"
@@ -490,6 +496,7 @@ console.log(describe(true))`,
     },
     {
       id: '9.7',
+      kind: 'demo',
       chapterId: 'ch9',
       title: 'unknown vs any — 安全 vs 灵活',
       content: `## unknown：安全的"未知类型"
@@ -562,6 +569,7 @@ null：0`,
     },
     {
       id: '9.8',
+      kind: 'demo',
       chapterId: 'ch9',
       title: '泛型进阶 — 约束与多类型参数',
       content: `## 泛型不只是 <T>，还可以约束它
@@ -670,6 +678,7 @@ console.log(\`库存：\${safeGet(product, "inStock", false)}\`)
     },
     {
       id: '9.9',
+      kind: 'demo',
       chapterId: 'ch9',
       title: '常用工具类型 (Utility Types)',
       content: `## TypeScript 内置的"类型变换器"
@@ -788,6 +797,7 @@ console.log("状态标签：", statusLabels)`,
     },
     {
       id: '9.10',
+      kind: 'exercise',
       chapterId: 'ch9',
       title: '类型窄化 — 可辨识联合与穷尽检查',
       content: `## 让 TypeScript 帮你覆盖所有情况
@@ -882,6 +892,7 @@ states.forEach(s => console.log(renderState(s)))`,
     },
     {
       id: '9.11',
+      kind: 'demo',
       chapterId: 'ch9',
       title: 'keyof — 获取对象的键',
       content: `## keyof：把对象的键变成联合类型
@@ -987,6 +998,7 @@ const ch10: Chapter = {
   sections: [
     {
       id: '10.1',
+      kind: 'demo',
       chapterId: 'ch10',
       title: '为什么需要模块',
       content: `## 模块：把大文件拆成小文件
@@ -1055,6 +1067,7 @@ console.log(\`总计：\${formatCurrency(total)}\`)`,
     },
     {
       id: '10.2',
+      kind: 'demo',
       chapterId: 'ch10',
       title: 'export — 把东西分享出去',
       content: `## export：把函数、变量、类型对外开放
@@ -1117,6 +1130,7 @@ console.log(countWords("hello world foo"))`,
     },
     {
       id: '10.3',
+      kind: 'exercise',
       chapterId: 'ch10',
       title: 'import — 把别人的拿来用',
       content: `## import：引入其他模块导出的东西
@@ -1191,6 +1205,7 @@ testPhones.forEach(p => console.log(\`  \${p}: \${isPhone(p)}\`))`,
     },
     {
       id: '10.4',
+      kind: 'demo',
       chapterId: 'ch10',
       title: '默认导出 vs 命名导出',
       content: `## 两种导出方式的对比
@@ -1256,6 +1271,7 @@ emitter.emit("message", "蜗牛编程")`,
     },
     {
       id: '10.5',
+      kind: 'demo',
       chapterId: 'ch10',
       title: 'ES Modules vs CommonJS + 动态导入',
       content: `## 两套模块系统的对比
@@ -1366,6 +1382,7 @@ const ch10a: Chapter = {
   sections: [
     {
       id: '10a.1',
+      kind: 'exercise',
       chapterId: 'ch10a',
       title: '回调函数与高阶函数',
       content: `## 函数也可以当参数传
@@ -1472,6 +1489,7 @@ console.log(result.join("\\n"))`,
     },
     {
       id: '10a.2',
+      kind: 'exercise',
       chapterId: 'ch10a',
       title: '作用域与闭包 (Scope & Closure)',
       content: `## 变量能"活"在哪里？
@@ -1580,6 +1598,7 @@ const ch11: Chapter = {
   sections: [
     {
       id: '11.1',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '同步 vs 异步 — 等菜 vs 先做别的',
       content: `## 同步与异步：等待的哲学
@@ -1632,6 +1651,7 @@ console.log("2. 继续执行（不等 setTimeout）")`,
     },
     {
       id: '11.2',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '回调函数 — 最早的异步方式',
       content: `## 回调函数：把"做完之后"的逻辑传进去
@@ -1691,6 +1711,7 @@ fetchUser(1, (user) => {
     },
     {
       id: '11.3',
+      kind: 'exercise',
       chapterId: 'ch11',
       title: 'Promise — 一个承诺',
       content: `## Promise：代表"未来的一个值"
@@ -1769,6 +1790,7 @@ failMaybe(true)
     },
     {
       id: '11.4',
+      kind: 'exercise',
       chapterId: 'ch11',
       title: 'async/await — 写起来像同步',
       content: `## async/await：让异步代码看起来像同步
@@ -1833,6 +1855,7 @@ main()`,
     },
     {
       id: '11.5',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '错误处理 — try/catch',
       content: `## try/catch：捕获异步错误
@@ -1902,6 +1925,7 @@ main()`,
     },
     {
       id: '11.6',
+      kind: 'exercise',
       chapterId: 'ch11',
       title: 'Promise.all/race + 错误处理模式',
       content: `## 并发和错误处理的高级模式
@@ -2014,6 +2038,7 @@ const ch11a: Chapter = {
   sections: [
     {
       id: '11a.1',
+      kind: 'demo',
       chapterId: 'ch11a',
       title: '为什么要写测试？',
       content: `## 测试不是负担，是保险
@@ -2098,6 +2123,7 @@ console.log("\\n手动测试很麻烦！下一节用 Jest 自动化这个过程"
     },
     {
       id: '11a.2',
+      kind: 'demo',
       chapterId: 'ch11a',
       title: 'Jest 入门：安装、配置、第一个测试',
       content: `## Jest：最流行的 JavaScript/TypeScript 测试框架
@@ -2226,6 +2252,7 @@ console.log(\`\\n结果：\${results.filter(r => r.passed).length}/\${results.le
     },
     {
       id: '11a.3',
+      kind: 'demo',
       chapterId: 'ch11a',
       title: '测试函数：expect 匹配器',
       content: `## Jest 的 expect 匹配器大全
@@ -2340,6 +2367,7 @@ console.log("\\n全部匹配器测试完成！")`,
     },
     {
       id: '11a.4',
+      kind: 'demo',
       chapterId: 'ch11a',
       title: '测试异步代码',
       content: `## 异步测试：Promise 和 async/await
@@ -2481,6 +2509,7 @@ const p2: Chapter = {
   sections: [
     {
       id: 'p2.1',
+      kind: 'demo',
       chapterId: 'p2',
       title: '设计实用类型 — DeepReadonly、Pick、Omit',
       content: `## 从零设计类型工具
@@ -2567,6 +2596,7 @@ console.log("Omit 结果：", omitted)`,
     },
     {
       id: 'p2.2',
+      kind: 'demo',
       chapterId: 'p2',
       title: '条件类型 + infer — 实现 ReturnType 和 Parameters',
       content: `## 条件类型：类型世界的 if/else
@@ -2651,6 +2681,7 @@ greet 返回值类型：string
     },
     {
       id: 'p2.3',
+      kind: 'exercise',
       chapterId: 'p2',
       title: '类型安全的事件系统 — 用泛型约束 event map',
       content: `## 用泛型构建类型安全的事件系统

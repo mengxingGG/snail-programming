@@ -13,6 +13,7 @@ const ch16: Chapter = {
   sections: [
     {
       id: '16.1',
+      kind: 'demo',
       chapterId: 'ch16',
       title: 'HTML 结构 — 标签、属性',
       content: `## HTML：网页的骨架
@@ -78,6 +79,7 @@ console.log(a)`,
     },
     {
       id: '16.2',
+      kind: 'demo',
       chapterId: 'ch16',
       title: '常用标签 — 标题/段落/链接/图片',
       content: `## 最常用的 HTML 标签
@@ -160,6 +162,7 @@ console.log(ol(steps))`,
     },
     {
       id: '16.3',
+      kind: 'demo',
       chapterId: 'ch16',
       title: '表单 — 让用户输入',
       content: `## 表单：收集用户输入
@@ -246,6 +249,7 @@ console.log("非法数据：", e2)`,
     },
     {
       id: '16.4',
+      kind: 'demo',
       chapterId: 'ch16',
       title: 'CSS Grid — 二维布局利器',
       content: `## CSS Grid：比 Flexbox 更强的布局
@@ -324,6 +328,7 @@ widths.forEach((w, i) => console.log(\`  第\${i+1}列：\${w}px\`))`,
     },
     {
       id: '16.5',
+      kind: 'demo',
       chapterId: 'ch16',
       title: '响应式设计 — 适配手机到桌面',
       content: `## 响应式设计：一套代码，适配所有屏幕
@@ -427,6 +432,7 @@ const ch17: Chapter = {
   sections: [
     {
       id: '17.1',
+      kind: 'demo',
       chapterId: 'ch17',
       title: '选择器 — 想改谁',
       content: `## CSS：控制网页样式的语言
@@ -509,6 +515,7 @@ button:hover {
     },
     {
       id: '17.2',
+      kind: 'demo',
       chapterId: 'ch17',
       title: '颜色、字体、间距',
       content: `## 最基础的三类 CSS 属性
@@ -582,6 +589,7 @@ colors.forEach(bg => {
     },
     {
       id: '17.3',
+      kind: 'demo',
       chapterId: 'ch17',
       title: '盒模型 — 每个元素都是一个盒子',
       content: `## 盒模型：CSS 布局的基础
@@ -660,6 +668,7 @@ console.log(\`总占用空间（含 margin）：\${totalWidth} × \${totalHeight
     },
     {
       id: '17.4',
+      kind: 'demo',
       chapterId: 'ch17',
       title: 'Flexbox — 布局不用愁',
       content: `## Flexbox：现代 CSS 布局利器
@@ -734,6 +743,7 @@ calcFlexLayout(800, [
     },
     {
       id: '17.5',
+      kind: 'demo',
       chapterId: 'ch17',
       title: '事件委托 — 高效的事件处理',
       content: `## 事件委托：一个监听器管理多个元素
@@ -822,6 +832,7 @@ clicks.forEach(c => {
     },
     {
       id: '17.6',
+      kind: 'demo',
       chapterId: 'ch17',
       title: '表单验证 — 前端实时校验',
       content: `## 前端表单验证：让用户少犯错
@@ -896,6 +907,7 @@ validateForm([
     },
     {
       id: '17.7',
+      kind: 'demo',
       chapterId: 'ch17',
       title: '本地存储 — localStorage',
       content: `## localStorage：把数据留在浏览器里
@@ -1000,6 +1012,7 @@ const ch17a: Chapter = {
   sections: [
     {
       id: '17a.1',
+      kind: 'demo',
       chapterId: 'ch17a',
       title: 'fetch 基础 — GET 和 POST',
       content: `## fetch：前端发起 HTTP 请求的标准方式
@@ -1093,6 +1106,7 @@ POST /api/echo → 201
     },
     {
       id: '17a.2',
+      kind: 'demo',
       chapterId: 'ch17a',
       title: '与 DOM 结合 — 请求数据并渲染',
       content: `## 从 API 拿数据，动态更新网页
@@ -1203,6 +1217,7 @@ const p4: Chapter = {
   sections: [
     {
       id: 'p4.1',
+      kind: 'demo',
       chapterId: 'p4',
       title: 'HTML 结构 + CSS Grid 布局',
       content: `## 仪表盘的整体布局
@@ -1299,6 +1314,7 @@ renderLayout(layout).forEach(l => console.log(l))`,
     },
     {
       id: 'p4.2',
+      kind: 'demo',
       chapterId: 'p4',
       title: 'DOM 交互 + 数据可视化',
       content: `## 动态更新仪表盘数据
@@ -1410,6 +1426,7 @@ renderDashboard({
     },
     {
       id: 'p4.3',
+      kind: 'demo',
       chapterId: 'p4',
       title: '响应式 + 暗色模式',
       content: `## 响应式仪表盘 + 主题切换
@@ -1526,6 +1543,7 @@ console.log("响应式列数：")
     },
     {
       id: '17.8',
+      kind: 'demo',
       chapterId: 'ch17',
       title: 'CSS 定位 — 把元素放在想放的位置',
       content: `## 定位：突破文档流

@@ -13,6 +13,7 @@ const ch18: Chapter = {
   sections: [
     {
       id: '18.1',
+      kind: 'demo',
       chapterId: 'ch18',
       title: 'React 是什么 — 积木式开发',
       content: `## React：用"积木"搭网页
@@ -115,6 +116,7 @@ console.log(render(state2))`,
     },
     {
       id: '18.2',
+      kind: 'demo',
       chapterId: 'ch18',
       title: 'JSX — 在 JavaScript 里写 HTML',
       content: `## JSX：JavaScript 的 HTML 扩展语法
@@ -195,6 +197,7 @@ console.log(renderToString(tree))`,
     },
     {
       id: '18.3',
+      kind: 'demo',
       chapterId: 'ch18',
       title: '你的第一个组件',
       content: `## 组件：React 的基本单元
@@ -267,6 +270,7 @@ console.log(UserCard({ name: "蜗牛老师", role: "讲师", verified: true }))`
     },
     {
       id: '18.4',
+      kind: 'demo',
       chapterId: 'ch18',
       title: 'Props — 给组件传数据',
       content: `## Props：从父组件向子组件传数据
@@ -364,6 +368,7 @@ const ch19: Chapter = {
   sections: [
     {
       id: '19.1',
+      kind: 'demo',
       chapterId: 'ch19',
       title: 'useState — 让组件有记忆',
       content: `## useState：给组件加上"记忆"
@@ -437,6 +442,7 @@ count.set(0)                  // 重置`,
     },
     {
       id: '19.2',
+      kind: 'demo',
       chapterId: 'ch19',
       title: '事件处理 — 点击、输入',
       content: `## 事件处理：响应用户操作
@@ -522,6 +528,7 @@ emitter.emit("submit", { target: "登录表单" })`,
     },
     {
       id: '19.3',
+      kind: 'demo',
       chapterId: 'ch19',
       title: '表单 — 受控组件',
       content: `## 受控组件：让 React 掌控表单状态
@@ -613,6 +620,7 @@ console.log("修复后：", Object.keys(errors2).length === 0 ? "✅ 验证通�
     },
     {
       id: '19.4',
+      kind: 'demo',
       chapterId: 'ch19',
       title: 'useEffect — 在合适的时机做合适的事',
       content: `## useEffect：处理副作用
@@ -698,6 +706,7 @@ console.log("渲染 3（userId 变化）：执行次数 =", effect2.run(() =>
     },
     {
       id: '19.5',
+      kind: 'demo',
       chapterId: 'ch19',
       title: '列表渲染 — 用 map 显示多个',
       content: `## 列表渲染：用数组 map 生成多个组件
@@ -779,6 +788,7 @@ console.log(renderList(articles, false))`,
     },
     {
       id: '19.6',
+      kind: 'demo',
       chapterId: 'ch19',
       title: '自定义 Hook — 复用状态逻辑',
       content: `## 自定义 Hook：把状态逻辑抽成可复用的函数
@@ -903,6 +913,7 @@ const ch20: Chapter = {
   sections: [
     {
       id: '20.1',
+      kind: 'demo',
       chapterId: 'ch20',
       title: 'fetch — 前端怎么请求后端',
       content: `## fetch：浏览器内置的 HTTP 请求工具
@@ -985,6 +996,7 @@ POST /api/articles → 201 { id: 2, title: '新文章' }`,
     },
     {
       id: '20.2',
+      kind: 'demo',
       chapterId: 'ch20',
       title: '加载数据 — 页面启动时获取',
       content: `## 在组件加载时获取数据
@@ -1067,6 +1079,7 @@ loadAndDisplay()`,
     },
     {
       id: '20.3',
+      kind: 'demo',
       chapterId: 'ch20',
       title: '提交数据 — 表单发送到后端',
       content: `## 表单提交：把数据发给后端
@@ -1148,6 +1161,7 @@ handleSubmit({ title: "TypeScript 入门", content: "详细介绍 TypeScript" })
     },
     {
       id: '20.4',
+      kind: 'demo',
       chapterId: 'ch20',
       title: '错误处理 — 网络失败了怎么办',
       content: `## 前端错误处理：不只是 console.error
@@ -1227,6 +1241,7 @@ fetchWithRetry("/api/articles")
     },
     {
       id: '20.5',
+      kind: 'demo',
       chapterId: 'ch20',
       title: 'Context API — 全局状态管理',
       content: `## Context：不用层层传 props
@@ -1333,6 +1348,7 @@ const p5: Chapter = {
   sections: [
     {
       id: 'p5.1',
+      kind: 'demo',
       chapterId: 'p5',
       title: '项目搭建 + 路由',
       content: `## 用 Vite 初始化 React 项目
@@ -1443,6 +1459,7 @@ paths.forEach(p => {
     },
     {
       id: 'p5.2',
+      kind: 'demo',
       chapterId: 'p5',
       title: '文章列表 + 详情 + Markdown 渲染',
       content: `## 文章展示的核心组件
@@ -1532,6 +1549,7 @@ TypeScript 是...`,
     },
     {
       id: 'p5.3',
+      kind: 'demo',
       chapterId: 'p5',
       title: '状态管理 + 搜索过滤',
       content: `## 全局搜索和状态管理

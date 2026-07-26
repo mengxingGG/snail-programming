@@ -12,16 +12,16 @@ import type { CourseData } from '../types/course';
 import { applyCourseAuthoring } from '../course-authoring';
 import { enrichCourseChapters } from '../course-metadata';
 
-const chapters = enrichCourseChapters(
-  applyCourseAuthoring([
-    ...part1Chapters,
-    ...part2Chapters,
-    ...part3Chapters,
-    ...part4Chapters,
-    ...part5Chapters,
-    ...part6Chapters,
-  ], 'typescript'),
-);
+export const rawCourseChapters = [
+  ...part1Chapters,
+  ...part2Chapters,
+  ...part3Chapters,
+  ...part4Chapters,
+  ...part5Chapters,
+  ...part6Chapters,
+];
+
+const chapters = enrichCourseChapters(applyCourseAuthoring(rawCourseChapters, 'typescript'));
 
 export const courseData: CourseData = {
   chapters,
