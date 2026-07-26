@@ -1,0 +1,39 @@
+<!--
+  index.html — 博客首页模板
+  
+  所属项目：p4-blog
+  
+  功能说明：
+  继承 base.html，显示所有博客文章的列表。
+  每篇文章显示标题、作者、发布时间、摘要。
+  
+  你需要实现：
+  1. {% extends "base.html" %}
+  2. {% block content %} 内循环 posts 列表
+  3. 每篇文章显示标题（链接到详情）、作者名、发布时间
+  4. 如果没有文章，显示"暂无文章"提示
+  5. 已登录用户可见"写文章"按钮
+  
+  相关文件：
+  - base.html：父模板
+  - app.py：index 视图函数传入 posts 变量
+  
+  关键语法：
+  - {% for post in posts %} ... {% endfor %}
+  - {% if session.user_id %} ... {% endif %}
+-->
+
+{% extends "base.html" %}
+
+{% block title %}首页 - Flask 博客{% endblock %}
+
+{% block content %}
+    <!-- TODO: 页面标题 -->
+    <h1>文章列表</h1>
+
+    <!-- TODO: 判断是否有文章 -->
+    <!-- 有文章：循环渲染每篇（标题、作者、时间、摘要） -->
+    <!-- 无文章：显示"暂无文章" -->
+
+    <!-- TODO: 已登录用户显示"写文章"链接 -->
+{% endblock %}

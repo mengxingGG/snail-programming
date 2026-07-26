@@ -1,0 +1,14 @@
+{
+  "name": "p1-cli-todo",
+  "version": "1.0.0",
+  "description": "CLI 待办事项管理工具 — TypeScript 学习项目",
+  "main": "src/todo.ts",
+  "scripts": {
+    "start": "ts-node src/todo.ts"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
+  }
+}

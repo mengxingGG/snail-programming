@@ -1,0 +1,62 @@
+<!--
+  index.html — 仪表盘页面结构
+  
+  所属项目：p4-dashboard
+  
+  功能说明：
+  仪表盘应用的 HTML 骨架。提供 header（标题 + 主题切换按钮）和 
+  main#dashboard 容器，由 TypeScript 动态生成数据卡片插入。
+  
+  你需要实现：
+  1. <head> 中设置 charset、viewport、title
+  2. 引入 CSS：<link rel="stylesheet" href="src/styles.css">
+  3. <body> 中：
+     - <header>：包含 <h1> 标题 和 <button id="theme-toggle"> 主题切换按钮
+     - <main id="dashboard">：卡片容器（由 TS 动态填充）
+  4. 引入 JS：<script src="src/main.ts" type="module"></script>
+     注意：直接引入 TS 需要使用支持 TS 的开发服务器，
+     或者先编译为 JS。可用 type="module" 配合 importmap 或直接引用编译后的 JS。
+     简化方案：使用 <script src="src/main.js"> 并预先 tsc 编译。
+  
+  相关文件：
+  - src/styles.css：页面样式
+  - src/main.ts：数据与渲染逻辑
+  
+  运行方式：
+  在浏览器中直接打开 index.html（若引用 .ts 则需要开发服务器；
+  若引用编译后的 .js 则直接打开即可）。
+  
+  关键约定：
+  - 主题切换按钮 id="theme-toggle"
+  - 仪表盘容器 id="dashboard"
+  - body 上通过 data-theme 属性控制主题（data-theme="dark"）
+-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仪表盘</title>
+    <!-- TODO: 引入 styles.css -->
+    <!-- TODO: 可选引入字体/图标库 -->
+</head>
+<body>
+    <!-- TODO: header 区域 -->
+    <!--
+    <header>
+        <h1>📊 仪表盘</h1>
+        <button id="theme-toggle">切换主题</button>
+    </header>
+    -->
+
+    <!-- TODO: 主仪表盘容器 -->
+    <!-- <main id="dashboard"></main> -->
+
+    <!-- TODO: 引入脚本 -->
+    <!-- 方案1：直接引用编译后的 JS（需先运行 tsc） -->
+    <!-- <script src="src/main.js"></script> -->
+    <!-- 方案2：使用 type="module" + importmap（适合原版 TS 开发服务器） -->
+    <!-- <script src="src/main.ts" type="module"></script> -->
+</body>
+</html>

@@ -1,0 +1,3 @@
+# p6-django-manager — Django 员工管理系统
+django>=5.0.0
+# Python ≥ 3.9

@@ -1,0 +1,3 @@
+# p5-snake-game — 贪吃蛇游戏
+pygame>=2.5.0
+# Python ≥ 3.9

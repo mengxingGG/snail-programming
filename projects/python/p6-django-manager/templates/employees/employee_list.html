@@ -1,0 +1,74 @@
+<!--
+  employee_list.html — 员工列表模板
+  
+  所属项目：p6-django-manager
+  
+  功能说明：
+  渲染员工列表页面，显示员工的姓名、邮箱、部门、职位、入职日期等信息。
+  支持分页导航和搜索表单。
+  
+  你需要实现：
+  1. 页面标题 "员工管理"
+  2. 搜索表单（GET 方法，输入框 name="q"）
+  3. "添加员工" 链接按钮
+  4. HTML 表格显示员工列表：
+     - 列：姓名、邮箱、部门、职位、入职日期、状态、操作
+     - 每行动态渲染员工数据
+     - "编辑"和"详情"链接
+  5. 分页导航（上一页/下一页链接）
+  6. 无搜索结果时显示提示信息
+  
+  可用模板变量：
+  - employees：当前页的员工 QuerySet（来自 ListView 的 context_object_name）
+  - page_obj：分页对象
+  - is_paginated：是否分页
+  
+  相关文件：
+  - views.py：EmployeeListView 提供数据
+  - models.py：Employee 模型定义
+  
+  关键语法：
+  - {% for employee in employees %} ... {% endfor %}
+  - {{ page_obj.has_previous }} / {{ page_obj.previous_page_number }}
+-->
+
+{% extends "base.html" %}
+
+{% block title %}员工管理{% endblock %}
+
+{% block content %}
+    <h1>员工管理</h1>
+
+    <!-- TODO: 搜索表单 -->
+    <!-- <form method="get"> <input name="q"> <button>搜索</button> </form> -->
+
+    <!-- TODO: 添加员工链接 -->
+    <!-- <a href="{% url 'employee_create' %}">添加员工</a> -->
+
+    <!-- TODO: 员工表格 -->
+    <!--
+    <table>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>邮箱</th>
+                <th>部门</th>
+                <th>职位</th>
+                <th>入职日期</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr> ... </tr>
+            {% empty %}
+                <tr><td colspan="7">暂无员工数据</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    -->
+
+    <!-- TODO: 分页导航 -->
+    <!-- 上一页 / 当前页 / 下一页 -->
+{% endblock %}

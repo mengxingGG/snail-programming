@@ -1,0 +1,67 @@
+/* CSS 变量 — 支持自动/浅色/深色 */
+:root,
+[data-theme='dark'] {
+  --bg: #080B12;
+  --bg-card: rgba(20, 28, 43, 0.72);
+  --bg-editor: #0D111A;
+  --bg-sidebar: rgba(10, 14, 23, 0.86);
+  --accent: #64D2FF;
+  --accent-hover: #8BE0FF;
+  --success: #32D74B;
+  --error: #FF453A;
+  --text: #D7DFEA;
+  --text-dim: #7E8BA1;
+  --text-bright: #F5F9FF;
+  --border: rgba(255, 255, 255, 0.10);
+  --glass: rgba(255, 255, 255, 0.055);
+  --glass-strong: rgba(255, 255, 255, 0.09);
+  --glow: rgba(100, 210, 255, 0.28);
+  --flow-1: rgba(100, 210, 255, 0.18);
+  --flow-2: rgba(120, 120, 255, 0.12);
+  --flow-3: rgba(50, 215, 180, 0.08);
+  --radius: 18px;
+}
+
+[data-theme='light'] {
+  --bg: #F5F7FB;
+  --bg-card: rgba(255, 255, 255, 0.72);
+  --bg-editor: #FFFFFF;
+  --bg-sidebar: rgba(245, 247, 251, 0.86);
+  --accent: #007AFF;
+  --accent-hover: #40A9FF;
+  --success: #28CD41;
+  --error: #FF3B30;
+  --text: #273244;
+  --text-dim: #6D7A8E;
+  --text-bright: #07111F;
+  --border: rgba(20, 32, 52, 0.12);
+  --glass: rgba(255, 255, 255, 0.58);
+  --glass-strong: rgba(255, 255, 255, 0.78);
+  --glow: rgba(0, 122, 255, 0.20);
+  --flow-1: rgba(0, 122, 255, 0.14);
+  --flow-2: rgba(88, 86, 214, 0.10);
+  --flow-3: rgba(52, 199, 180, 0.10);
+}
+
+@media (prefers-color-scheme: light) {
+  [data-theme='auto'] {
+    --bg: #F5F7FB;
+    --bg-card: rgba(255, 255, 255, 0.72);
+    --bg-editor: #FFFFFF;
+    --bg-sidebar: rgba(245, 247, 251, 0.86);
+    --accent: #007AFF;
+    --accent-hover: #40A9FF;
+    --success: #28CD41;
+    --error: #FF3B30;
+    --text: #273244;
+    --text-dim: #6D7A8E;
+    --text-bright: #07111F;
+    --border: rgba(20, 32, 52, 0.12);
+    --glass: rgba(255, 255, 255, 0.58);
+    --glass-strong: rgba(255, 255, 255, 0.78);
+    --glow: rgba(0, 122, 255, 0.20);
+    --flow-1: rgba(0, 122, 255, 0.14);
+    --flow-2: rgba(88, 86, 214, 0.10);
+    --flow-3: rgba(52, 199, 180, 0.10);
+  }
+}

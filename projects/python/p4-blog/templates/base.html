@@ -1,0 +1,46 @@
+<!--
+  base.html — 博客应用基础模板
+  
+  所属项目：p4-blog
+  
+  功能说明：
+  所有页面继承此模板。提供统一的 HTML 结构、导航栏、flash 消息显示区域。
+  使用 Jinja2 模板继承机制，子模板通过 {% block content %}{% endblock %} 填充内容。
+  
+  你需要实现：
+  1. 完整的 HTML5 文档结构
+  2. 导航栏：首页链接 + 登录/注册/登出链接（根据登录状态动态显示）
+  3. flash 消息循环显示（get_flashed_messages）
+  4. {% block content %}{% endblock %} 占位区域
+  
+  相关文件：
+  - index.html：继承 base.html 的首页模板
+  - app.py：Flask 视图函数
+  
+  关键语法：
+  - Jinja2：{% block %}, {% if %}, {% for %}, {{ url_for() }}
+-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Flask 博客{% endblock %}</title>
+    <!-- TODO: 可引入 CSS 样式 -->
+</head>
+<body>
+    <!-- TODO: 导航栏 -->
+    <!-- - 首页链接 -->
+    <!-- - 如果已登录：显示用户名、创建文章、登出 -->
+    <!-- - 如果未登录：显示登录、注册链接 -->
+
+    <!-- TODO: flash 消息区域 -->
+    <!-- 遍历 get_flashed_messages() 显示每个消息 -->
+
+    <!-- TODO: 主内容区域 -->
+    <!-- {% block content %}{% endblock %} -->
+
+    <!-- TODO: 页脚（可选） -->
+</body>
+</html>

@@ -1,0 +1,11 @@
+import { courseData } from "../src/shared/course-data"; 
+mport { pythonCourseData } from "../src/shared/course-data-python"; 
+import { validateLessonOutput } from "../src/renderer/utils/lessonValidation"; 
+let hasError = false; 
+function checkCourse(course, name) { const sections = course.chapters.flatMap(c => c.sections); 
+    for (const s of sections) { const res = validateLessonOutput(s, s.expectedOutput, s.starterCode); 
+        const requiresEdit = s.validation?.requireCodeChangeFromStarter || s.validation?.mode === "edit_required"; 
+        if (requiresEdit) { if (res.passed) { console.error(`[${name}] ${s.id} ����ʧ��(��Ҫ�Ĵ���)������֤ͨ����`); 
+        hasError = true; } } else { if (!res.passed) { console.error(`[${name}] ${s.id} ����ͨ��(����Ĵ���)������֤ʧ����! \nԭ��: ${res.details}`); 
+        hasError = true; } } } } checkCourse(courseData, "TS"); checkCourse(pythonCourseData, "Python"); if (hasError) process.exit(1);
+         else console.log("All sections passed sanity check!");

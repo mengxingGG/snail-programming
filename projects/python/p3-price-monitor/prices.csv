@@ -1,0 +1,4 @@
+url,title,price,currency,timestamp
+https://example.com/product/1,示例商品A,99.00,¥,2024-01-01T12:00:00
+https://example.com/product/2,示例商品B,199.00,¥,2024-01-01T12:00:00
+https://example.com/product/1,示例商品A,89.00,¥,2024-01-02T12:00:00

@@ -1,0 +1,79 @@
+.course-map-shell {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  isolation: isolate;
+}
+
+.course-map-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--flow-1) 150%, transparent), transparent 26%),
+    radial-gradient(circle at 86% 14%, color-mix(in srgb, var(--flow-2) 170%, transparent), transparent 24%),
+    radial-gradient(circle at 48% 82%, color-mix(in srgb, var(--flow-3) 170%, transparent), transparent 28%);
+  opacity: 0.78;
+  transform: scale(1.04);
+  pointer-events: none;
+  z-index: -3;
+}
+
+.course-map-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, transparent 0%, color-mix(in srgb, var(--accent) 9%, transparent) 35%, transparent 62%),
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--accent-hover) 12%, transparent), transparent 36%);
+  opacity: 0.54;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.course-map-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--text-dim) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--text-dim) 10%, transparent) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.85), transparent 88%);
+  opacity: 0.28;
+  transform: perspective(800px) rotateX(70deg) translateY(36%);
+  transform-origin: center bottom;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.course-map-orb {
+  position: absolute;
+  border-radius: 999px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.course-map-orb-primary {
+  top: 10%;
+  right: 14%;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent-hover) 46%, transparent) 0%, transparent 72%);
+}
+
+.course-map-orb-secondary {
+  top: 44%;
+  left: -40px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 34%, transparent) 0%, transparent 72%);
+}
+
+.course-map-orb-tertiary {
+  bottom: 8%;
+  right: 18%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--success) 28%, transparent) 0%, transparent 72%);
+}

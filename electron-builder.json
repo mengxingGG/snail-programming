@@ -1,0 +1,29 @@
+{
+  "appId": "com.snail.programming",
+  "productName": "蜗牛编程",
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*",
+    "package.json"
+  ],
+  "extraResources": [],
+  "win": {
+    "target": "nsis",
+    "icon": null
+  },
+  "mac": {
+    "target": "dmg",
+    "icon": null
+  },
+  "linux": {
+    "target": "AppImage",
+    "icon": null
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "installerLanguages": ["zh_CN", "en_US"]
+  }
+}
