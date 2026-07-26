@@ -1,5 +1,5 @@
 // 预加载桥接 — 暴露安全 API 给渲染进程
-import { contextBridge, ipcRenderer, shell } from 'electron';
+import { contextBridge, ipcRenderer } from 'electron';
 import { IPC_CHANNELS } from '../shared/types/ipc';
 import type { AiLessonContext, AiMessage } from '../services/ai/client';
 import type { CourseId } from '../shared/course-catalog';
@@ -57,7 +57,8 @@ const api = {
       ipcRenderer.invoke(IPC_CHANNELS.AI_EXPLAIN, { concept, context }),
   },
   system: {
-    openExternal: (url: string) => shell.openExternal(url),
+    // 交由主进程校验协议后再打开，避免 file:// 等协议被用来启动本地程序
+    openExternal: (url: string) => ipcRenderer.invoke(IPC_CHANNELS.SYSTEM_OPEN_EXTERNAL, url),
   },
   window: {
     minimize: () => ipcRenderer.invoke(IPC_CHANNELS.WIN_MINIMIZE),

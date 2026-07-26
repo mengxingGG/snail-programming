@@ -3,11 +3,13 @@ import { createWindow } from './window';
 import { setupMenu } from './menu';
 import { registerIpcHandlers } from './ipc';
 import { initDatabase } from '../services/database/init';
+import { purgeExpiredSessions } from '../services/auth/service';
 
 function main() {
   app.whenReady().then(() => {
     try {
       initDatabase();
+      purgeExpiredSessions();
     } catch (err) {
       console.error('数据库初始化失败:', err);
       dialog.showErrorBox('启动失败', `数据库初始化失败：${err}`);

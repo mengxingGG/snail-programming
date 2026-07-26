@@ -28,6 +28,8 @@ export const IPC_CHANNELS = {
   WIN_MAXIMIZE: 'win:maximize',
   WIN_CLOSE: 'win:close',
   WIN_IS_MAXIMIZED: 'win:is-maximized',
+  // 系统
+  SYSTEM_OPEN_EXTERNAL: 'system:open-external',
   // 项目操作
   PROJECT_LIST_FILES: 'project:list-files',
   PROJECT_READ_FILE: 'project:read-file',

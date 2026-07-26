@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { app, ipcMain } from 'electron';
 import { buildTutorSystemPrompt, type AiLessonContext, type AiMemorySnapshot } from './prompts';
+import { isSafeExternalUrl } from '../../shared/url-safety';
 
 // ─── 类型 ────────────────────────────────────────────────
 
@@ -40,6 +41,21 @@ const DEFAULT_CONFIG: AiConfig = {
 
 let currentConfig: AiConfig = { ...DEFAULT_CONFIG };
 let lastRequestTime = 0;
+
+/** 校验并规范化 API 地址：只允许 http/https，去掉结尾斜杠 */
+export function normalizeBaseUrl(baseUrl: unknown): string {
+  const value = typeof baseUrl === 'string' ? baseUrl.trim() : '';
+  if (!value) return DEFAULT_CONFIG.baseUrl;
+  if (!isSafeExternalUrl(value)) {
+    throw new Error('API 地址必须以 http:// 或 https:// 开头');
+  }
+  return value.replace(/\/+$/, '');
+}
+
+/** 拼接 chat/completions 端点，容忍 baseUrl 结尾多余的斜杠 */
+export function buildChatEndpoint(baseUrl: string): string {
+  return `${baseUrl.replace(/\/+$/, '')}/chat/completions`;
+}
 
 interface MemoryEntry {
   text: string;
@@ -99,7 +115,10 @@ export function loadConfig(): void {
   try {
     const raw = fs.readFileSync(getConfigPath(), 'utf-8');
     const parsed = JSON.parse(raw) as Partial<AiConfig>;
-    currentConfig = { ...DEFAULT_CONFIG, ...parsed };
+    const merged = { ...DEFAULT_CONFIG, ...parsed };
+    // 配置文件可能被手工改过，这里再兜一次协议校验
+    merged.baseUrl = normalizeBaseUrl(merged.baseUrl);
+    currentConfig = merged;
   } catch {
     currentConfig = { ...DEFAULT_CONFIG };
   }
@@ -230,7 +249,7 @@ async function chat(messages: AiMessage[]): Promise<string> {
   // 输出最多使用 25% 的 token，上限 2000
   const maxTokens = Math.min(2000, Math.floor(currentConfig.contextLength * 0.25));
 
-  const endpoint = currentConfig.baseUrl.replace(/\/$/, '') + '/chat/completions';
+  const endpoint = buildChatEndpoint(currentConfig.baseUrl);
 
   let response: Response;
   try {
@@ -342,7 +361,7 @@ export function registerIpcHandlers(): void {
     },
   ) => {
     persistConfig({
-      baseUrl: baseUrl.trim() || DEFAULT_CONFIG.baseUrl,
+      baseUrl: normalizeBaseUrl(baseUrl),
       model: model.trim() || DEFAULT_CONFIG.model,
       contextLength: Number.isFinite(contextLength) && contextLength >= 512
         ? contextLength

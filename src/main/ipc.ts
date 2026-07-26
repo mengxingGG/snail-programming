@@ -1,4 +1,6 @@
-import { ipcMain, app } from 'electron';
+import { ipcMain, app, shell } from 'electron';
+import { IPC_CHANNELS } from '../shared/types/ipc';
+import { isSafeExternalUrl } from '../shared/url-safety';
 import { registerIpcHandlers as registerAuthHandlers } from '../services/auth/service';
 import { registerIpcHandlers as registerProgressHandlers } from '../services/progress/service';
 import { registerIpcHandlers as registerCodeHandlers } from '../services/runner/service';
@@ -41,4 +43,13 @@ function registerBuiltinHandlers(): void {
       ? `${process.resourcesPath}/preload.js`
       : `${app.getAppPath()}/preload.js`,
   }));
+
+  // 打开外部链接：只放行 http/https
+  ipcMain.handle(IPC_CHANNELS.SYSTEM_OPEN_EXTERNAL, async (_event, url: unknown) => {
+    if (!isSafeExternalUrl(url)) {
+      return { success: false, error: '不支持的链接协议' };
+    }
+    await shell.openExternal(url);
+    return { success: true };
+  });
 }

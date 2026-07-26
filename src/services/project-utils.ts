@@ -7,6 +7,9 @@ import * as path from 'path';
 
 const BLOCKED_SHELL_PATTERN = /[|&;><`]/;
 const ALLOWED_NPM_SCRIPTS = new Set(['dev', 'build', 'preview', 'test', 'lint', 'start', 'typecheck']);
+// 项目标识只允许字母数字开头，后接字母数字、下划线、连字符、点
+// 这样可以排除 ".."、路径分隔符、绝对路径等越界写法
+const PROJECT_ID_PATTERN = /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/;
 
 interface ProjectCommandSpec {
   executable: string;
@@ -28,23 +31,38 @@ export function getProjectsRoot(): string {
   return path.join(process.resourcesPath, 'projects');
 }
 
+/** 判断 child 是否位于 parent 目录内（含 parent 本身） */
+function isInside(parent: string, child: string): boolean {
+  const relative = path.relative(parent, child);
+  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
+}
+
 export function getProjectDir(projectId: string): string {
+  if (typeof projectId !== 'string' || !PROJECT_ID_PATTERN.test(projectId)) {
+    throw new Error(`非法项目标识：${projectId}`);
+  }
+
   const root = getProjectsRoot();
   for (const lang of ['typescript', 'python']) {
     const dir = path.join(root, lang, projectId);
     if (fs.existsSync(dir)) return dir;
   }
-  return path.join(root, projectId);
+
+  const fallback = path.join(root, projectId);
+  // 兜底路径同样需要确认仍在 projects 根目录内
+  if (!isInside(root, fallback)) {
+    throw new Error(`非法项目标识：${projectId}`);
+  }
+  return fallback;
 }
 
 export function resolveProjectFilePath(projectDir: string, filePath: string): string {
-  const resolved = path.resolve(projectDir, filePath);
-  const relative = path.relative(projectDir, resolved);
+  if (typeof filePath !== 'string') {
+    throw new Error('路径必须是字符串');
+  }
 
-  if (
-    relative === ''
-    || (!relative.startsWith('..') && !path.isAbsolute(relative))
-  ) {
+  const resolved = path.resolve(projectDir, filePath);
+  if (isInside(projectDir, resolved)) {
     return resolved;
   }
 
