@@ -12,7 +12,7 @@ import { theme } from '../theme';
 import { useAuth } from '../hooks/useAuth';
 import { useProgress } from '../hooks/useProgress';
 import { useUIStore } from '../stores/uiStore';
-import { validateLessonOutput } from '../utils/lessonValidation';
+import { validateLessonOutput, type LessonValidationResult } from '../utils/lessonValidation';
 import { buildLessonCodeFilename } from '../utils/codeState';
 import type { CourseId } from '../../shared/course-catalog';
 import { buildLearnPath } from '../../shared/course-catalog';
@@ -48,7 +48,7 @@ export default function LearnPage() {
   // 加载用户保存的学习路线
   useEffect(() => {
     if (!userId) return;
-    (window as any).snailAPI?.plan?.get(userId)
+    (window as any).snailAPI?.plan?.get()
       .then((plan: any) => { if (plan?.planId) setSavedPlanId(plan.planId); })
       .catch(() => {});
   }, [userId]);
@@ -74,6 +74,23 @@ export default function LearnPage() {
   const flatSections = useMemo(() => sidebarChapters.flatMap(c =>
     c.sections.map(s => ({ chapterId: c.id, sectionId: s.id })),
   ), [sidebarChapters]);
+
+  // 前置小节由 course-metadata 生成（默认是上一节）。
+  // 只在学生确实跳着学时提示，已完成或未登录都不打扰。
+  const unmetPrerequisites = useMemo(() => {
+    if (!section?.prerequisites?.length || !progress) return [];
+    const completedSet = new Set(progress.completedSections);
+    return section.prerequisites
+      .filter(id => !completedSet.has(id))
+      .map(id => {
+        const owner = course.data.chapters.find(c => c.sections.some(item => item.id === id));
+        const target = owner?.sections.find(item => item.id === id);
+        return target && owner
+          ? { sectionId: target.id, chapterId: owner.id, title: target.title }
+          : null;
+      })
+      .filter((item): item is { sectionId: string; chapterId: string; title: string } => item !== null);
+  }, [section, progress, course.data.chapters]);
   const currentIndex = flatSections.findIndex(
     s => s.chapterId === chapterId && s.sectionId === sectionId,
   );
@@ -84,7 +101,7 @@ export default function LearnPage() {
 
   const [code, setCode] = useState(section?.starterCode || defaultStarterCode);
   const [result, setResult] = useState<any>(null);
-  const [validation, setValidation] = useState<{ passed: boolean; message: string; expectedHint: string; details?: string } | null>(null);
+  const [validation, setValidation] = useState<LessonValidationResult | null>(null);
   const [isRunning, setIsRunning] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [saveState, setSaveState] = useState('');
@@ -105,7 +122,6 @@ export default function LearnPage() {
 
       try {
         const saved = await (window as any).snailAPI.runner.load(
-          userId,
           buildLessonCodeFilename(courseId, sectionId, section?.starterCode),
         );
         if (!cancelled) setCode(saved?.content ?? starter);
@@ -128,7 +144,6 @@ export default function LearnPage() {
     if (!userId || !sectionId || !(window as any).snailAPI?.runner?.save) return;
     const timer = window.setTimeout(() => {
       (window as any).snailAPI.runner.save(
-        userId,
         buildLessonCodeFilename(courseId, sectionId, section?.starterCode),
         code,
       )
@@ -154,7 +169,6 @@ export default function LearnPage() {
     try {
       if (userId && sectionId) {
         await (window as any).snailAPI.runner.save(
-          userId,
           buildLessonCodeFilename(courseId, sectionId, section?.starterCode),
           code,
         ).catch(() => {});
@@ -223,7 +237,8 @@ export default function LearnPage() {
               completed={completed}
               difficulty={section.difficulty}
               estimatedMinutes={section.estimatedMinutes}
-              prerequisitesCount={section.prerequisites?.length ?? 0}
+              unmetPrerequisites={unmetPrerequisites}
+              onJumpToPrerequisite={(chId, sId) => navigate(buildLearnPath(courseId, chId, sId))}
               onPrev={handlePrev}
               onNext={handleNext}
             />
@@ -248,6 +263,7 @@ export default function LearnPage() {
               completed={completed}
               validationMessage={validation?.message}
               validationPassed={validation?.passed}
+              validationStatus={validation?.status}
               validationDetails={validation?.details}
             />
           </div>

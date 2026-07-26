@@ -1,4 +1,4 @@
-// 📝 考试题库（Python）— 27 章，每章 3 题（2 选择 + 1 填空）
+// 📝 考试题库（Python）— 基础题 + 代表性编程题
 import type { Question } from '../types/course';
 
 export const allQuestions: Record<string, Question[]> = {
@@ -76,6 +76,13 @@ export const allQuestions: Record<string, Question[]> = {
       text: 'Python 用 _____ 来包裹多行字符串。',
       answer: '三引号',
     },
+    {
+      id: 'ch2-q4', chapterId: 'ch2', type: 'code',
+      text: '设置 price 为 12、quantity 为 3，并输出「总价：36」。',
+      starterCode: '# 在这里写代码\n',
+      expectedOutput: '总价：36',
+      answer: '',
+    },
   ],
 
   ch3: [
@@ -95,6 +102,13 @@ export const allQuestions: Record<string, Question[]> = {
       id: 'ch3-q3', chapterId: 'ch3', type: 'fill',
       text: 'Python 的三元表达式格式是：值1 ____ 条件 else 值2',
       answer: 'if',
+    },
+    {
+      id: 'ch3-q4', chapterId: 'ch3', type: 'code',
+      text: '设置 score 为 80；分数大于等于 60 时输出「通过」，否则输出「继续努力」。',
+      starterCode: '# 在这里写代码\n',
+      expectedOutput: '通过',
+      answer: '',
     },
   ],
 
@@ -116,6 +130,13 @@ export const allQuestions: Record<string, Question[]> = {
       text: 'Python 中 for 循环直接遍历序列元素，不需要用 _____ 变量。',
       answer: '索引',
     },
+    {
+      id: 'ch4-q4', chapterId: 'ch4', type: 'code',
+      text: '使用 range 和 for 循环依次输出 1、2、3，每个数字一行。',
+      starterCode: '# 在这里写代码\n',
+      expectedOutput: '1\n2\n3',
+      answer: '',
+    },
   ],
 
   ch5: [
@@ -135,6 +156,13 @@ export const allQuestions: Record<string, Question[]> = {
       id: 'ch5-q3', chapterId: 'ch5', type: 'fill',
       text: '取字符串前三个字符用 s[____]',
       answer: ':3',
+    },
+    {
+      id: 'ch5-q4', chapterId: 'ch5', type: 'code',
+      text: '定义字符串 text 为 hello，使用 upper() 输出 HELLO。',
+      starterCode: '# 在这里写代码\n',
+      expectedOutput: 'HELLO',
+      answer: '',
     },
   ],
 
@@ -156,6 +184,13 @@ export const allQuestions: Record<string, Question[]> = {
       text: '用列表推导式生成 0-9 的平方：`[____ for x in range(10)]`',
       answer: 'x**2',
     },
+    {
+      id: 'ch6-q4', chapterId: 'ch6', type: 'code',
+      text: '创建列表 [3, 1, 2]，按升序排序后输出 [1, 2, 3]。',
+      starterCode: '# 在这里写代码\n',
+      expectedOutput: '[1, 2, 3]',
+      answer: '',
+    },
   ],
 
   ch7: [
@@ -176,6 +211,13 @@ export const allQuestions: Record<string, Question[]> = {
       text: '遍历字典的键和值用 dict.____()',
       answer: 'items',
     },
+    {
+      id: 'ch7-q4', chapterId: 'ch7', type: 'code',
+      text: '创建字典 student，包含 name「小明」和 score 90，输出「小明：90」。',
+      starterCode: '# 在这里写代码\n',
+      expectedOutput: '小明：90',
+      answer: '',
+    },
   ],
 
   ch8: [
@@ -195,6 +237,13 @@ export const allQuestions: Record<string, Question[]> = {
       id: 'ch8-q3', chapterId: 'ch8', type: 'fill',
       text: '函数内部访问全局变量需要用 _____ 关键字声明。',
       answer: 'global',
+    },
+    {
+      id: 'ch8-q4', chapterId: 'ch8', type: 'code',
+      text: '定义 multiply 函数，返回两个参数的乘积；调用它计算 3 × 4 并输出 12。',
+      starterCode: '# 在这里写代码\n',
+      expectedOutput: '12',
+      answer: '',
     },
   ],
 
@@ -796,6 +845,13 @@ export const allQuestions: Record<string, Question[]> = {
       id: 'ch9b-q3', chapterId: 'ch9b', type: 'fill',
       text: 'Python 类型提示中，Union[int, str] 的简写格式（Python 3.10+）是 int | _____',
       answer: 'str',
+    },
+    {
+      id: 'ch9b-q4', chapterId: 'ch9b', type: 'code',
+      text: '定义带类型提示的 add(a: int, b: int) -> int，输出 add(3, 4) 的结果。',
+      starterCode: '# 在这里写代码\n',
+      expectedOutput: '7',
+      answer: '',
     },
   ],
   'ch12d': [

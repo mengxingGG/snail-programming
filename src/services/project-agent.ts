@@ -4,7 +4,7 @@
 import { ipcMain } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
-import { getConfig } from './ai/client';
+import { buildChatEndpoint, getConfig } from './ai/client';
 import { executeProjectCommand, getProjectDir, resolveProjectFilePath } from './project-utils';
 
 // ─── 类型 ────────────────────────────────────────────────
@@ -117,22 +117,37 @@ async function chatWithAgent(
   const allMessages = [systemMsg, ...messages];
 
   // 调用 OpenAI 兼容 API
-  const response = await fetch(`${config.baseUrl}/chat/completions`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${config.apiKey}`,
-    },
-    body: JSON.stringify({
-      model: config.model,
-      messages: allMessages,
-      max_tokens: 2000,
-      temperature: 0.7,
-    }),
-  });
+  let response: Response;
+  try {
+    response = await fetch(buildChatEndpoint(config.baseUrl), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${config.apiKey}`,
+      },
+      body: JSON.stringify({
+        model: config.model,
+        messages: allMessages,
+        max_tokens: 2000,
+        temperature: 0.7,
+      }),
+      signal: AbortSignal.timeout(30_000),
+    });
+  } catch (err: any) {
+    if (err?.name === 'TimeoutError') throw new Error('AI 服务连接超时，请检查网络', { cause: err });
+    throw new Error('无法连接 AI 服务，请检查网络或 API 地址', { cause: err });
+  }
 
-  const data = await response.json();
-  return data.choices?.[0]?.message?.content ?? '（AI 未返回内容）';
+  if (!response.ok) {
+    const text = await response.text().catch(() => '');
+    if (response.status === 401) throw new Error('API 密钥无效，请重新检查');
+    if (response.status === 429) throw new Error('请求太频繁，请稍候再试');
+    if (response.status === 404) throw new Error('模型不存在，请检查模型名称');
+    throw new Error(`API 错误 ${response.status}：${text.slice(0, 120)}`);
+  }
+
+  const data = (await response.json()) as any;
+  return data?.choices?.[0]?.message?.content ?? '（AI 未返回内容）';
 }
 
 // ─── 工具执行 ───────────────────────────────────────────
@@ -157,7 +172,9 @@ async function executeToolCall(
     }
 
     case 'write_file': {
+      if (typeof args.content !== 'string') return '写入失败：content 必须是字符串';
       const fullPath = safeResolve(ctx.projectDir, args.filePath);
+      fs.mkdirSync(path.dirname(fullPath), { recursive: true });
       fs.writeFileSync(fullPath, args.content, 'utf-8');
       return `✅ 已写入 ${args.filePath}`;
     }

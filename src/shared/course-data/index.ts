@@ -9,16 +9,19 @@ import { part5Chapters } from './part5-react';
 import { part6Chapters } from './part6-fullstack';
 import { allQuestions } from './exams';
 import type { CourseData } from '../types/course';
+import { applyCourseAuthoring } from '../course-authoring';
 import { enrichCourseChapters } from '../course-metadata';
 
-const chapters = enrichCourseChapters([
-  ...part1Chapters,
-  ...part2Chapters,
-  ...part3Chapters,
-  ...part4Chapters,
-  ...part5Chapters,
-  ...part6Chapters,
-]);
+const chapters = enrichCourseChapters(
+  applyCourseAuthoring([
+    ...part1Chapters,
+    ...part2Chapters,
+    ...part3Chapters,
+    ...part4Chapters,
+    ...part5Chapters,
+    ...part6Chapters,
+  ], 'typescript'),
+);
 
 export const courseData: CourseData = {
   chapters,

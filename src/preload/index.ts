@@ -1,5 +1,5 @@
 // 预加载桥接 — 暴露安全 API 给渲染进程
-import { contextBridge, ipcRenderer, shell } from 'electron';
+import { contextBridge, ipcRenderer } from 'electron';
 import { IPC_CHANNELS } from '../shared/types/ipc';
 import type { AiLessonContext, AiMessage } from '../services/ai/client';
 import type { CourseId } from '../shared/course-catalog';
@@ -13,31 +13,32 @@ const api = {
     logout: (token: string) => ipcRenderer.invoke(IPC_CHANNELS.AUTH_LOGOUT, { token }),
     getSession: (token: string) => ipcRenderer.invoke(IPC_CHANNELS.AUTH_GET_SESSION, { token }),
   },
+  // 以下接口作用于「当前登录用户」，userId 由主进程按会话解析，渲染层无需也无法指定
   profile: {
-    get: (userId: string) => ipcRenderer.invoke(IPC_CHANNELS.PROFILE_GET, { userId }),
-    save: (userId: string, nickname: string) => ipcRenderer.invoke(IPC_CHANNELS.PROFILE_SAVE, { userId, nickname }),
+    get: () => ipcRenderer.invoke(IPC_CHANNELS.PROFILE_GET),
+    save: (nickname: string) => ipcRenderer.invoke(IPC_CHANNELS.PROFILE_SAVE, { nickname }),
   },
   plan: {
-    get: (userId: string) => ipcRenderer.invoke(IPC_CHANNELS.PLAN_GET, { userId }),
-    save: (payload: { userId: string; planId: string; startChapterId: string; startSectionId: string }) =>
+    get: () => ipcRenderer.invoke(IPC_CHANNELS.PLAN_GET),
+    save: (payload: { planId: string; startChapterId: string; startSectionId: string }) =>
       ipcRenderer.invoke(IPC_CHANNELS.PLAN_SAVE, payload),
   },
   progress: {
     save: (data: unknown) => ipcRenderer.invoke(IPC_CHANNELS.PROGRESS_SAVE, data),
-    load: (userId: string, courseId: CourseId) => ipcRenderer.invoke(IPC_CHANNELS.PROGRESS_LOAD, { userId, courseId }),
-    completeSection: (userId: string, sectionId: string, courseId: CourseId) =>
-      ipcRenderer.invoke(IPC_CHANNELS.PROGRESS_COMPLETE_SECTION, { userId, sectionId, courseId }),
+    load: (courseId: CourseId) => ipcRenderer.invoke(IPC_CHANNELS.PROGRESS_LOAD, { courseId }),
+    completeSection: (sectionId: string, courseId: CourseId) =>
+      ipcRenderer.invoke(IPC_CHANNELS.PROGRESS_COMPLETE_SECTION, { sectionId, courseId }),
   },
   runner: {
     run: (code: string, language?: 'typescript' | 'python') => ipcRenderer.invoke(IPC_CHANNELS.CODE_RUN, { code, language }),
-    save: (userId: string, filename: string, code: string) =>
-      ipcRenderer.invoke(IPC_CHANNELS.CODE_SAVE, { userId, filename, code }),
-    load: (userId: string, filename: string) =>
-      ipcRenderer.invoke(IPC_CHANNELS.CODE_LOAD, { userId, filename }),
-    list: (userId: string) => ipcRenderer.invoke(IPC_CHANNELS.CODE_LIST, { userId }),
+    save: (filename: string, code: string) =>
+      ipcRenderer.invoke(IPC_CHANNELS.CODE_SAVE, { filename, code }),
+    load: (filename: string) =>
+      ipcRenderer.invoke(IPC_CHANNELS.CODE_LOAD, { filename }),
+    list: () => ipcRenderer.invoke(IPC_CHANNELS.CODE_LIST),
   },
   exam: {
-    submit: (payload: { userId?: string; courseId: CourseId; chapterId: string; answers: Record<string, string> }) =>
+    submit: (payload: { courseId: CourseId; chapterId: string; answers: Record<string, string> }) =>
       ipcRenderer.invoke(IPC_CHANNELS.EXAM_SUBMIT, payload),
     getQuestions: (courseId: CourseId, chapterId: string) =>
       ipcRenderer.invoke(IPC_CHANNELS.EXAM_GET_QUESTIONS, { courseId, chapterId }),
@@ -57,7 +58,8 @@ const api = {
       ipcRenderer.invoke(IPC_CHANNELS.AI_EXPLAIN, { concept, context }),
   },
   system: {
-    openExternal: (url: string) => shell.openExternal(url),
+    // 交由主进程校验协议后再打开，避免 file:// 等协议被用来启动本地程序
+    openExternal: (url: string) => ipcRenderer.invoke(IPC_CHANNELS.SYSTEM_OPEN_EXTERNAL, url),
   },
   window: {
     minimize: () => ipcRenderer.invoke(IPC_CHANNELS.WIN_MINIMIZE),

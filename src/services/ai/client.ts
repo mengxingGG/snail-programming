@@ -5,6 +5,15 @@ import fs from 'fs';
 import path from 'path';
 import { app, ipcMain } from 'electron';
 import { buildTutorSystemPrompt, type AiLessonContext, type AiMemorySnapshot } from './prompts';
+import { isSafeExternalUrl } from '../../shared/url-safety';
+import { getActiveUserId } from '../auth/session';
+import {
+  decodeApiKey,
+  encodeApiKey,
+  hasLegacyPlaintext,
+  isEncryptionAvailable,
+  type StoredKeyFields,
+} from './key-store';
 
 // ─── 类型 ────────────────────────────────────────────────
 
@@ -26,6 +35,8 @@ export type { AiLessonContext } from './prompts';
 // 渲染层看到的安全配置（不含明文 key）
 export interface AiConfigPublic extends Omit<AiConfig, 'apiKey'> {
   apiKeySet: boolean;
+  /** 密钥是否由系统钥匙串加密保存，用于在设置页如实告知用户 */
+  apiKeyEncrypted: boolean;
 }
 
 // ─── 配置 ────────────────────────────────────────────────
@@ -40,6 +51,21 @@ const DEFAULT_CONFIG: AiConfig = {
 
 let currentConfig: AiConfig = { ...DEFAULT_CONFIG };
 let lastRequestTime = 0;
+
+/** 校验并规范化 API 地址：只允许 http/https，去掉结尾斜杠 */
+export function normalizeBaseUrl(baseUrl: unknown): string {
+  const value = typeof baseUrl === 'string' ? baseUrl.trim() : '';
+  if (!value) return DEFAULT_CONFIG.baseUrl;
+  if (!isSafeExternalUrl(value)) {
+    throw new Error('API 地址必须以 http:// 或 https:// 开头');
+  }
+  return value.replace(/\/+$/, '');
+}
+
+/** 拼接 chat/completions 端点，容忍 baseUrl 结尾多余的斜杠 */
+export function buildChatEndpoint(baseUrl: string): string {
+  return `${baseUrl.replace(/\/+$/, '')}/chat/completions`;
+}
 
 interface MemoryEntry {
   text: string;
@@ -98,8 +124,20 @@ function persistMemoryStore(store: MemoryStore): void {
 export function loadConfig(): void {
   try {
     const raw = fs.readFileSync(getConfigPath(), 'utf-8');
-    const parsed = JSON.parse(raw) as Partial<AiConfig>;
-    currentConfig = { ...DEFAULT_CONFIG, ...parsed };
+    const parsed = JSON.parse(raw) as Partial<AiConfig> & StoredKeyFields;
+    const merged: AiConfig = {
+      ...DEFAULT_CONFIG,
+      ...parsed,
+      apiKey: decodeApiKey(parsed),
+    };
+    // 配置文件可能被手工改过，这里再兜一次协议校验
+    merged.baseUrl = normalizeBaseUrl(merged.baseUrl);
+    currentConfig = merged;
+
+    // 发现旧版明文密钥，立刻重写为密文
+    if (hasLegacyPlaintext(parsed) && isEncryptionAvailable()) {
+      persistConfig(merged);
+    }
   } catch {
     currentConfig = { ...DEFAULT_CONFIG };
   }
@@ -111,11 +149,23 @@ export function getConfig(): AiConfig {
 
 function persistConfig(config: AiConfig): void {
   currentConfig = config;
-  fs.writeFileSync(getConfigPath(), JSON.stringify(config, null, 2), 'utf-8');
+
+  // apiKey 不直接落盘，改存 safeStorage 密文
+  const { apiKey, ...rest } = config;
+  const payload = { ...rest, ...encodeApiKey(apiKey) };
+  fs.writeFileSync(getConfigPath(), JSON.stringify(payload, null, 2), 'utf-8');
 }
 
 function getMemoryUserKey(userId?: string | null): string {
   return userId?.trim() || 'anonymous';
+}
+
+/**
+ * AI 记忆按用户分桶，桶名必须来自主进程会话。
+ * 否则渲染层传一个别人的 userId 就能读到他人的提问历史。
+ */
+function withSessionUser<T extends AiLessonContext>(context: T): T {
+  return { ...context, userId: getActiveUserId() ?? undefined };
 }
 
 function getSectionMemoryKey(context: AiLessonContext): string {
@@ -230,7 +280,7 @@ async function chat(messages: AiMessage[]): Promise<string> {
   // 输出最多使用 25% 的 token，上限 2000
   const maxTokens = Math.min(2000, Math.floor(currentConfig.contextLength * 0.25));
 
-  const endpoint = currentConfig.baseUrl.replace(/\/$/, '') + '/chat/completions';
+  const endpoint = buildChatEndpoint(currentConfig.baseUrl);
 
   let response: Response;
   try {
@@ -249,8 +299,8 @@ async function chat(messages: AiMessage[]): Promise<string> {
       signal: AbortSignal.timeout(30_000),
     });
   } catch (err: any) {
-    if (err?.name === 'TimeoutError') throw new Error('AI 服务连接超时，请检查网络');
-    throw new Error('无法连接 AI 服务，请检查网络或 API 地址');
+    if (err?.name === 'TimeoutError') throw new Error('AI 服务连接超时，请检查网络', { cause: err });
+    throw new Error('无法连接 AI 服务，请检查网络或 API 地址', { cause: err });
   }
 
   if (!response.ok) {
@@ -331,6 +381,7 @@ export function registerIpcHandlers(): void {
     contextLength: currentConfig.contextLength,
     enabled: currentConfig.enabled,
     apiKeySet: currentConfig.apiKey.length > 0,
+    apiKeyEncrypted: isEncryptionAvailable(),
   }));
 
   // 保存配置；newApiKey 留空表示不修改密钥
@@ -342,7 +393,7 @@ export function registerIpcHandlers(): void {
     },
   ) => {
     persistConfig({
-      baseUrl: baseUrl.trim() || DEFAULT_CONFIG.baseUrl,
+      baseUrl: normalizeBaseUrl(baseUrl),
       model: model.trim() || DEFAULT_CONFIG.model,
       contextLength: Number.isFinite(contextLength) && contextLength >= 512
         ? contextLength
@@ -356,20 +407,20 @@ export function registerIpcHandlers(): void {
   // 通用对话（渲染层传完整 messages 数组）
   ipcMain.handle('ai:chat', async (
     _e, { messages, context }: { messages: AiMessage[]; context?: AiLessonContext },
-  ) => (context ? askLessonAi(messages, context) : askAi(messages)));
+  ) => (context ? askLessonAi(messages, withSessionUser(context)) : askAi(messages)));
 
   // 代码审查——只接收代码字符串，不返回可写内容
   ipcMain.handle('ai:review-code', async (
     _e, { code, sectionTitle, context }: { code: string; sectionTitle: string; context: AiLessonContext },
-  ) => reviewCode(code, sectionTitle, context));
+  ) => reviewCode(code, sectionTitle, withSessionUser(context)));
 
   // 获取提示
   ipcMain.handle('ai:get-hint', async (
     _e, { sectionTitle, courseHint, context }: { sectionTitle: string; courseHint?: string; context: AiLessonContext },
-  ) => getHint(sectionTitle, courseHint, context));
+  ) => getHint(sectionTitle, courseHint, withSessionUser(context)));
 
   // 解释概念
   ipcMain.handle('ai:explain', async (
     _e, { concept, context }: { concept: string; context: AiLessonContext },
-  ) => explainConcept(concept, context));
+  ) => explainConcept(concept, withSessionUser(context)));
 }

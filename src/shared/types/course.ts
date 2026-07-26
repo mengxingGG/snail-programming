@@ -28,10 +28,18 @@ export interface SectionValidation {
   expectedHint?: string;
 }
 
+/**
+ * 小节类型。不填时由判题逻辑在运行时推断：
+ * 起始代码原样运行就能满足输出要求的，视为 demo。
+ */
+export type SectionKind = 'demo' | 'exercise';
+
 export interface Section {
   id: string;
   chapterId: string;
   title: string;
+  /** 演示节只要求"运行并观察"，练习节必须有代码改动才算通过 */
+  kind?: SectionKind;
   content: string;        // Markdown 概念卡片
   starterCode: string;     // 初始代码模板
   expectedOutput: string;  // 预期输出（用于验证）
@@ -60,6 +68,11 @@ export interface Question {
   answer: string;
   starterCode?: string;
   expectedOutput?: string;
+  /**
+   * 填空题默认大小写敏感（编程课里 toFixed / StopIteration 这类标识符大小写有意义）。
+   * SQL 关键字等确实不区分大小写的题目可以显式放开。
+   */
+  caseInsensitive?: boolean;
 }
 
 export interface ExamResult {
@@ -67,6 +80,8 @@ export interface ExamResult {
   passed: boolean;
   correct: number;
   total: number;
+  /** 本章没有题库时为 true，用于和"考了但没过"区分开 */
+  unavailable?: boolean;
 }
 
 export interface CourseProgress {

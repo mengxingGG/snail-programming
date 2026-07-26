@@ -23,7 +23,7 @@ export default function AccountPage() {
 
   useEffect(() => {
     if (!userId || !(window as any).snailAPI?.profile) return;
-    (window as any).snailAPI.profile.get(userId).then((profile: { nickname: string }) => {
+    (window as any).snailAPI.profile.get().then((profile: { nickname: string }) => {
       setNickname(profile.nickname);
     });
   }, [userId]);
@@ -53,7 +53,7 @@ export default function AccountPage() {
     if (!userId) return;
     setProfileStatus('保存中...');
     try {
-      const profile = await (window as any).snailAPI.profile.save(userId, nickname);
+      const profile = await (window as any).snailAPI.profile.save(nickname);
       setNickname(profile.nickname);
       setProfileStatus('已保存');
     } catch (e: any) {

@@ -8,15 +8,18 @@ import { part3Chapters } from './part3-scraping';
 import { part4Chapters } from './part4-web';
 import { part5Chapters } from './part5-advanced';
 import { allQuestions } from './exams';
+import { applyCourseAuthoring } from '../course-authoring';
 import { enrichCourseChapters } from '../course-metadata';
 
-const chapters = enrichCourseChapters([
-  ...part1Chapters,
-  ...part2Chapters,
-  ...part3Chapters,
-  ...part4Chapters,
-  ...part5Chapters,
-]);
+const chapters = enrichCourseChapters(
+  applyCourseAuthoring([
+    ...part1Chapters,
+    ...part2Chapters,
+    ...part3Chapters,
+    ...part4Chapters,
+    ...part5Chapters,
+  ], 'python'),
+);
 
 export const pythonCourseData: CourseData = {
   chapters,

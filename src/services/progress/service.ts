@@ -4,6 +4,7 @@ import { getDb } from '../database/init';
 import { CourseProgress } from '../../shared/types/course';
 import type { CourseId } from '../../shared/course-catalog';
 import { getCourseIdFromPlanId } from '../../shared/course-catalog';
+import { requireUserId } from '../auth/session';
 
 export interface UserPlan {
   userId: string;
@@ -125,40 +126,42 @@ export function listCodeFiles(userId: string): string[] {
   return rows.map(r => r.filename);
 }
 
+// 所有 handler 的 userId 一律取自主进程会话，渲染层传入的值不作数
 export function registerIpcHandlers(): void {
-  ipcMain.handle('plan:get', async (_event, { userId }) => {
-    return loadPlan(userId);
+  ipcMain.handle('plan:get', async () => {
+    return loadPlan(requireUserId());
   });
 
-  ipcMain.handle('plan:save', async (_event, { userId, planId, startChapterId, startSectionId }) => {
-    return savePlan(userId, planId, startChapterId, startSectionId);
+  ipcMain.handle('plan:save', async (_event, { planId, startChapterId, startSectionId }) => {
+    return savePlan(requireUserId(), planId, startChapterId, startSectionId);
   });
 
-  ipcMain.handle('progress:save', async (_event, { userId, sectionId, courseId }) => {
-    saveProgress(userId, sectionId, courseId);
+  ipcMain.handle('progress:save', async (_event, { sectionId, courseId }) => {
+    saveProgress(requireUserId(), sectionId, courseId);
     return { success: true };
   });
 
-  ipcMain.handle('progress:load', async (_event, { userId, courseId }) => {
-    return loadProgress(userId, courseId);
+  ipcMain.handle('progress:load', async (_event, { courseId }) => {
+    return loadProgress(requireUserId(), courseId);
   });
 
-  ipcMain.handle('progress:complete-section', async (_event, { userId, sectionId, courseId }) => {
+  ipcMain.handle('progress:complete-section', async (_event, { sectionId, courseId }) => {
+    const userId = requireUserId();
     saveProgress(userId, sectionId, courseId);
     return loadProgress(userId, courseId);
   });
 
-  ipcMain.handle('code:save', async (_event, { userId, filename, code }) => {
-    saveCodeFile(userId, filename, code);
+  ipcMain.handle('code:save', async (_event, { filename, code }) => {
+    saveCodeFile(requireUserId(), filename, code);
     return { success: true };
   });
 
-  ipcMain.handle('code:load', async (_event, { userId, filename }) => {
-    const content = loadCodeFile(userId, filename);
+  ipcMain.handle('code:load', async (_event, { filename }) => {
+    const content = loadCodeFile(requireUserId(), filename);
     return { content };
   });
 
-  ipcMain.handle('code:list', async (_event, { userId }) => {
-    return { files: listCodeFiles(userId) };
+  ipcMain.handle('code:list', async () => {
+    return { files: listCodeFiles(requireUserId()) };
   });
 }

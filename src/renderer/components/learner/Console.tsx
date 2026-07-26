@@ -2,6 +2,7 @@
 import React from 'react';
 import { theme } from '../../theme';
 import type { RunResult } from '../../../services/runner/service';
+import type { LessonStatus } from '../../utils/lessonValidation';
 
 interface ConsoleProps {
   result: RunResult | null;
@@ -11,6 +12,7 @@ interface ConsoleProps {
   completed: boolean;
   validationMessage?: string;
   validationPassed?: boolean;
+  validationStatus?: LessonStatus;
   validationDetails?: string;
 }
 
@@ -22,11 +24,17 @@ export function Console({
   completed,
   validationMessage,
   validationPassed,
+  validationStatus,
   validationDetails,
 }: ConsoleProps) {
   const passed = validationPassed ?? (result?.success && expectedOutput
     ? result.output.trim() === expectedOutput.trim()
     : undefined);
+
+  // demo 态用中性色，避免把"照着示例点了一下运行"渲染成练习通过
+  const verdictColor = validationStatus === 'demo'
+    ? theme.colors.accent
+    : passed ? theme.colors.success : theme.colors.error;
 
   return (
     <div style={{
@@ -99,7 +107,7 @@ export function Console({
               <div style={{ color: theme.colors.textDim, whiteSpace: 'pre-wrap' }}>诊断：{result.details}</div>
             )}
             {passed !== undefined && (
-              <div style={{ color: passed ? theme.colors.success : theme.colors.error, whiteSpace: 'pre-wrap' }}>
+              <div style={{ color: verdictColor, whiteSpace: 'pre-wrap' }}>
                 {validationMessage ?? (passed ? '输出匹配，练习通过。' : `输出不匹配，请对照要求：${expectedOutput}`)}
               </div>
             )}

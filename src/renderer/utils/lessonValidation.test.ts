@@ -724,3 +724,90 @@ n= 1000:  O(1)=0.000002s | O(n)=0.000041s | O(n²)=0.052341s`,
     expect((result as any).details).toContain('实际：你的分数是：90');
   });
 });
+
+describe('三态判定：区分演示节与练习节', () => {
+  const section = buildSection({
+    starterCode: 'print("hello")',
+    expectedOutput: 'hello',
+  });
+
+  it('原样运行起始代码只算演示，不谎报"练习通过"', () => {
+    const result = validateLessonOutput(section, 'hello', section.starterCode);
+
+    expect(result.status).toBe('demo');
+    expect(result.message).toContain('试着自己改改代码');
+    // 仍然允许标记为已学，避免演示节永远卡住进度
+    expect(result.passed).toBe(true);
+  });
+
+  it('学生改动代码且输出正确才算真正通过', () => {
+    const result = validateLessonOutput(section, 'hello', 'msg = "hello"\nprint(msg)');
+
+    expect(result.status).toBe('passed');
+    expect(result.message).toContain('通过');
+  });
+
+  it('输出不对时无论有没有改动都是失败', () => {
+    expect(validateLessonOutput(section, 'bye', section.starterCode).status).toBe('failed');
+    expect(validateLessonOutput(section, 'bye', 'print("bye")').status).toBe('failed');
+  });
+
+  it('显式标为 exercise 的小节，不改代码直接判失败而不是演示', () => {
+    const exercise = buildSection({
+      kind: 'exercise',
+      starterCode: 'print("hello")',
+      expectedOutput: 'hello',
+    });
+    const result = validateLessonOutput(exercise, 'hello', exercise.starterCode);
+
+    expect(result.status).toBe('failed');
+    expect(result.details).toContain('还没有修改起始代码');
+  });
+
+  it('显式标为 demo 的小节即使改了代码也不冒充练习通过', () => {
+    const demo = buildSection({
+      kind: 'demo',
+      starterCode: 'print("hello")',
+      expectedOutput: 'hello',
+    });
+
+    expect(validateLessonOutput(demo, 'hello', 'print("hell" + "o")').status).toBe('demo');
+  });
+
+  it('调用方没传代码时无从判断改动，按通过处理', () => {
+    expect(validateLessonOutput(section, 'hello').status).toBe('passed');
+    expect(validateLessonOutput(section, 'hello', '').status).toBe('passed');
+  });
+});
+
+describe('教材正则写错时的兜底', () => {
+  it('无法编译的正则不再抛异常，而是明确报出配置错误', () => {
+    const broken = buildSection({
+      starterCode: 'print("x")',
+      expectedOutput: 'x',
+      validation: {
+        mode: 'regex_pattern',
+        outputRules: [{ type: 'regex', value: '^(未闭合的分组' }],
+      },
+    });
+
+    expect(() => validateLessonOutput(broken, 'x', 'print("y")')).not.toThrow();
+    const result = validateLessonOutput(broken, 'x', 'print("y")');
+    expect(result.status).toBe('failed');
+    expect(result.message).toContain('校验规则配置有误');
+    expect(result.details).toContain('未闭合的分组');
+  });
+
+  it('codeRules 里的坏正则同样被拦下', () => {
+    const broken = buildSection({
+      validation: {
+        mode: 'edit_required',
+        codeRules: [{ type: 'regex', value: '[a-' }],
+      },
+    });
+
+    const result = validateLessonOutput(broken, '固定输出', 'console.log("x")');
+    expect(result.status).toBe('failed');
+    expect(result.details).toContain('[a-');
+  });
+});
