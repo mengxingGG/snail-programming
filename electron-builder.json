@@ -8,7 +8,13 @@
     "dist/**/*",
     "package.json"
   ],
-  "extraResources": [],
+  "extraResources": [
+    {
+      "from": "projects",
+      "to": "projects",
+      "filter": ["**/*", "!**/node_modules/**", "!**/__pycache__/**", "!**/.venv/**"]
+    }
+  ],
   "win": {
     "target": "nsis",
     "icon": null

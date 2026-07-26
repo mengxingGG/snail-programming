@@ -53,11 +53,15 @@ export async function compileAndRun(code: string, language: 'typescript' | 'pyth
   fs.writeFileSync(tmpFile, executableCode, 'utf-8');
 
   try {
+    // 默认沿用 python 命令；在解释器未加入 PATH 的开发/验收环境中，
+    // 可显式指定绝对路径，而不改变最终用户的既有行为。
+    const pythonExecutable = process.env.SNAIL_PYTHON_EXECUTABLE?.trim() || 'python';
     const output = language === 'python'
-      ? execFileSync('python', [tmpFile], buildExecutionOptions('python', tmpDir))
+      ? execFileSync(pythonExecutable, [tmpFile], buildExecutionOptions('python', tmpDir))
       : execFileSync('node', [tmpFile], buildExecutionOptions('typescript', tmpDir));
     return output;
   } finally {
-    try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}
+    // 清理失败不影响本次运行结果，交由系统临时目录回收
+    try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch { /* 忽略清理失败 */ }
   }
 }

@@ -13,7 +13,9 @@ interface ConceptCardProps {
   completed: boolean;
   difficulty?: Difficulty;
   estimatedMinutes?: number;
-  prerequisitesCount?: number;
+  /** 尚未完成的前置小节；为空表示可以直接学本节 */
+  unmetPrerequisites?: { sectionId: string; chapterId: string; title: string }[];
+  onJumpToPrerequisite?: (chapterId: string, sectionId: string) => void;
 }
 
 function navButtonStyle(primary = false): React.CSSProperties {
@@ -60,7 +62,8 @@ export function ConceptCard({
   completed,
   difficulty,
   estimatedMinutes,
-  prerequisitesCount = 0,
+  unmetPrerequisites = [],
+  onJumpToPrerequisite,
 }: ConceptCardProps) {
   return (
     <article style={{
@@ -92,7 +95,6 @@ export function ConceptCard({
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 14 }}>
             <span style={metaChipStyle()}>{difficultyLabel(difficulty)}</span>
             {typeof estimatedMinutes === 'number' && <span style={metaChipStyle()}>{`预计 ${estimatedMinutes} 分钟`}</span>}
-            <span style={metaChipStyle()}>{`前置 ${prerequisitesCount} 节`}</span>
           </div>
         </div>
         {completed && (
@@ -110,6 +112,43 @@ export function ConceptCard({
           </span>
         )}
       </div>
+
+      {unmetPrerequisites.length > 0 && (
+        <div style={{
+          position: 'relative',
+          marginTop: 16,
+          padding: '10px 14px',
+          borderRadius: 14,
+          background: theme.colors.accent + '12',
+          border: '1px solid ' + theme.colors.accent + '44',
+          fontSize: 12,
+          lineHeight: 1.7,
+        }}>
+          <span style={{ color: theme.colors.textBright, fontWeight: 700 }}>建议先完成前置内容</span>
+          <span style={{ color: theme.colors.textDim }}>
+            {' '}— 本节会用到下面这些还没学完的内容，跳着学容易卡住：
+          </span>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
+            {unmetPrerequisites.map(item => (
+              <button
+                key={item.sectionId}
+                onClick={() => onJumpToPrerequisite?.(item.chapterId, item.sectionId)}
+                style={{
+                  background: 'transparent',
+                  color: theme.colors.accent,
+                  border: '1px solid ' + theme.colors.accent + '66',
+                  borderRadius: 999,
+                  padding: '4px 12px',
+                  fontSize: 11.5,
+                  cursor: 'pointer',
+                }}
+              >
+                {`去学 ${item.title}`}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div style={{
         position: 'relative',

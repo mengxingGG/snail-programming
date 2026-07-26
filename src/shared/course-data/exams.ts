@@ -1,4 +1,5 @@
-// 📝 考试题库 — 22章 + 6个实战项目，每章 3 题（2 选择 + 1 填空/编程）
+// 📝 考试题库 — 基础题 + 代表性编程题
+// 章节覆盖完整性由 src/shared/course-content.test.ts 保证：新增章节若没有题库，测试会失败。
 import type { Question } from '../types/course';
 
 export const allQuestions: Record<string, Question[]> = {
@@ -40,6 +41,13 @@ export const allQuestions: Record<string, Question[]> = {
       text: '声明一个数字类型的变量 age，应该写：let age: ____ = 18',
       answer: 'number',
     },
+    {
+      id: 'ch2-q4', chapterId: 'ch2', type: 'code',
+      text: '声明变量 score 并赋值 90，输出「分数：90」。',
+      starterCode: '// 在这里写代码\n',
+      expectedOutput: '分数：90',
+      answer: '',
+    },
   ],
 
   ch3: [
@@ -64,6 +72,13 @@ export const allQuestions: Record<string, Question[]> = {
       id: 'ch3-q3', chapterId: 'ch3', type: 'fill',
       text: '判断 x 是否严格等于 5，应该用：x ____ 5',
       answer: '=== 5',
+    },
+    {
+      id: 'ch3-q4', chapterId: 'ch3', type: 'code',
+      text: '声明 score 为 80；分数大于等于 60 时输出「通过」，否则输出「继续努力」。',
+      starterCode: '// 在这里写代码\n',
+      expectedOutput: '通过',
+      answer: '',
     },
   ],
 
@@ -105,6 +120,13 @@ export const allQuestions: Record<string, Question[]> = {
       text: '遍历数组 arr 的每个元素 item，写法：for (const ____ of arr)',
       answer: 'item',
     },
+    {
+      id: 'ch5-q4', chapterId: 'ch5', type: 'code',
+      text: '使用 for 循环依次输出数字 1、2、3，每个数字一行。',
+      starterCode: '// 在这里写代码\n',
+      expectedOutput: '1\n2\n3',
+      answer: '',
+    },
   ],
 
   ch6: [
@@ -124,6 +146,13 @@ export const allQuestions: Record<string, Question[]> = {
       id: 'ch6-q3', chapterId: 'ch6', type: 'fill',
       text: '筛选数组中满足条件的元素，用：arr._______(item => item > 0)',
       answer: 'filter',
+    },
+    {
+      id: 'ch6-q4', chapterId: 'ch6', type: 'code',
+      text: '创建数组 [45, 70, 80]，用 filter 筛出及格分数并输出「70,80」。',
+      starterCode: '// 在这里写代码\n',
+      expectedOutput: '70,80',
+      answer: '',
     },
   ],
 
@@ -150,6 +179,13 @@ export const allQuestions: Record<string, Question[]> = {
       text: '函数没有返回值时，返回值类型标注为：function foo(): ____',
       answer: 'void',
     },
+    {
+      id: 'ch7-q4', chapterId: 'ch7', type: 'code',
+      text: '定义 multiply 函数，接收两个数字并返回乘积；调用它计算 3 × 4 并输出结果。',
+      starterCode: '// 在这里写代码\n',
+      expectedOutput: '12',
+      answer: '',
+    },
   ],
 
   ch8: [
@@ -170,6 +206,13 @@ export const allQuestions: Record<string, Question[]> = {
       text: '对象方法内用 ____ 引用对象自身的其他属性',
       answer: 'this',
     },
+    {
+      id: 'ch8-q4', chapterId: 'ch8', type: 'code',
+      text: '创建包含 name 属性的对象，name 为「小明」，并输出这个属性。',
+      starterCode: '// 在这里写代码\n',
+      expectedOutput: '小明',
+      answer: '',
+    },
   ],
 
   ch9: [
@@ -189,6 +232,13 @@ export const allQuestions: Record<string, Question[]> = {
       id: 'ch9-q3', chapterId: 'ch9', type: 'fill',
       text: '检查变量运行时类型的运算符是：____ value === "string"',
       answer: 'typeof',
+    },
+    {
+      id: 'ch9-q4', chapterId: 'ch9', type: 'code',
+      text: '声明联合类型变量 id（string | number），赋值 1001，并输出「ID：1001」。',
+      starterCode: '// 在这里写代码\n',
+      expectedOutput: 'ID：1001',
+      answer: '',
     },
   ],
 
@@ -212,6 +262,38 @@ export const allQuestions: Record<string, Question[]> = {
     },
   ],
 
+  ch10a: [
+    {
+      id: 'ch10a-q1', chapterId: 'ch10a', type: 'choice',
+      text: '把一个函数当作参数传给另一个函数，被传进去的那个函数叫什么？',
+      options: ['回调函数', '构造函数', '匿名函数', '递归函数'],
+      answer: '回调函数',
+    },
+    {
+      id: 'ch10a-q2', chapterId: 'ch10a', type: 'choice',
+      text: '关于闭包，下面哪种说法是对的？',
+      options: [
+        '内部函数能够记住并访问它定义时所在的外层作用域的变量',
+        '闭包会让所有变量都变成全局变量',
+        '闭包只能用在箭头函数里',
+        '函数执行结束后，它的局部变量一定立刻被回收',
+      ],
+      answer: '内部函数能够记住并访问它定义时所在的外层作用域的变量',
+    },
+    {
+      id: 'ch10a-q3', chapterId: 'ch10a', type: 'fill',
+      text: '作用域链的方向是：内层可以访问外层，外层________访问内层。（填「不能」或「能」）',
+      answer: '不能',
+    },
+    {
+      id: 'ch10a-q4', chapterId: 'ch10a', type: 'code',
+      text: '定义 applyTwice(value, fn)，让 fn 对 value 连续执行两次；传入 2 和“乘以 2”的函数，输出 8。',
+      starterCode: '// 在这里写代码\n',
+      expectedOutput: '8',
+      answer: '',
+    },
+  ],
+
   ch11: [
     {
       id: 'ch11-q1', chapterId: 'ch11', type: 'choice',
@@ -229,6 +311,13 @@ export const allQuestions: Record<string, Question[]> = {
       id: 'ch11-q3', chapterId: 'ch11', type: 'fill',
       text: '捕获 async 函数中抛出的错误，使用 try { } ____ { } 结构',
       answer: 'catch',
+    },
+    {
+      id: 'ch11-q4', chapterId: 'ch11', type: 'code',
+      text: '创建一个 resolve 为「完成」的 Promise，并在 then 回调中输出它。',
+      starterCode: '// 在这里写代码\n',
+      expectedOutput: '完成',
+      answer: '',
     },
   ],
 
@@ -317,6 +406,32 @@ export const allQuestions: Record<string, Question[]> = {
     },
   ],
 
+  ch15a: [
+    {
+      id: 'ch15a-q1', chapterId: 'ch15a', type: 'choice',
+      text: '「认证（Authentication）」回答的是下面哪个问题？',
+      options: ['你是谁？', '你能做什么？', '你在哪里？', '你什么时候来的？'],
+      answer: '你是谁？',
+    },
+    {
+      id: 'ch15a-q2', chapterId: 'ch15a', type: 'choice',
+      text: '数据库里应该怎样保存用户密码？',
+      options: [
+        '保存加盐后的哈希值，登录时比对哈希',
+        '直接保存明文，方便找回密码',
+        '用 Base64 编码后保存',
+        '保存明文但限制数据库访问权限',
+      ],
+      answer: '保存加盐后的哈希值，登录时比对哈希',
+    },
+    {
+      id: 'ch15a-q3', chapterId: 'ch15a', type: 'fill',
+      text: 'JWT 由三部分组成，用点号连接：Header.Payload.________',
+      answer: 'Signature',
+      caseInsensitive: true,
+    },
+  ],
+
   ch16: [
     {
       id: 'ch16-q1', chapterId: 'ch16', type: 'choice',
@@ -354,6 +469,36 @@ export const allQuestions: Record<string, Question[]> = {
       id: 'ch17-q3', chapterId: 'ch17', type: 'fill',
       text: '盒模型中，元素内部的间距叫 ________，外部间距叫 margin',
       answer: 'padding',
+    },
+  ],
+
+  ch17a: [
+    {
+      id: 'ch17a-q1', chapterId: 'ch17a', type: 'choice',
+      text: 'fetch() 返回的是什么？',
+      options: [
+        '一个 Promise，解析后得到 Response 对象',
+        '直接返回解析好的 JSON 数据',
+        '返回字符串形式的响应体',
+        '返回 XMLHttpRequest 对象',
+      ],
+      answer: '一个 Promise，解析后得到 Response 对象',
+    },
+    {
+      id: 'ch17a-q2', chapterId: 'ch17a', type: 'choice',
+      text: '用 fetch 发送 POST 并提交 JSON 时，除了 method 和 body，通常还必须设置什么？',
+      options: [
+        "请求头 Content-Type: application/json",
+        '把 body 写成查询字符串',
+        'mode: no-cors',
+        '什么都不用设置',
+      ],
+      answer: "请求头 Content-Type: application/json",
+    },
+    {
+      id: 'ch17a-q3', chapterId: 'ch17a', type: 'fill',
+      text: '把 fetch 拿到的响应体按 JSON 解析：const data = await response.________()',
+      answer: 'json',
     },
   ],
 

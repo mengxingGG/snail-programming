@@ -21,6 +21,7 @@ export function initDatabase(): void {
     console.error('[M02] 数据库初始化失败:', err);
     throw new Error(
       `无法初始化数据库：${err instanceof Error ? err.message : String(err)}`,
+      { cause: err },
     );
   }
 }

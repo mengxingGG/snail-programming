@@ -11,13 +11,13 @@ export function useProgress(userId: string | null, courseId: CourseId = 'typescr
       setProgress(null);
       return;
     }
-    (window as any).snailAPI.progress.load(userId, courseId).then(setProgress);
+    (window as any).snailAPI.progress.load(courseId).then(setProgress);
   }, [userId, courseId]);
 
   const completeSection = async (sectionId: string) => {
     if (!userId) return;
-    await (window as any).snailAPI.progress.completeSection(userId, sectionId, courseId);
-    const p = await (window as any).snailAPI.progress.load(userId, courseId);
+    await (window as any).snailAPI.progress.completeSection(sectionId, courseId);
+    const p = await (window as any).snailAPI.progress.load(courseId);
     setProgress(p);
   };
 

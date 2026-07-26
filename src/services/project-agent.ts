@@ -134,8 +134,8 @@ async function chatWithAgent(
       signal: AbortSignal.timeout(30_000),
     });
   } catch (err: any) {
-    if (err?.name === 'TimeoutError') throw new Error('AI 服务连接超时，请检查网络');
-    throw new Error('无法连接 AI 服务，请检查网络或 API 地址');
+    if (err?.name === 'TimeoutError') throw new Error('AI 服务连接超时，请检查网络', { cause: err });
+    throw new Error('无法连接 AI 服务，请检查网络或 API 地址', { cause: err });
   }
 
   if (!response.ok) {

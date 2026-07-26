@@ -1,4 +1,36 @@
-import { Menu, shell, app, BrowserWindow } from 'electron';
+import { Menu, shell, app, BrowserWindow, dialog } from 'electron';
+
+const REPO_URL = 'https://github.com/mengxingGG/snail-programming';
+
+/**
+ * 关于对话框。
+ * 原先是向渲染层 send('about-snail')，但 preload 没有暴露对应的监听接口，
+ * 渲染层收不到，点「关于」没有任何反应。这里直接用主进程原生对话框。
+ */
+function showAboutDialog(): void {
+  const detail = [
+    `版本：${app.getVersion()}`,
+    `Electron：${process.versions.electron}`,
+    `Chromium：${process.versions.chrome}`,
+    `Node：${process.versions.node}`,
+    `平台：${process.platform} ${process.arch}`,
+  ].join('\n');
+
+  const options: Electron.MessageBoxOptions = {
+    type: 'info',
+    title: '关于蜗牛编程',
+    message: '🐌 蜗牛编程',
+    detail,
+    buttons: ['确定'],
+  };
+
+  const focused = BrowserWindow.getFocusedWindow();
+  if (focused) {
+    dialog.showMessageBox(focused, options);
+  } else {
+    dialog.showMessageBox(options);
+  }
+}
 
 export function setupMenu() {
   const isDev = !app.isPackaged;
@@ -42,16 +74,16 @@ export function setupMenu() {
         submenu: [
           {
             label: '关于 Snail',
-            click: () => BrowserWindow.getFocusedWindow()?.webContents.send('about-snail'),
+            click: () => showAboutDialog(),
           },
           { type: 'separator' },
           {
             label: '查看文档',
-            click: () => shell.openExternal('https://snail-docs.empero.org'),
+            click: () => shell.openExternal(REPO_URL),
           },
           {
             label: '提交问题',
-            click: () => shell.openExternal('https://github.com/empero/snail/issues'),
+            click: () => shell.openExternal(`${REPO_URL}/issues`),
           },
         ],
       },
@@ -64,7 +96,7 @@ export function setupMenu() {
         submenu: [
           {
             label: '关于 Snail',
-            click: () => BrowserWindow.getFocusedWindow()?.webContents.send('about-snail'),
+            click: () => showAboutDialog(),
           },
           { type: 'separator' },
           { label: '退出', accelerator: 'CmdOrCtrl+Q', click: () => app.quit() },

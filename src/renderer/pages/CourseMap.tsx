@@ -70,8 +70,8 @@ export default function CourseMap() {
   useEffect(() => {
     if (!userId) return;
     Promise.all([
-      (window as any).snailAPI.plan.get(userId),
-      (window as any).snailAPI.profile.get(userId),
+      (window as any).snailAPI.plan.get(),
+      (window as any).snailAPI.profile.get(),
     ]).then(([plan, userProfile]) => {
       setSavedPlan(plan);
       setProfile(userProfile);
@@ -129,7 +129,7 @@ export default function CourseMap() {
     if (!userId || plan.status !== 'available') return;
     setSavingPlan(plan.id);
     try {
-      const saved = await (window as any).snailAPI.plan.save({ userId, planId: plan.id, startChapterId: plan.startChapterId, startSectionId: plan.startSectionId });
+      const saved = await (window as any).snailAPI.plan.save({ planId: plan.id, startChapterId: plan.startChapterId, startSectionId: plan.startSectionId });
       setSavedPlan(saved);
       navigate(buildLearnPath(plan.courseId, plan.startChapterId, plan.startSectionId));
     } finally {
@@ -227,6 +227,30 @@ export default function CourseMap() {
                   <div style={{ marginTop: 8, color: theme.colors.textDim, lineHeight: 1.7 }}>
                     如果你是第一次进入，可以直接选一条主语言路线开始。想做桌面与前端优先 TypeScript，想学脚本、自动化和 AI 工具优先 Python。
                   </div>
+                  <div style={{ marginTop: 14, display: 'grid', gap: 8 }}>
+                    {LEARNING_PLANS.filter(plan => plan.status === 'available').map(plan => (
+                      <button
+                        key={plan.id}
+                        onClick={() => selectPlan(plan)}
+                        disabled={!userId || !!savingPlan}
+                        title={userId ? plan.description : '请先登录后再选择学习路线'}
+                        style={{
+                          ...ghostButtonStyle(),
+                          width: '100%',
+                          textAlign: 'left',
+                          opacity: !userId || savingPlan ? 0.55 : 1,
+                          cursor: !userId || savingPlan ? 'not-allowed' : 'pointer',
+                        }}
+                      >
+                        {savingPlan === plan.id ? '正在保存...' : `${plan.title} · ${plan.subtitle}`}
+                      </button>
+                    ))}
+                  </div>
+                  {!userId && (
+                    <div style={{ marginTop: 8, color: theme.colors.textDim, fontSize: 11 }}>
+                      登录后才能保存学习路线。
+                    </div>
+                  )}
                 </div>
               )}
 

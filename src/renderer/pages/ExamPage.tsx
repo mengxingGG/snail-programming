@@ -5,7 +5,6 @@ import { ChoiceQuestion } from '../components/exam/ChoiceQuestion';
 import { FillQuestion } from '../components/exam/FillQuestion';
 import { CodeQuestion } from '../components/exam/CodeQuestion';
 import { theme } from '../theme';
-import { useAuth } from '../hooks/useAuth';
 import type { CourseId } from '../../shared/course-catalog';
 import { getCourseBundle } from '../../shared/course-catalog';
 
@@ -22,7 +21,6 @@ export default function ExamPage() {
   const courseId: CourseId = routeCourseId === 'python' ? 'python' : 'typescript';
   const course = getCourseBundle(courseId);
   const navigate = useNavigate();
-  const { userId } = useAuth();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(true);
@@ -62,7 +60,7 @@ export default function ExamPage() {
     setError('');
     setIsSubmitting(true);
     try {
-      const res = await (window as any).snailAPI.exam.submit({ userId: userId ?? '', courseId, answers, chapterId: chapterId ?? '' });
+      const res = await (window as any).snailAPI.exam.submit({ courseId, answers, chapterId: chapterId ?? '' });
       setScore(res.score);
       setSubmitted(true);
     } catch {

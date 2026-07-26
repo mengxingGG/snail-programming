@@ -9,6 +9,7 @@ interface AiConfigPublic {
   contextLength: number;
   enabled: boolean;
   apiKeySet: boolean;
+  apiKeyEncrypted: boolean;
 }
 
 const api = () => (window as any).snailAPI.ai;
@@ -70,6 +71,7 @@ export default function SettingsPage() {
     contextLength: 8192,
     enabled: false,
     apiKeySet: false,
+    apiKeyEncrypted: false,
   });
   const [newApiKey, setNewApiKey] = useState('');
   const [saving, setSaving] = useState(false);
@@ -188,7 +190,9 @@ export default function SettingsPage() {
             style={inputStyle()}
           />
           <p style={{ color: theme.colors.textDim, fontSize: '11px', margin: '4px 0 0' }}>
-            密钥存储在本地 userData 目录，不上传任何服务器。
+            {cfg.apiKeyEncrypted
+              ? '密钥由系统钥匙串加密后保存在本地 userData 目录，不上传任何服务器。'
+              : '当前系统没有可用的钥匙串后端，密钥将以明文保存在本地 userData 目录，不上传任何服务器。'}
           </p>
 
           {/* 模型 */}

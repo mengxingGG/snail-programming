@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { theme } from '../theme';
-import { useAuth } from '../hooks/useAuth';
+import { CodeEditor } from '../components/learner/CodeEditor';
 import { getProject, getProjectsByCourse } from '../../shared/projects-data';
 import type { ProjectDef } from '../../shared/projects-data';
 import type { CourseId } from '../../shared/course-catalog';
@@ -288,7 +288,9 @@ export default function ProjectIDE() {
         if (main) setActiveFile(prev => prev || main.path);
         return;
       }
-    } catch {}
+    } catch {
+      // 读取真实文件系统失败时走下面的静态回退
+    }
 
     // 回退：从 project-data 定义生成文件列表
     const fallbackFiles: FileEntry[] = project.files.map(f => ({
@@ -308,14 +310,17 @@ export default function ProjectIDE() {
   const loadContent = useCallback(async (filePath: string) => {
     if (!project || !filePath) return;
     if (dirty && activeFile && fileContent) {
-      try { await api()?.writeFile(project.id, activeFile, fileContent); } catch {}
+      // 切换文件前尽力保存，失败不阻塞切换
+      try { await api()?.writeFile(project.id, activeFile, fileContent); } catch { /* 忽略保存失败 */ }
     }
     setDirty(false);
 
     try {
       const res = await api()?.readFile(project.id, filePath);
       if (res?.success && res.data !== undefined) { setFileContent(res.data); return; }
-    } catch {}
+    } catch {
+      // 读取失败时回退到 project-data 里的静态内容
+    }
 
     const def = project.files.find(f => f.name === filePath);
     if (def) setFileContent(def.content);
@@ -417,11 +422,15 @@ export default function ProjectIDE() {
             <span>{icon(fileLang)}</span>
             <span style={{ color: theme.colors.text }}>{activeFile || '选择文件'}</span>
           </div>
-          <div style={{ flex: 1, minHeight: 0, background: '#0D111A' }}>
-            <textarea value={fileContent} onChange={e => { setFileContent(e.target.value); setDirty(true); }}
-              spellCheck={false}
-              style={{ width: '100%', height: '100%', border: 'none', background: '#0D111A', color: '#C9D1D9', fontFamily: "'Consolas','Monaco',monospace", fontSize: 13, lineHeight: 1.6, padding: '12px 14px', resize: 'none', outline: 'none', tabSize: 4, whiteSpace: 'pre' }}
-              onKeyDown={e => { if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); handleSave(); } }} />
+          <div
+            style={{ flex: 1, minHeight: 0, background: '#0D111A' }}
+            onKeyDown={e => { if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); handleSave(); } }}
+          >
+            <CodeEditor
+              value={fileContent}
+              language={fileLang}
+              onChange={next => { setFileContent(next); setDirty(true); }}
+            />
           </div>
           <div style={{ height: 180, borderTop: '1px solid var(--border)', background: '#080C14', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
             <div style={{ padding: '6px 12px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

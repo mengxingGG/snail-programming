@@ -77,6 +77,23 @@ describe('compileAndRun', () => {
     );
   });
 
+  it('允许验收环境显式指定 Python 解释器路径', async () => {
+    const previous = process.env.SNAIL_PYTHON_EXECUTABLE;
+    process.env.SNAIL_PYTHON_EXECUTABLE = 'C:\\tools\\python.exe';
+
+    try {
+      await compileAndRun('print(1)', 'python');
+      expect(mockExecFileSync).toHaveBeenCalledWith(
+        'C:\\tools\\python.exe',
+        [expect.stringMatching(/main\.py$/)],
+        expect.any(Object),
+      );
+    } finally {
+      if (previous === undefined) delete process.env.SNAIL_PYTHON_EXECUTABLE;
+      else process.env.SNAIL_PYTHON_EXECUTABLE = previous;
+    }
+  });
+
   it('每次执行都使用独立的临时目录，路径不可预测', async () => {
     await compileAndRun('print(1)', 'python');
     await compileAndRun('print(2)', 'python');

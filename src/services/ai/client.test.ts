@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 vi.mock('electron', () => ({
   ipcMain: { handle: vi.fn() },
   app: { getPath: () => 'C:\\temp' },
+  safeStorage: { isEncryptionAvailable: () => false },
 }));
 
 import { buildChatEndpoint, normalizeBaseUrl } from './client';

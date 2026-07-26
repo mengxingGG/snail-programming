@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { ipcMain } from 'electron';
 import { getDb } from '../database/init';
 import { User, UserSession } from '../../shared/types/user';
+import { clearActiveSessionByToken, requireUserId, setActiveSession } from './session';
 
 const FUN_NICKNAMES = [
   '会写代码的蜗牛',
@@ -188,30 +189,42 @@ export function saveProfile(userId: string, nickname: string): { userId: string;
 export function registerIpcHandlers(): void {
   ipcMain.handle('auth:register', async (_event, { username, password }) => {
     register(username, password);
-    return login(username, password);
+    const session = login(username, password);
+    setActiveSession(session.userId, session.token);
+    return session;
   });
 
   ipcMain.handle('auth:login', async (_event, { username, password }) => {
-    return login(username, password);
+    const session = login(username, password);
+    setActiveSession(session.userId, session.token);
+    return session;
   });
 
   ipcMain.handle('auth:logout', async (_event, { token }) => {
     if (token) {
       getDb().prepare('DELETE FROM sessions WHERE token = ?').run(token);
+      clearActiveSessionByToken(token);
     }
     return { success: true };
   });
 
+  // 应用重启后渲染层用本地令牌恢复会话，主进程在这里重新确立活动会话
   ipcMain.handle('auth:get-session', async (_event, { token }) => {
     const userId = validateSession(token);
+    if (userId) {
+      setActiveSession(userId, token);
+    } else {
+      clearActiveSessionByToken(token);
+    }
     return { userId };
   });
 
-  ipcMain.handle('profile:get', async (_event, { userId }) => {
-    return ensureProfile(userId);
+  // 以下操作只作用于当前登录用户，忽略渲染层传入的 userId
+  ipcMain.handle('profile:get', async () => {
+    return ensureProfile(requireUserId());
   });
 
-  ipcMain.handle('profile:save', async (_event, { userId, nickname }) => {
-    return saveProfile(userId, nickname);
+  ipcMain.handle('profile:save', async (_event, { nickname }) => {
+    return saveProfile(requireUserId(), nickname);
   });
 }

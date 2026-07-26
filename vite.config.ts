@@ -4,9 +4,7 @@ import electron from 'vite-plugin-electron';
 import electronRenderer from 'vite-plugin-electron-renderer';
 import path from 'path';
 
-export default defineConfig(({ command }) => {
-  const isDev = command === 'serve';
-
+export default defineConfig(() => {
   return {
     plugins: [
       react(),
