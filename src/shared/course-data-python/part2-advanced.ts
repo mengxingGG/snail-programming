@@ -68,6 +68,7 @@ const ch10: Chapter = {
   sections: [
     {
       id: '10.1',
+      kind: 'demo',
       chapterId: 'ch10',
       title: 'import — 引入标准库和第三方库',
       content: `## import：把别人写好的代码拿过来用
@@ -127,6 +128,7 @@ print(f"现在时间是 {now.strftime('%Y-%m-%d %H:%M:%S')}")`,
     },
     {
       id: '10.2',
+      kind: 'demo',
       chapterId: 'ch10',
       title: 'pip — Python 的包管理器',
       content: `## pip：安装别人分享的第三方库
@@ -193,6 +195,7 @@ print(f"很棒？{'👍 当然！' if info['awesome'] else '😅'}")`,
     },
     {
       id: '10.3',
+      kind: 'exercise',
       chapterId: 'ch10',
       title: '写自己的模块 — 一个 .py 文件就是一个模块',
       content: `## 每一个 .py 文件，都是天然的模块
@@ -291,6 +294,7 @@ print(f"10 是质数？{is_prime(10)}")`,
     },
     {
       id: '10.4',
+      kind: 'demo',
       chapterId: 'ch10',
       title: 'lambda — Python 的匿名函数',
       content: `## lambda：一行搞定小函数
@@ -400,6 +404,7 @@ const ch11: Chapter = {
   sections: [
     {
       id: '11.1',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '类是什么 — 创建对象的模板',
       content: `## 类（class）：制造对象的"图纸"
@@ -486,6 +491,7 @@ pet 的文档：宠物基类——展示最基本的类结构`,
     },
     {
       id: '11.2',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '__init__ — 初始化方法',
       content: `## __init__：对象出生时自动执行的"初始化代码"
@@ -558,6 +564,7 @@ print(book3)`,
     },
     {
       id: '11.3',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '属性与方法 — self 是什么',
       content: `## self：指向"当前这个对象"的引用
@@ -650,6 +657,7 @@ print(f"重置后 — {c1.status()}")`,
     },
     {
       id: '11.4',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '继承 — 复用父类的能力',
       content: `## 继承：把已有的类"复制一份"，再加自己的东西
@@ -754,6 +762,7 @@ print(f"李四是 Manager 吗？{isinstance(m1, Manager)}")`,
     },
     {
       id: '11.5',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '@property — 把方法当属性用',
       content: `## @property：方法变身属性
@@ -858,6 +867,7 @@ print(f"\\n修改后：{t.celsius}°C = {t.fahrenheit:.1f}°F")`,
     },
     {
       id: '11.6',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '@classmethod + @staticmethod — 什么时候用哪个',
       content: `## @classmethod 和 @staticmethod
@@ -958,6 +968,7 @@ print(f"200岁合法？{User.validate_age(200)}")`,
     },
     {
       id: '11.7',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '魔术方法 — __str__/__repr__/__eq__/__lt__',
       content: `## 魔术方法：让对象可打印、可比较
@@ -1075,6 +1086,7 @@ s1 == s2？ False
     },
     {
       id: '11.8',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '组合 vs 继承 — has-a vs is-a',
       content: `## 组合 vs 继承：设计类的关系
@@ -1185,6 +1197,7 @@ print(f"升级后：{c.brand}：{c.engine.start()} → 出发！")`,
     },
     {
       id: '11.9',
+      kind: 'demo',
       chapterId: 'ch11',
       title: 'dataclasses — 现代 Python 数据类',
       content: `## dataclasses：告别样板代码
@@ -1300,6 +1313,7 @@ p1 == p2？ False
     },
     {
       id: '11.10',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '类型提示入门 — def greet(name: str) -> str:',
       content: `## 类型提示：让代码更清晰
@@ -1400,6 +1414,7 @@ print(greet("张老师", "教授"))`,
     },
     {
       id: '11.11',
+      kind: 'demo',
       chapterId: 'ch11',
       title: '抽象基类 (ABC) 入门',
       content: `## 抽象基类：定义"必须实现什么"
@@ -1510,6 +1525,7 @@ Circle：面积=28.3，周长=18.8`,
     },
     {
       id: '11.12',
+      kind: 'demo',
       chapterId: 'ch11',
       title: 'OOP 综合练习 — 银行账户系统',
       content: `## OOP 综合练习：银行账户系统
@@ -1667,6 +1683,7 @@ const ch12: Chapter = {
   sections: [
     {
       id: '12.1',
+      kind: 'demo',
       chapterId: 'ch12',
       title: 'try/except — 优雅地处理错误',
       content: `## try/except：给代码装上"安全气囊"
@@ -1759,6 +1776,7 @@ items[-1] = 橘子`,
     },
     {
       id: '12.2',
+      kind: 'demo',
       chapterId: 'ch12',
       title: '常见异常类型 + 自定义异常',
       content: `## Python 内置的异常家族
@@ -1852,6 +1870,7 @@ for name, age in test_cases:
     },
     {
       id: '12.3',
+      kind: 'demo',
       chapterId: 'ch12',
       title: 'print 调试法 + pdb 入门',
       content: `## 调试：找 bug 的艺术
@@ -1967,6 +1986,7 @@ print("   这就是典型的初始化错误——print 能帮你一眼发现。"
     },
     {
       id: '12.4',
+      kind: 'demo',
       chapterId: 'ch12',
       title: 'with 语句与上下文管理器',
       content: `## with 语句：资源管理的"自动开关"
@@ -2082,6 +2102,7 @@ with 块已结束，资源自动清理
     },
     {
       id: '12.5',
+      kind: 'demo',
       chapterId: 'ch12',
       title: 'logging 模块入门 — 替代 print 调试',
       content: `## logging：专业的日志系统
@@ -2191,6 +2212,7 @@ const ch12a: Chapter = {
   sections: [
     {
       id: '12a.1',
+      kind: 'demo',
       chapterId: 'ch12a',
       title: '为什么要写测试？',
       content: `## 为什么要写测试？
@@ -2269,6 +2291,7 @@ print("   自动测试 = 把这些验证写成代码，一键运行！")`,
     },
     {
       id: '12a.2',
+      kind: 'demo',
       chapterId: 'ch12a',
       title: 'assert 语句入门',
       content: `## assert：Python 内置的"断言"
@@ -2371,6 +2394,7 @@ print("   如果某个条件必须为真，就用 assert 明确表达")`,
     },
     {
       id: '12a.3',
+      kind: 'demo',
       chapterId: 'ch12a',
       title: 'pytest 安装与第一个测试',
       content: `## pytest：Python 最流行的测试框架
@@ -2485,6 +2509,7 @@ print(f"\\n{passed}/{len(tests)} 个测试通过")`,
     },
     {
       id: '12a.4',
+      kind: 'demo',
       chapterId: 'ch12a',
       title: 'pytest fixtures 与参数化',
       content: `## pytest fixtures 与参数化
@@ -2602,6 +2627,7 @@ print(f"  ✅ 平均分：{avg:.1f}")`,
     },
     {
       id: '12a.5',
+      kind: 'demo',
       chapterId: 'ch12a',
       title: '测试异常 — pytest.raises',
       content: `## 测试异常：验证"应该出错"的情况
@@ -2737,6 +2763,7 @@ const ch12b: Chapter = {
   sections: [
     {
       id: '12b.1',
+      kind: 'demo',
       chapterId: 'ch12b',
       title: '正则表达式是什么？',
       content: `## 正则表达式：文本匹配的"搜索语言"
@@ -2838,6 +2865,7 @@ for email in test_emails:
     },
     {
       id: '12b.2',
+      kind: 'exercise',
       chapterId: 'ch12b',
       title: '基本匹配 — 字符类 \\d \\w \\s .',
       content: `## 字符类：匹配特定类型的字符
@@ -2938,6 +2966,7 @@ print("\\n点号匹配：", re.findall(r"u.e", "use u_e u1e u你e"))`,
     },
     {
       id: '12b.3',
+      kind: 'demo',
       chapterId: 'ch12b',
       title: '量词 — * + ? {n,m}',
       content: `## 量词：控制匹配次数
@@ -3036,6 +3065,7 @@ HTML： <div>内容A</div><span>内容B</span>
     },
     {
       id: '12b.4',
+      kind: 'demo',
       chapterId: 'ch12b',
       title: '分组与捕获 — ()',
       content: `## 分组与捕获：( )
@@ -3143,6 +3173,7 @@ print(f"  匹配的颜色：{colors}")`,
     },
     {
       id: '12b.5',
+      kind: 'demo',
       chapterId: 'ch12b',
       title: 're 模块 — search/match/findall/sub',
       content: `## re 模块：Python 的正则工具箱
@@ -3240,6 +3271,7 @@ sub 隐藏价格：价格：[价格已隐藏]、[价格已隐藏]、[价格已�
     },
     {
       id: '12b.6',
+      kind: 'demo',
       chapterId: 'ch12b',
       title: '实践 — 电话号码/邮箱提取器',
       content: `## 实践：构建电话号码和邮箱提取器
@@ -3375,6 +3407,7 @@ const ch12c: Chapter = {
   sections: [
     {
       id: '12c.1',
+      kind: 'demo',
       chapterId: 'ch12c',
       title: 'sys.argv — 读取命令行参数',
       content: `## sys.argv：命令行参数的入口
@@ -3513,6 +3546,7 @@ $ python
     },
     {
       id: '12c.2',
+      kind: 'demo',
       chapterId: 'ch12c',
       title: 'argparse 模块入门',
       content: `## argparse：专业的命令行参数解析
@@ -3657,6 +3691,7 @@ usage: tool.py <输入文件> [-c COUNT] [-l] [-o 输出文件]
     },
     {
       id: '12c.3',
+      kind: 'exercise',
       chapterId: 'ch12c',
       title: 'logging 模块 — 为什么不用 print 调试',
       content: `## logging：生产级的日志系统
@@ -3830,6 +3865,7 @@ print("\\n💡 观察：INFO 模式安静，DEBUG 模式显示详细诊断")`,
     },
     {
       id: '12c.4',
+      kind: 'demo',
       chapterId: 'ch12c',
       title: '实践 — 构建 CLI 文件处理工具',
       content: `## 实践：构建一个 CLI 文件处理工具
@@ -4007,6 +4043,7 @@ const p2: Chapter = {
   sections: [
     {
       id: 'p2.1',
+      kind: 'demo',
       chapterId: 'p2',
       title: '需求分析 + 读取日志文件',
       content: `## 需求分析：分析什么？
@@ -4089,6 +4126,7 @@ print(f"平均行长：{sum(len(l) for l in log_lines) // len(log_lines)} 字符
     },
     {
       id: 'p2.2',
+      kind: 'demo',
       chapterId: 'p2',
       title: '解析日志 + 统计分析',
       content: `## 解析与统计：从文本到洞察
@@ -4199,6 +4237,7 @@ print(f"\\n📊 总流量：{total_bytes:,} 字节")`,
     },
     {
       id: 'p2.3',
+      kind: 'exercise',
       chapterId: 'p2',
       title: '生成分析报告',
       content: `## 输出报告：把结果写成文件
@@ -4333,6 +4372,7 @@ const ch12d: Chapter = {
   sections: [
     {
       id: '12d.1',
+      kind: 'demo',
       chapterId: 'ch12d',
       title: '可迭代对象 vs 迭代器',
       content: `## 一切皆可迭代
@@ -4423,6 +4463,7 @@ except StopIteration:
     },
     {
       id: '12d.2',
+      kind: 'demo',
       chapterId: 'ch12d',
       title: '生成器函数：yield 关键字',
       content: `## 生成器：简单的迭代器
@@ -4520,6 +4561,7 @@ except StopIteration:
     },
     {
       id: '12d.3',
+      kind: 'exercise',
       chapterId: 'ch12d',
       title: '生成器表达式',
       content: `## 生成器表达式：() 代替 []
@@ -4568,7 +4610,14 @@ all(x > 0 for x in [1, 2, -3])      # False
 
 # 从文件读取——生成器一行一行读
 lines = (line.strip() for line in open("file.txt"))
-\`\`\``,
+\`\`\`
+
+---
+
+### 动手练习
+
+1. 把 \`gen_squares\` 从列表推导式 \`[...]\` 改成生成器表达式 \`(...)\`，观察内存变化
+2. 把 \`total = 0\` 改成用生成器表达式计算平方和`,
       starterCode: `# 列表推导式 vs 生成器表达式
 import sys
 
@@ -4577,8 +4626,8 @@ list_squares = [x*x for x in range(1000)]
 print(f"列表大小：{sys.getsizeof(list_squares):,} 字节")
 print(f"前 5 个：{list_squares[:5]}")
 
-# 生成器表达式：按需生成
-gen_squares = (x*x for x in range(1000))
+# TODO: 把下面的列表推导式改成生成器表达式（把 [] 换成 ()）
+gen_squares = [x*x for x in range(1000)]
 print(f"\\n生成器大小：{sys.getsizeof(gen_squares)} 字节")
 print(f"生成器类型：{type(gen_squares).__name__}")
 
@@ -4590,8 +4639,8 @@ for i, val in enumerate(gen_squares):
     print(val, end=" ")
 print()
 
-# 生成器的典型用途：sum 配合
-total = sum(x*x for x in range(10))
+# TODO: 用生成器表达式计算 0~9 的平方和（替换 0）
+total = 0
 print(f"\\nsum(x*x for x in range(10)) = {total}")`,
       expectedOutput: `列表大小：8,856 字节
 前 5 个：[0, 1, 4, 9, 16]
@@ -4602,10 +4651,11 @@ print(f"\\nsum(x*x for x in range(10)) = {total}")`,
 生成器前 5 个： 0 1 4 9 16 
 
 sum(x*x for x in range(10)) = 285`,
-      hint: '生成器表达式用 () 包裹，列表推导式用 []。当数据量大且只需遍历一次时，永远用生成器——内存差距是数量级的',
+      hint: '生成器表达式用 () 包裹，列表推导式用 []。把 gen_squares 的 [] 改成 ()，内存会从约 8KB 降到约 200 字节。sum 可以直接接收生成器表达式。',
     },
     {
       id: '12d.4',
+      kind: 'demo',
       chapterId: 'ch12d',
       title: '实战：用生成器处理大文件',
       content: `## 实战：处理百万行日志
@@ -4731,6 +4781,7 @@ const ch12e: Chapter = {
   sections: [
     {
       id: '12e.1',
+      kind: 'demo',
       chapterId: 'ch12e',
       title: '函数是一等公民——函数也可以当参数',
       content: `## 函数也是对象
@@ -4833,6 +4884,7 @@ triple(10) = 30
     },
     {
       id: '12e.2',
+      kind: 'demo',
       chapterId: 'ch12e',
       title: '@装饰器语法 — @ 符号的魔力',
       content: `## @ 语法糖：装饰器就像"印章"
@@ -4937,6 +4989,7 @@ print(f"文档：{slow_function.__doc__}")`,
     },
     {
       id: '12e.3',
+      kind: 'demo',
       chapterId: 'ch12e',
       title: '实战：最常见的 Python 装饰器',
       content: `## 实际项目中的装饰器
@@ -5047,6 +5100,7 @@ for i in range(5):
     },
     {
       id: '12e.4',
+      kind: 'demo',
       chapterId: 'ch12e',
       title: '多个装饰器叠加 + 综合练习',
       content: `## 多个装饰器：像洋葱一样层层包裹

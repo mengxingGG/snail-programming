@@ -52,7 +52,8 @@ npx tsx scripts/list-demo-sections.ts --json demo-sections.json
 
 会真实执行每一节的起始代码（几分钟），输出分类：
 
-- `demo` — **改造候选**，就是要处理的对象
+- `demo` + 未声明 `kind` — **改造候选**，就是要处理的对象
+- `demo` + `kind: 'demo'` — 已确认的有意演示节，**不用改**
 - `failed` — 起始代码跑不出预期输出，已经是练习形态，**不用动**
 - `error` — 起始代码直接报错，多数是缺第三方库（flask / pandas / pygame 等）的讲解节，**不用动**
 - `passed` — 异常，需要人工看

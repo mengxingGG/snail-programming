@@ -1025,23 +1025,15 @@ print("总价：" + str(total([1.5, 2.0, 3.0])))`,
   ),
 };
 
-// 这些节的学习目标是观察、环境配置或项目导览。显式声明为 demo，避免被误当成
-// 漏改的练习；其他未列出的节维持原教材的默认行为，便于后续继续精修。
-const intentionalDemoIds: Record<CourseLanguage, ReadonlySet<string>> = {
+// 原教材中已经具备“补全代码 / 修复 bug”形态的练习。这里补齐题干、TODO 和判题
+// 元数据，不替换它们原有的起始代码与预期输出。
+const existingExerciseIds: Record<CourseLanguage, ReadonlySet<string>> = {
   typescript: new Set([
-    '0.3', '0.4', '0.5', '1.1', '1.2', '9a.1', '9a.3',
-    '10.1', '10.4', '10.5', '11.1', '11a.1', '11a.2', '11a.3', '11a.4',
-    '12.1', '13.1', '13.2', '14.1', '15.1', '16.5', '17a.1', '18.1',
-    'p1.1', 'p1.2', 'p1.3', 'p2.1', 'p3.1', 'p3.2', 'p3.3',
-    'p4.1', 'p4.2', 'p5.1', 'p5.2', 'p5.3', 'p6.1', 'p6.2', 'p6.3',
-    '21.1', '21.2', '21.3', '22.1', '22.2', '22.3', '22.4', '22.5',
+    '1.3', '1.4', '2.2', '4.2', '5.2', '6.6', '6.7', '10.3',
+    'p2.3', '12.3', '13.4', 'p6.4',
   ]),
   python: new Set([
-    '-1.1', '-1.2', '-1.3', '-1.4', '-1.5', '0.1', '0.2', '0.3', '0.4', '0.5',
-    '1.1', '1.2', '9.1', '9.2', '9.3', '9a.1', '9a.2', '9a.3', '9a.5',
-    '13.1', '13.2', '14.1', '15.1', '16.1', '17.1', '17.2', '18.1',
-    '21.1', '22.1', '23.1', '24.1', '25.1', '26.1', '27.1',
-    'p1.1', 'p2.1', 'p3.1', 'p4.1', 'p5.1', 'p6.1',
+    '1.3', '5.7', '9a.4', '10.3', '12b.2', '12c.3', '12d.3', 'p2.3',
   ]),
 };
 
@@ -1071,17 +1063,47 @@ function applyExercise(section: Section, definition: ExerciseDefinition): Sectio
   };
 }
 
-/** 在课程入口集中应用经过人工编写的练习补丁。 */
+function promoteExistingExercise(section: Section, language: CourseLanguage): Section {
+  const todoPrefix = language === 'typescript'
+    ? '// TODO: 根据题干修复或补全代码，使输出符合要求\n'
+    : '# TODO: 根据题干修复或补全代码，使输出符合要求\n';
+  const starterCode = /(?:\/\/|#) TODO:/.test(section.starterCode)
+    ? section.starterCode
+    : `${todoPrefix}${section.starterCode}`;
+  const validation: SectionValidation = {
+    ...section.validation,
+    mode: 'edit_required',
+    requireCodeChangeFromStarter: true,
+    successMessage: section.validation?.successMessage
+      ?? '很好，你已经完成了本节的动手练习。',
+    failureMessage: section.validation?.failureMessage
+      ?? '请根据题干和 TODO 修改代码后再运行。',
+  };
+
+  return {
+    ...section,
+    kind: 'exercise',
+    content: appendPractice(
+      section.content,
+      `根据本节讲解修复或补全起始代码，完成「${section.title}」练习，使程序输出与期望一致。`,
+    ),
+    starterCode,
+    hint: section.hint || '先比较起始代码和期望输出，再定位需要补全或修复的位置。',
+    validation,
+  };
+}
+
+/** 在课程入口集中应用课程编写补丁，并确保每节课都有明确形态。 */
 export function applyCourseAuthoring(chapters: Chapter[], language: CourseLanguage): Chapter[] {
   const definitions = language === 'typescript' ? typeScriptExercises : pythonExercises;
-  const demos = intentionalDemoIds[language];
+  const existingExercises = existingExerciseIds[language];
 
   return chapters.map(chapter => ({
     ...chapter,
     sections: chapter.sections.map(section => {
       const definition = definitions[section.id];
       if (definition) return applyExercise(section, definition);
-      if (demos.has(section.id)) return { ...section, kind: 'demo' };
+      if (existingExercises.has(section.id)) return promoteExistingExercise(section, language);
       return section;
     }),
   }));

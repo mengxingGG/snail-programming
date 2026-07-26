@@ -311,7 +311,11 @@ Press CTRL+C to quit
     const starterResult = validateLessonOutput(section!, section!.expectedOutput, section!.starterCode);
     expect(starterResult.passed).toBe(false);
 
+    // 修复所有三处错误：删除拼错的变量声明，修正 console.log 引用
     const fixedCode = section!.starterCode
+      .replace("const userNmae = \"\"\n", '')
+      .replace("const ctiy = \"\"\n", '')
+      .replace("const bb = 0\n", '')
       .replace('userNmae', 'userName')
       .replace('ctiy', 'city')
       .replace('a + bb', 'a + b');

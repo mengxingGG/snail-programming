@@ -25,6 +25,7 @@ const ch21: Chapter = {
   sections: [
     {
       id: '21.1',
+      kind: 'demo',
       chapterId: 'ch21',
       title: '项目规划 — 我们要做什么',
       content: `## 全栈实战：个人博客
@@ -127,6 +128,7 @@ console.log(\`字数：\${article.content.length} 字\`)`,
     },
     {
       id: '21.2',
+      kind: 'demo',
       chapterId: 'ch21',
       title: '初始化项目结构与配置',
       content: `## 搭建项目脚手架
@@ -235,6 +237,7 @@ validateConfig({
     },
     {
       id: '21.3',
+      kind: 'demo',
       chapterId: 'ch21',
       title: '数据库设计 — 文章和分类',
       content: `## 数据库设计
@@ -355,6 +358,7 @@ const ch22: Chapter = {
   sections: [
     {
       id: '22.1',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '后端 API — 文章的增删改查',
       content: `## 实现文章 CRUD API
@@ -458,6 +462,7 @@ console.log(\`删除后总数：\${svc.list().length} 篇\`)`,
     },
     {
       id: '22.2',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '前端页面 — 文章列表',
       content: `## 文章列表页：展示 + 筛选 + 分页
@@ -549,6 +554,7 @@ result.forEach(a => console.log(\`  \${a.title} (\${a.views} 次浏览)\`))`,
     },
     {
       id: '22.3',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '前端页面 — 写文章（Markdown）',
       content: `## 文章编辑器：Markdown 支持
@@ -638,6 +644,7 @@ lines.forEach(l => console.log(l))`,
     },
     {
       id: '22.4',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '前后端联调 — 全部跑通',
       content: `## 联调：让前端和后端握手成功
@@ -726,6 +733,7 @@ runIntegrationTest()`,
     },
     {
       id: '22.5',
+      kind: 'demo',
       chapterId: 'ch22',
       title: '课程数据模块',
       content: `## 课程数据模块：用类型定义结构化内容
@@ -842,6 +850,7 @@ export const part6Chapters: Chapter[] = [ch21, ch22,
     sections: [
       {
         id: 'p6.1',
+        kind: 'demo',
         chapterId: 'p6',
         title: '架构设计 + 数据库',
         content: `## 全栈在线笔记：从设计开始
@@ -959,6 +968,7 @@ relations.forEach(r => console.log("  " + r))`,
       },
       {
         id: 'p6.2',
+        kind: 'demo',
         chapterId: 'p6',
         title: '后端 API — Express + Prisma + JWT',
         content: `## 实现后端核心功能
@@ -1077,6 +1087,7 @@ Token 验证：userId=1
       },
       {
         id: 'p6.3',
+        kind: 'demo',
         chapterId: 'p6',
         title: '前端 — React + Tailwind + API 集成',
         content: `## 前端实现
@@ -1195,6 +1206,7 @@ console.log(\`\\n共 \${notes.length} 条笔记\`)`,
       },
       {
         id: 'p6.4',
+        kind: 'exercise',
         chapterId: 'p6',
         title: '部署 — Docker + 环境变量',
         content: `## 用 Docker 部署全栈应用

@@ -71,6 +71,7 @@ const ch17: Chapter = {
   sections: [
     {
       id: '17.1',
+      kind: 'demo',
       chapterId: 'ch17',
       title: 'Flask 是什么 — Python 最轻量的 Web 框架',
       content: `## Flask：小而美的 Python Web 框架
@@ -131,6 +132,7 @@ print("💡 本节先理解 Flask 应用结构，真正启动服务放到后面�
     },
     {
       id: '17.2',
+      kind: 'demo',
       chapterId: 'ch17',
       title: '最小应用 — 5 行启动 Web 服务',
       content: `## 最小 Flask 应用：5 行代码启动网站
@@ -194,6 +196,7 @@ print("💡 Flask 应用需要在本地运行才能看到 Web 页面。当前仅
     },
     {
       id: '17.3',
+      kind: 'demo',
       chapterId: 'ch17',
       title: '路由 — @app.route() 装饰器',
       content: `## 路由：Python 函数变身网页
@@ -273,6 +276,7 @@ Press CTRL+C to quit
     },
     {
       id: '17.4',
+      kind: 'demo',
       chapterId: 'ch17',
       title: '返回 HTML — render_template',
       content: `## render_template：返回真正的网页
@@ -357,6 +361,7 @@ const ch18: Chapter = {
   sections: [
     {
       id: '18.1',
+      kind: 'demo',
       chapterId: 'ch18',
       title: 'Jinja2 模板 — {{ }} 和 {% %}',
       content: `## Jinja2：HTML 里嵌入 Python
@@ -492,6 +497,7 @@ print(html)`,
     },
     {
       id: '18.2',
+      kind: 'demo',
       chapterId: 'ch18',
       title: 'Flask + SQLite — 读写数据库',
       content: `## Flask + SQLite：数据持久化
@@ -596,6 +602,7 @@ conn.close()`,
     },
     {
       id: '18.3',
+      kind: 'demo',
       chapterId: 'ch18',
       title: '模板继承 — base.html 复用布局',
       content: `## 模板继承：DRY 原则在 HTML 中的运用
@@ -722,6 +729,7 @@ const ch19: Chapter = {
   sections: [
     {
       id: '19.1',
+      kind: 'demo',
       chapterId: 'ch19',
       title: 'GET vs POST 表单',
       content: `## GET 和 POST：两种提交方式
@@ -817,6 +825,7 @@ POST /login： ❌ 用户名或密码错误`,
     },
     {
       id: '19.2',
+      kind: 'demo',
       chapterId: 'ch19',
       title: '注册登录 — session + 密码哈希',
       content: `## 用户认证：注册和登录
@@ -941,6 +950,7 @@ session 已清除，当前用户：None`,
     },
     {
       id: '19.3',
+      kind: 'demo',
       chapterId: 'ch19',
       title: 'Flash 消息 — 给用户反馈',
       content: `## Flash 消息：一闪而过的提示
@@ -1033,6 +1043,7 @@ if not msgs:
     },
     {
       id: '19.4',
+      kind: 'demo',
       chapterId: 'ch19',
       title: '文件上传',
       content: `## 📎 文件上传：让用户上传图片和附件
@@ -1195,6 +1206,7 @@ const ch20: Chapter = {
   sections: [
     {
       id: '20.1',
+      kind: 'demo',
       chapterId: 'ch20',
       title: 'REST 是什么 — 一套 URL 约定',
       content: `## REST：一套设计 Web API 的约定
@@ -1294,6 +1306,7 @@ GET    /articles       → 200 [{'id': 2, 'title': 'Flask 进阶', 'author': '�
     },
     {
       id: '20.2',
+      kind: 'demo',
       chapterId: 'ch20',
       title: 'Flask 返回 JSON — jsonify',
       content: `## jsonify：Python 字典变 JSON
@@ -1415,6 +1428,7 @@ HTTP 201 Created
     },
     {
       id: '20.3',
+      kind: 'demo',
       chapterId: 'ch20',
       title: '完整的 CRUD API',
       content: `## CRUD：增删改查的完整实现
@@ -1577,6 +1591,7 @@ const p4: Chapter = {
   sections: [
     {
       id: 'p4.1',
+      kind: 'demo',
       chapterId: 'p4',
       title: '项目规划 + 数据库设计',
       content: `## 📐 博客项目：先规划，再动手
@@ -1734,6 +1749,7 @@ conn.close()
     },
     {
       id: 'p4.2',
+      kind: 'demo',
       chapterId: 'p4',
       title: '后端 API + 模板页面',
       content: `## 🏗️ Flask 路由 + Jinja2 模板
@@ -1909,6 +1925,7 @@ conn.close()
     },
     {
       id: 'p4.3',
+      kind: 'demo',
       chapterId: 'p4',
       title: '完整功能：CRUD + 登录保护 + 评论 + 样式',
       content: `## 🎨 完整博客：CRUD + 登录 + 评论 + 美化

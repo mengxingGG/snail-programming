@@ -93,6 +93,7 @@ const ch0: Chapter = {
   sections: [
     {
       id: '0.1',
+      kind: 'exercise',
       chapterId: 'ch0',
       title: '第一个程序：Hello World 与程序运行原理',
       content: `## Hello World：程序员的成人礼
@@ -161,6 +162,7 @@ console.log("🚀 开始旅程！")`,
     },
     {
       id: '0.2',
+      kind: 'exercise',
       chapterId: 'ch0',
       title: '什么是编程？计算思维入门',
       content: `## 编程 ≠ 写代码
@@ -225,6 +227,7 @@ console.log(year + " 年是闰年吗？" + isLeap)`,
     },
     {
       id: '0.3',
+      kind: 'demo',
       chapterId: 'ch0',
       title: '学会求助：阅读文档、搜索错误、使用 AI',
       content: `## 编程最重要的能力：学会如何学习
@@ -287,6 +290,7 @@ console.log("总价：" + total)
     },
     {
       id: '0.4',
+      kind: 'demo',
       chapterId: 'ch0',
       title: '开发环境搭建：VS Code、终端、Node.js',
       content: `## 搭建你的编程工作台
@@ -358,6 +362,7 @@ console.log("  状态：一切就绪！")`,
     },
     {
       id: '0.5',
+      kind: 'demo',
       chapterId: 'ch0',
       title: 'Git 基础：版本控制入门',
       content: `## Git：代码的"时光机"
@@ -483,6 +488,7 @@ const ch1: Chapter = {
   sections: [
     {
       id: '1.1',
+      kind: 'demo',
       chapterId: 'ch1',
       title: '什么是编程？程序如何运行',
       content: `## 什么是编程？
@@ -540,6 +546,7 @@ console.log("第 4 步：取出享用 🍱")`,
     },
     {
       id: '1.2',
+      kind: 'demo',
       chapterId: 'ch1',
       title: '认识 TypeScript 和我们的工具',
       content: `## 认识 TypeScript
@@ -578,6 +585,7 @@ console.log("当前版本：" + version)`,
     },
     {
       id: '1.3',
+      kind: 'exercise',
       chapterId: 'ch1',
       title: 'Hello, World! — 第一行代码',
       content: `## Hello, World!
@@ -614,6 +622,7 @@ console.log("我的名字叫：小明")`,
     },
     {
       id: '1.4',
+      kind: 'exercise',
       chapterId: 'ch1',
       title: '第一个 Bug — 学会读错误信息',
       content: `## 遇见你的第一个 Bug 🐛
@@ -640,8 +649,9 @@ ReferenceError: scroe is not defined
 
 下面有一个拼写错误，找到它并修复，让程序输出"你的分数是：100"：`,
       starterCode: `let score = 100
+let scroe = 0
 
-// 下面这行有一个 bug，找到它！
+// 下面这行有一个 bug——用错了变量，找到它！
 console.log("你的分数是：" + scroe)`,
       expectedOutput: `你的分数是：100`,
       hint: '对比一下：上面声明的变量名是什么？下面 console.log 里用的是什么？',
@@ -660,6 +670,7 @@ const ch2: Chapter = {
   sections: [
     {
       id: '2.1',
+      kind: 'exercise',
       chapterId: 'ch2',
       title: '变量是什么 — let 和 const',
       content: `## 变量：给数据起个名字
@@ -748,6 +759,7 @@ console.log("应用名：" + appName)`,
     },
     {
       id: '2.2',
+      kind: 'exercise',
       chapterId: 'ch2',
       title: '字符串 — 处理文字',
       content: `## 字符串：装文字的容器
@@ -825,6 +837,7 @@ console.log("大写版：" + fullName.toUpperCase())`,
     },
     {
       id: '2.3',
+      kind: 'exercise',
       chapterId: 'ch2',
       title: '数字 — 加减乘除取余',
       content: `## 数字类型：计算器超级版
@@ -876,6 +889,7 @@ console.log(\`是偶数？\${count % 2 === 0}\`)`,
     },
     {
       id: '2.4',
+      kind: 'exercise',
       chapterId: 'ch2',
       title: '布尔值 — 对与错的判断',
       content: `## 布尔值：只有两个答案
@@ -923,6 +937,7 @@ console.log("不是成年人：" + !isAdult)`,
     },
     {
       id: '2.5',
+      kind: 'exercise',
       chapterId: 'ch2',
       title: '给变量贴标签 — 类型注解初识',
       content: `## 类型注解：给变量贴上"标签"
@@ -993,6 +1008,7 @@ const ch3: Chapter = {
   sections: [
     {
       id: '3.1',
+      kind: 'exercise',
       chapterId: 'ch3',
       title: 'if — 如果条件成立...',
       content: `## if：给程序加一个"如果..."
@@ -1067,6 +1083,7 @@ console.log("检测完毕")`,
     },
     {
       id: '3.2',
+      kind: 'exercise',
       chapterId: 'ch3',
       title: 'else — 否则走另一条路',
       content: `## if...else：两条路选一条
@@ -1124,6 +1141,7 @@ if (isWeekend) {
     },
     {
       id: '3.3',
+      kind: 'exercise',
       chapterId: 'ch3',
       title: 'else if — 多条件判断',
       content: `## else if：三岔路口、四岔路口……
@@ -1180,6 +1198,7 @@ console.log(\`分数 \${score} → 等级：\${grade}\`)`,
     },
     {
       id: '3.4',
+      kind: 'exercise',
       chapterId: 'ch3',
       title: '三元运算符 — 一行搞定两种情况',
       content: `## 三元运算符：if...else 的简洁版
@@ -1245,6 +1264,7 @@ const ch4: Chapter = {
   sections: [
     {
       id: '4.1',
+      kind: 'exercise',
       chapterId: 'ch4',
       title: 'console.log — 你的眼睛',
       content: `## console.log：程序员的手电筒
@@ -1297,6 +1317,7 @@ console.log("减 5 后，total =", total)`,
     },
     {
       id: '4.2',
+      kind: 'exercise',
       chapterId: 'ch4',
       title: '读懂错误信息三步法',
       content: `## 错误信息不是敌人，是朋友 ❤️
@@ -1329,13 +1350,16 @@ console.log("减 5 后，total =", total)`,
       starterCode: `// 这三行代码各演示一种常见错误，修复后应能正确输出
 
 const userName = "小明"
+const userNmae = ""
 console.log("用户名：" + userNmae)
 
 const city = "北京"
+const ctiy = ""
 console.log("城市：" + ctiy)
 
 const a = 10
 const b = 20
+const bb = 0
 console.log("合计：" + (a + bb))`,
       expectedOutput: `用户名：小明
 城市：北京
@@ -1345,6 +1369,7 @@ console.log("合计：" + (a + bb))`,
     },
     {
       id: '4.3',
+      kind: 'exercise',
       chapterId: 'ch4',
       title: '定位 bug 的排除法',
       content: `## 排除法：像侦探一样找 bug 🔍
@@ -1405,6 +1430,7 @@ const ch5: Chapter = {
   sections: [
     {
       id: '5.1',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: 'for — 精确控制次数',
       content: `## for 循环：当你知道要重复几次
@@ -1464,6 +1490,7 @@ for (let i = 1; i <= 5; i++) {
     },
     {
       id: '5.2',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: 'while — 不知道几次时用',
       content: `## while 循环：循环到条件不成立为止
@@ -1525,6 +1552,7 @@ join： Hello, | Python | World!`,
     },
     {
       id: '5.3',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: 'for...of — 逐个取值的优雅循环',
       content: `## for...of：把容器里的东西"一个一个拿出来"
@@ -1594,6 +1622,7 @@ S`,
     },
     {
       id: '5.4',
+      kind: 'exercise',
       chapterId: 'ch5',
       title: 'break 和 continue — 控制循环节奏',
       content: `## 不一定要走完全程
@@ -1656,6 +1685,7 @@ const ch6: Chapter = {
   sections: [
     {
       id: '6.1',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '什么是数组 — 一个装很多数据的盒子',
       content: `## 数组：有序的数据集合
@@ -1726,6 +1756,7 @@ console.log("所有城市：" + cities)`,
     },
     {
       id: '6.2',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '增删改查 — push / pop / includes',
       content: `## 操作数组的常用方法
@@ -1787,6 +1818,7 @@ pop 后： [ '写代码', '喝咖啡', '写文档' ]
     },
     {
       id: '6.3',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: 'map — 每个元素都变一下',
       content: `## map：批量转换数组里的每个元素
@@ -1836,6 +1868,7 @@ console.log(lengths)`,
     },
     {
       id: '6.4',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: 'filter — 只挑出想要的',
       content: `## filter：筛选满足条件的元素
@@ -1893,6 +1926,7 @@ affordable.forEach(p => console.log(\`  \${p.name}: ¥\${p.price}\`))`,
     },
     {
       id: '6.5',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: '数组的类型标注',
       content: `## 给数组标注元素类型
@@ -1954,6 +1988,7 @@ top.forEach(s => console.log(\`  \${s.name}: \${s.score} 分\`))`,
     },
     {
       id: '6.6',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: 'reduce — 把数组"压缩"成一个值',
       content: `## reduce：像滚雪球一样累积
@@ -2054,6 +2089,7 @@ append [3,4]：[1, 2, [3, 4]]
     },
     {
       id: '6.7',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: 'find / findIndex — 在数组里"找人"',
       content: `## find：找到第一个符合条件的元素
@@ -2136,6 +2172,7 @@ copy.copy： [10, 20, 30]`,
     },
     {
       id: '6.8',
+      kind: 'exercise',
       chapterId: 'ch6',
       title: 'some / every + 链式调用',
       content: `## some 和 every："有没有？"和"是不是都？"
@@ -2242,6 +2279,7 @@ const ch7: Chapter = {
   sections: [
     {
       id: '7.1',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '为什么需要函数',
       content: `## 函数：打包你的代码，随时复用
@@ -2304,6 +2342,7 @@ console.log(\`商品3 折后价：\${price3}\`)`,
     },
     {
       id: '7.2',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '定义和调用 — 给它一个名字',
       content: `## 定义函数 + 调用函数
@@ -2366,6 +2405,7 @@ printSeparator()`,
     },
     {
       id: '7.3',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '参数和返回值 — 输入与输出',
       content: `## 参数：给函数传数据；返回值：从函数拿结果
@@ -2421,6 +2461,7 @@ console.log(describe("键盘", discount(300, 0.7)))`,
     },
     {
       id: '7.4',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '箭头函数 — 更简洁的写法',
       content: `## 箭头函数：function 的简洁版 ✨
@@ -2476,6 +2517,7 @@ false
     },
     {
       id: '7.5',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '函数类型标注',
       content: `## 给函数标注类型
@@ -2535,6 +2577,7 @@ printReport([92, 75, 55])`,
     },
     {
       id: '7.6',
+      kind: 'exercise',
       chapterId: 'ch7',
       title: '默认参数与剩余参数 (...rest)',
       content: `## 让函数参数更灵活
@@ -2631,6 +2674,7 @@ const ch8: Chapter = {
   sections: [
     {
       id: '8.1',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '对象是什么 — 描述一个东西的所有属性',
       content: `## 对象：把相关数据打包在一起
@@ -2696,6 +2740,7 @@ console.log(\`已出版：\${book.isPublished}\`)`,
     },
     {
       id: '8.2',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '读取和修改属性',
       content: `## 读取和修改对象的属性
@@ -2760,6 +2805,7 @@ console.log(\`升级！现在：等级 \${profile.level}，经验 \${profile.exp
     },
     {
       id: '8.3',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '嵌套对象 — 对象里的对象',
       content: `## 嵌套对象：描述更复杂的结构
@@ -2822,6 +2868,7 @@ console.log(\`蓝牙：\${product.specs.bluetooth}\`)`,
     },
     {
       id: '8.4',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: 'interface — 给对象定型',
       content: `## interface：定义对象的"形状"
@@ -2880,6 +2927,7 @@ available.forEach(p => console.log(\`  [\${p.id}] \${p.name} - ¥\${p.price}\`))
     },
     {
       id: '8.5',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '方法 — 对象的行为',
       content: `## 方法：对象不只能存数据，还能做事
@@ -2943,6 +2991,7 @@ console.log("重置后：" + counter.getValue())`,
     },
     {
       id: '8.6',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '展开运算符 (...) 与解构赋值',
       content: `## 展开与解构：操作对象的利器
@@ -3042,6 +3091,7 @@ printConfig(prod)`,
     },
     {
       id: '8.7',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: 'this 关键字详解',
       content: `## this：到底指向谁？
@@ -3143,6 +3193,7 @@ classroom.rollCall()`,
     },
     {
       id: '8.8',
+      kind: 'exercise',
       chapterId: 'ch8',
       title: '可选链 (?.) 与空值合并 (??)',
       content: `## 安全地访问深层属性
@@ -3268,6 +3319,7 @@ const ch9a: Chapter = {
   sections: [
     {
       id: '9a.1',
+      kind: 'demo',
       chapterId: 'ch9a',
       title: '常见错误类型',
       content: `## 认识 TypeScript 的三大错误类型
@@ -3346,6 +3398,7 @@ console.log("3. 程序继续运行 — 没有被错误中断！")`,
     },
     {
       id: '9a.2',
+      kind: 'demo',
       chapterId: 'ch9a',
       title: 'try/catch/finally — 优雅处理错误',
       content: `## 不要让一个错误毁了整个程序
@@ -3441,6 +3494,7 @@ console.log("所有输入处理完毕 ✅")`,
     },
     {
       id: '9a.3',
+      kind: 'demo',
       chapterId: 'ch9a',
       title: '调试技巧：console.log 进阶、debugger 语句、断点',
       content: `## 从"打印调试"到"专业调试"
@@ -3561,6 +3615,7 @@ export const part1Chapters: Chapter[] = [
     sections: [
       {
         id: 'p1.1',
+        kind: 'demo',
         chapterId: 'p1',
         title: '设计 + 数据结构',
         content: `## CLI 待办事项：设计思路
@@ -3637,6 +3692,7 @@ showTodos(todos)`,
       },
       {
         id: 'p1.2',
+        kind: 'demo',
         chapterId: 'p1',
         title: '核心功能 — add / list / done / delete',
         content: `## 实现待办事项的四个核心操作
@@ -3746,6 +3802,7 @@ app.list().forEach(t => {
       },
       {
         id: 'p1.3',
+        kind: 'demo',
         chapterId: 'p1',
         title: '持久化 — 读写 JSON 文件',
         content: `## 让数据在程序重启后还在

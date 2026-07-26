@@ -1,9 +1,9 @@
 // 教材数据体检 —— 把作者层面的错误挡在提交之前
 // 这些问题在运行时只会表现为"某一节判题莫名其妙不通过"，很难排查
 import { describe, expect, it } from 'vitest';
-import { courseData } from './course-data';
-import { pythonCourseData } from './course-data-python';
-import type { CourseData, Question, Section } from './types/course';
+import { courseData, rawCourseChapters } from './course-data';
+import { pythonCourseData, rawPythonCourseChapters } from './course-data-python';
+import type { Chapter, CourseData, Question, Section } from './types/course';
 
 /**
  * 已知缺少题库的章节。这里显式列出而不是直接放行，
@@ -14,9 +14,20 @@ const KNOWN_CHAPTERS_WITHOUT_QUESTIONS: Record<string, string[]> = {
   Python: [],
 };
 
+/** 练习节数量下限，防止把练习改成演示来规避真实性检查 */
+const MIN_EXERCISE_COUNT: Record<string, number> = {
+  TypeScript: 56,
+  Python: 48,
+};
+
 const COURSES: Array<[string, CourseData]> = [
   ['TypeScript', courseData],
   ['Python', pythonCourseData],
+];
+
+const RAW_COURSES: Array<[string, Chapter[]]> = [
+  ['TypeScript', rawCourseChapters],
+  ['Python', rawPythonCourseChapters],
 ];
 
 function allSections(data: CourseData): Section[] {
@@ -30,6 +41,17 @@ function allQuestions(data: CourseData): Question[] {
 function findDuplicates(values: string[]): string[] {
   return [...new Set(values.filter((value, index) => values.indexOf(value) !== index))];
 }
+
+describe.each(RAW_COURSES)('%s 原始教材分类', (_courseName, chapters) => {
+  it('每个 section 都在 Part 文件中显式声明 demo 或 exercise', () => {
+    const missing = chapters
+      .flatMap(chapter => chapter.sections)
+      .filter(section => section.kind !== 'demo' && section.kind !== 'exercise')
+      .map(section => section.id);
+
+    expect(missing).toEqual([]);
+  });
+});
 
 describe.each(COURSES)('%s 教材数据完整性', (courseName, data) => {
   it('section id 不重复', () => {
@@ -123,6 +145,15 @@ describe.each(COURSES)('%s 教材数据完整性', (courseName, data) => {
       .map(section => section.id);
 
     expect(broken).toEqual([]);
+  });
+
+  it('练习节数量不低于当前水平', () => {
+    // verify-exercises.ts 只检查现有练习节是否合格，本身不关心数量。
+    // 若把不合格的练习统统改成 kind: 'demo'，那个脚本会因为"没有练习节可查"
+    // 而绿灯放行。这里设下限，堵住这条退化路径。
+    // 有意下调时需连同这个数字一起改，并在评审中说明理由。
+    const exercises = allSections(data).filter(section => section.kind === 'exercise');
+    expect(exercises.length).toBeGreaterThanOrEqual(MIN_EXERCISE_COUNT[courseName]);
   });
 
   it('基础章节提供可执行的编程题', () => {
