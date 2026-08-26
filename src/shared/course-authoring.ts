@@ -583,6 +583,215 @@ Promise.all([Promise.resolve(0), Promise.resolve(0)]).then(values => {
     'Promise.all 会按原顺序返回两个 Promise 的结果。',
     changed('Promise.resolve(0), Promise.resolve(0)'),
   ),
+  // ── ch9 类型系统进阶 ──
+  '9.1': exercise(
+    '修正 printLength 函数，让它在 text 为 null 时打印 "文本为空"。',
+    `// TODO: 当 text 为 null 时应打印 "文本为空"，当前打印的是错误提示
+function printLength(text: string | null): void {
+  if (text === null) {
+    console.log("长度：0")
+  } else {
+    console.log(\`文本长度：\${text.length}\`)
+  }
+}
+
+printLength("Hello TypeScript")
+printLength(null)
+printLength("蜗牛编程")`,
+    '文本长度：16\n文本为空\n文本长度：4',
+    '把 "长度：0" 改成 "文本为空" 即可。',
+    changed('console.log("长度：0")'),
+  ),
+  '9.3': exercise(
+    '修复 colorLabel 函数，让它根据颜色返回对应的中文标签。',
+    `type Point = { x: number; y: number }
+type Color = "red" | "green" | "blue"
+
+function distance(a: Point, b: Point): number {
+  const dx = b.x - a.x
+  const dy = b.y - a.y
+  return Math.sqrt(dx * dx + dy * dy)
+}
+
+// TODO: 这个函数目前永远返回 "未知"，请修复它
+function colorLabel(c: Color): string {
+  return "未知"
+}
+
+const p1: Point = { x: 0, y: 0 }
+const p2: Point = { x: 3, y: 4 }
+console.log(\`距离：\${distance(p1, p2)}\`)
+console.log(colorLabel("red"))
+console.log(colorLabel("blue"))`,
+    '距离：5\n红色\n蓝色',
+    '用 if/switch 或对象映射（Record）根据 c 的值返回 "红色"/"绿色"/"蓝色"。',
+    changed('return "未知"'),
+  ),
+  '9.4': exercise(
+    '补全 Circle 和 Rectangle 的 area() 方法实现。',
+    `interface Shape {
+  color: string
+  area(): number
+}
+
+interface Circle extends Shape {
+  radius: number
+}
+
+interface Rectangle extends Shape {
+  width: number
+  height: number
+}
+
+const circle: Circle = {
+  color: "red",
+  radius: 5,
+  // TODO: 补全 area 方法 —— 圆形面积 = π × 半径²
+  area() { return 0 }
+}
+
+const rect: Rectangle = {
+  color: "blue",
+  width: 4,
+  height: 6,
+  // TODO: 补全 area 方法 —— 矩形面积 = 宽 × 高
+  area() { return 0 }
+}
+
+console.log(\`圆形面积：\${circle.area().toFixed(2)}\`)
+console.log(\`矩形面积：\${rect.area()}\`)`,
+    '圆形面积：78.54\n矩形面积：24',
+    '圆形面积 = Math.PI * radius * radius；矩形面积 = width * height。',
+    changed('area() { return 0 }'),
+  ),
+  '9.7': exercise(
+    '补全 Array.isArray 的类型检查分支，让 safeLength 正确处理数组。',
+    `// TODO: 补全数组的类型检查分支，让数组也能正确返回 length
+function safeLength(value: unknown): number {
+  if (typeof value === "string") {
+    return value.length
+  }
+  // 提示：用 Array.isArray 检查数组
+  return 0
+}
+
+console.log("字符串长度：" + safeLength("Hello TypeScript"))
+console.log("数组长度：" + safeLength([1, 2, 3, 4, 5]))
+console.log("数字（无 length）：" + safeLength(42))
+console.log("null：" + safeLength(null))`,
+    '字符串长度：16\n数组长度：5\n数字（无 length）：0\nnull：0',
+    '在 return 0 之前加上 if (Array.isArray(value)) return value.length。',
+    changed('return 0'),
+  ),
+  '9.8': exercise(
+    '修复 safeGet 函数，让它能正确返回属性值而不是永远返回默认值。',
+    `interface Identifiable {
+  id: number
+}
+
+// 约束 T 必须有 id 属性
+function findById<T extends Identifiable>(items: T[], id: number): T | undefined {
+  return items.find(item => item.id === id)
+}
+
+// TODO: 修复 safeGet —— 当前没有读取 obj[key]，永远返回 defaultValue
+function safeGet<T, K extends keyof T>(obj: T, key: K, defaultValue: T[K]): T[K] {
+  return defaultValue
+}
+
+interface Product {
+  id: number
+  name: string
+  price: number
+  inStock: boolean
+}
+
+const products: Product[] = [
+  { id: 1, name: "键盘", price: 299, inStock: true },
+  { id: 2, name: "鼠标", price: 149, inStock: false },
+]
+
+const found = findById(products, 2)
+if (found) {
+  console.log(\`找到：\${found.name}，¥\${found.price}\`)
+}
+
+const product = products[0]
+console.log(\`名称：\${safeGet(product, "name", "未知")}\`)
+console.log(\`库存：\${safeGet(product, "inStock", false)}\`)`,
+    '找到：鼠标，¥149\n名称：键盘\n库存：true',
+    '应该 return obj[key] !== undefined ? obj[key] : defaultValue。',
+    changed('return defaultValue'),
+  ),
+  '9.9': exercise(
+    '修正 statusLabels 中 "active" 的标签，当前写成了错误的中文。',
+    `interface Task {
+  id: number
+  title: string
+  description: string
+  completed: boolean
+  createdAt: string
+}
+
+function updateTask(id: number, changes: Partial<Task>) {
+  console.log(\`更新任务 \${id}：\`, changes)
+}
+
+type TaskSummary = Pick<Task, "id" | "title" | "completed">
+
+type TaskStatus = "all" | "active" | "completed"
+// TODO: "active" 的标签当前写错了，请改正
+const statusLabels: Record<TaskStatus, string> = {
+  all: "全部",
+  active: "已激活",
+  completed: "已完成",
+}
+
+type CreateTaskInput = Omit<Task, "id" | "createdAt">
+
+updateTask(1, { completed: true })
+updateTask(2, { title: "新标题", description: "新描述" })
+
+const summary: TaskSummary = { id: 1, title: "学 TypeScript", completed: false }
+console.log(\`任务摘要：[\${summary.id}] \${summary.title}\`)
+console.log("状态标签：", statusLabels)`,
+    '更新任务 1： { completed: true }\n更新任务 2： { title: \'新标题\', description: \'新描述\' }\n任务摘要：[1] 学 TypeScript\n状态标签： { all: \'全部\', active: \'进行中\', completed: \'已完成\' }',
+    '把 active 的值从 "已激活" 改成 "进行中"。',
+    changed('active: "已激活"'),
+  ),
+  '9.11': exercise(
+    '修复 getValue 函数，让它返回 obj[key] 的实际值而非占位字符串。',
+    `interface Product {
+  id: number
+  name: string
+  price: number
+  inStock: boolean
+}
+
+// TODO: 修复函数体，让它返回 obj[key] 的实际值
+function getValue<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return "TODO" as any
+}
+
+const product: Product = {
+  id: 1,
+  name: "无线键盘",
+  price: 299,
+  inStock: true,
+}
+
+const id = getValue(product, "id")
+const name = getValue(product, "name")
+const price = getValue(product, "price")
+
+console.log(\`商品 ID：\${id}\`)
+console.log(\`商品名：\${name}\`)
+console.log(\`价格：¥\${price}\`)
+console.log(\`类型：\${typeof price}\`)`,
+    '商品 ID：1\n商品名：无线键盘\n价格：¥299\n类型：number',
+    '把 return "TODO" as any 改成 return obj[key]。keyof 约束保证了 key 一定是 T 的合法键名。',
+    changed('return "TODO" as any'),
+  ),
 };
 
 const pythonExercises: Record<string, ExerciseDefinition> = {
@@ -1022,6 +1231,316 @@ print("总价：" + str(total([1.5, 2.0, 3.0])))`,
     '总价：6.5',
     'sum(prices) 的结果正好符合 float 返回类型。',
     changed('return 0.0'),
+  ),
+  // ── ch8-ch12 Python 进阶改造 ──
+  '8.7': exercise(
+    '修复 get_evens_gen 的条件，让它产出偶数而非奇数。',
+    `# 普通函数 vs 生成器
+def get_evens_list(limit):
+    """返回所有偶数——一次性"""
+    return [n for n in range(limit) if n % 2 == 0]
+
+# TODO: 条件是 n % 2 == 1（奇数），应改成 n % 2 == 0（偶数）
+def get_evens_gen(limit):
+    """逐个产出偶数——懒加载"""
+    for n in range(limit):
+        if n % 2 == 1:
+            yield n
+
+print("列表版本：", get_evens_list(12))
+print("生成器遍历：", end=" ")
+for even in get_evens_gen(12):
+    print(even, end=" ")`,
+    '列表版本： [0, 2, 4, 6, 8, 10]\n生成器遍历： 0 2 4 6 8 10',
+    '把 n % 2 == 1 改成 n % 2 == 0。yield 让函数变成生成器，每次暂停在 yield 处。',
+    changed('n % 2 == 1'),
+  ),
+  '10.4': exercise(
+    '修复 square lambda 的错误定义，让它返回 n 的平方而非两倍。',
+    `# TODO: 修复 square —— 当前返回 n+n（两倍），应返回 n*n（平方）
+square = lambda n: n + n
+is_odd = lambda n: n % 2 == 1
+
+print("5的平方：", square(5))
+print("7是奇数？", is_odd(7))
+
+pairs = [(1, 3), (4, 1), (2, 5), (3, 2)]
+pairs.sort(key=lambda p: p[1])
+print("\\n按第二个数排序：", pairs)
+
+nums = [1, 2, 3, 4, 5, 6, 7, 8]
+evens = list(filter(lambda n: n % 2 == 0, nums))
+print("偶数：", evens)
+
+squares = list(map(lambda x: x**2, [1, 2, 3, 4, 5]))
+print("平方：", squares)`,
+    '5的平方： 25\n7是奇数？ True\n\n按第二个数排序： [(4, 1), (3, 2), (1, 3), (2, 5)]\n偶数： [2, 4, 6, 8]\n平方： [1, 4, 9, 16, 25]',
+    'lambda 的参数是 n，表达式 n * n 才是平方。n + n 是两倍。',
+    changed('lambda n: n + n'),
+  ),
+  '11.1': exercise(
+    '修复 Cat 类的 __init__，让名字和年龄使用传入的参数值。',
+    `class Cat:
+    """猫的蓝图"""
+    # TODO: 当前名字和年龄写死了，应该用传入的 name 和 age
+    def __init__(self, name, age):
+        self.name = "未知"
+        self.age = 0
+
+cat1 = Cat("小黑", 3)
+cat2 = Cat("小白", 1)
+
+print(f"cat1：{cat1.name}，{cat1.age} 岁")
+print(f"cat2：{cat2.name}，{cat2.age} 岁")`,
+    'cat1：小黑，3 岁\ncat2：小白，1 岁',
+    '把 self.name = "未知" 改成 self.name = name，self.age = 0 改成 self.age = age。',
+    changed('self.name = "未知"', 'self.age = 0'),
+  ),
+  '11.2': exercise(
+    '补全 Book.__init__ 中缺失的 self.title，当前书名永远是空字符串。',
+    `class Book:
+    """一本书的蓝图"""
+    def __init__(self, title: str, author: str, pages: int):
+        # TODO: 把空字符串改成 title
+        self.title = ""
+        self.author = author
+        self.pages = pages
+        self.is_long = pages > 300
+    def __str__(self) -> str:
+        status = "厚书" if self.is_long else "薄书"
+        return f"《{self.title}》— {self.author}（{self.pages}页）{status}"
+
+book1 = Book("Python 编程：从入门到实践", "Eric Matthes", 500)
+book2 = Book("Python 极简讲义", "张三", 150)
+print(book1)
+print(book2)`,
+    '《Python 编程：从入门到实践》— Eric Matthes（500页）厚书\n《Python 极简讲义》— 张三（150页）薄书',
+    '把 self.title = "" 改成 self.title = title。',
+    changed('self.title = ""'),
+  ),
+  '11.3': exercise(
+    '修复 increment 方法，让它每次调用增加 1 而不是减少。',
+    `class Counter:
+    """一个简单的计数器"""
+
+    def __init__(self, name: str):
+        self.name = name
+        self.count = 0
+
+    # TODO: 这里写成了 -= 1（减少），应该是 += 1（增加）
+    def increment(self) -> int:
+        self.count -= 1
+        return self.count
+
+    def reset(self) -> None:
+        self.count = 0
+
+    def status(self) -> str:
+        return f"[{self.name}] 当前计数：{self.count}"
+
+c1 = Counter("点赞")
+c1.increment()
+c1.increment()
+c1.increment()
+print(c1.status())`,
+    '[点赞] 当前计数：3',
+    '把 -= 1 改成 += 1。',
+    changed('self.count -= 1'),
+  ),
+  '11.4': exercise(
+    '修复 Manager.bonus 方法，让经理的年终奖按正确倍数计算。',
+    `class Employee:
+    """员工基类"""
+    def __init__(self, name: str, salary: float):
+        self.name = name
+        self.salary = salary
+
+    def describe(self) -> str:
+        return f"{self.name} — 月薪 ¥{self.salary:,.0f}"
+
+    def bonus(self) -> float:
+        return self.salary
+
+class Manager(Employee):
+    """经理——继承 Employee"""
+    def __init__(self, name: str, salary: float, team_size: int):
+        super().__init__(name, salary)
+        self.team_size = team_size
+
+    # TODO: 经理年终奖应该是 3 倍月薪，当前只返回了 1 倍
+    def bonus(self) -> float:
+        return self.salary
+
+e1 = Employee("张三", 8000)
+m1 = Manager("李四", 15000, 8)
+
+print(e1.describe())
+print(f"  年终奖：¥{e1.bonus():,}")
+print(m1.describe())
+print(f"  年终奖：¥{m1.bonus():,}")`,
+    '张三 — 月薪 ¥8,000\n  年终奖：¥8,000\n李四 — 月薪 ¥15,000，团队 8 人\n  年终奖：¥45,000',
+    'Manager.bonus 应该返回 self.salary * 3（经理 3 倍年终奖）。',
+    changed('def bonus(self) -> float:\n        return self.salary'),
+  ),
+  '11.5': exercise(
+    '修复 celsius setter，让它正确更新 self._celsius 的值。',
+    `class Temperature:
+    """温度类——演示 @property 和 setter"""
+    def __init__(self, celsius=0):
+        self._celsius = celsius
+
+    @property
+    def celsius(self):
+        return self._celsius
+
+    @celsius.setter
+    def celsius(self, value):
+        # TODO: 这里忘了更新 self._celsius!
+        if value < -273.15:
+            raise ValueError("温度不能低于绝对零度！")
+        pass
+
+    @property
+    def fahrenheit(self):
+        return self._celsius * 9 / 5 + 32
+
+t = Temperature(25)
+print(f"摄氏度：{t.celsius}°C")
+print(f"华氏度：{t.fahrenheit}°F")
+
+t.celsius = 30
+print(f"\\n修改后：{t.celsius}°C = {t.fahrenheit}°F")`,
+    '摄氏度：25°C\n华氏度：77.0°F\n\n修改后：30°C = 86.0°F',
+    '在 setter 中把 pass 改成 self._celsius = value。',
+    changed('pass'),
+  ),
+  '11.9': exercise(
+    '补全 Order.total 属性，让它正确计算订单总价。',
+    `from dataclasses import dataclass, field
+from typing import List
+
+@dataclass
+class Product:
+    name: str
+    price: float
+    stock: int = 0
+
+@dataclass
+class Order:
+    order_id: int
+    items: List[Product] = field(default_factory=list)
+
+    @property
+    def total(self) -> float:
+        # TODO: 返回所有商品价格的总和
+        return 0.0
+
+p1 = Product("键盘", 299, 50)
+p2 = Product("鼠标", 149, 30)
+
+order = Order(1, [p1, p2])
+for item in order.items:
+    print(f"  {item.name}：¥{item.price}")
+print(f"总价：¥{order.total}")`,
+    '  键盘：¥299\n  鼠标：¥149\n总价：¥448',
+    '用 sum(item.price for item in self.items) 计算总和。',
+    changed('return 0.0'),
+  ),
+  '11.10': exercise(
+    '修复 calculate_stats 的 average 计算，当前永远返回 0。',
+    `from typing import List
+
+def calculate_stats(scores: List[int]) -> dict[str, float]:
+    """计算分数统计——修复 average 的计算"""
+    return {
+        # TODO: 用 sum(scores) / len(scores) 计算真实平均分
+        "average": 0.0,
+        "max": max(scores),
+        "min": min(scores),
+    }
+
+def format_score(name: str, score: int) -> str:
+    return f"{name}: {score}分"
+
+def greet(name: str, title: str | None = None) -> str:
+    if title:
+        return f"{title} {name}，你好！"
+    return f"{name}，你好！"
+
+stats = calculate_stats([88, 95, 76, 92])
+print("统计结果：")
+print(f"  average: {stats['average']}")
+print(f"  max: {stats['max']}")
+print(f"  min: {stats['min']}")
+
+print()
+print(format_score("小明", stats['max']))
+print(greet("小红"))
+print(greet("张老师", "教授"))`,
+    '统计结果：\n  average: 87.8\n  max: 95.0\n  min: 76.0\n\n小明: 95分\n小红，你好！\n教授 张老师，你好！',
+    '把 0.0 改成 sum(scores) / len(scores)。',
+    changed('"average": 0.0'),
+  ),
+  '12.1': exercise(
+    '修正 ZeroDivisionError 的错误提示文案。',
+    `def safe_divide(a, b):
+    try:
+        result = a / b
+        return f"{a} / {b} = {result:.2f}"
+    except ZeroDivisionError:
+        # TODO: 修正错误提示为"错误：除数不能为零！"
+        return f"{a} / {b} = 除数不能是 0！"
+    except TypeError:
+        return f"错误：两个参数都必须是数字！"
+
+def safe_get(items, index):
+    try:
+        return f"items[{index}] = {items[index]}"
+    except IndexError:
+        return f"items[{index}] = 错误：索引超出范围"
+    except TypeError:
+        return f"错误：索引必须是整数！"
+
+print(safe_divide(10, 2))
+print(safe_divide(10, 0))
+print(safe_divide(10, 3))
+print(safe_get(["苹果", "香蕉", "橘子"], 1))
+print(safe_get(["苹果", "香蕉", "橘子"], 5))
+print(safe_get(["苹果", "香蕉", "橘子"], -1))`,
+    '10 / 2 = 5.00\n10 / 0 = 错误：除数不能为零！\n10 / 3 = 3.33\nitems[1] = 香蕉\nitems[5] = 错误：索引超出范围\nitems[-1] = 橘子',
+    '把 "除数不能是 0！" 改成 "错误：除数不能为零！"。',
+    changed('"除数不能是 0！"'),
+  ),
+  '12.2': exercise(
+    '补全 register 函数中缺失的 UnderageError 异常抛出。',
+    `class InvalidAgeError(ValueError):
+    """年龄不合法异常"""
+    pass
+
+class UnderageError(Exception):
+    """未成年人异常"""
+    def __init__(self, age: int):
+        self.age = age
+        super().__init__(f"未满 18 岁（当前 {age} 岁）")
+
+def register(name: str, age: int) -> str:
+    """注册用户——补全未成年检查"""
+    if age < 0 or age > 150:
+        raise InvalidAgeError(f"年龄 {age} 不合法，须在 0~150 之间")
+    # TODO: 如果 age < 18，抛出 UnderageError(age)
+    return f"✅ {name}（{age}岁）注册成功！"
+
+test_cases = [("张三", 25), ("王五", 16), ("赵六", 30)]
+for name, age in test_cases:
+    try:
+        print(register(name, age))
+    except InvalidAgeError as e:
+        print(f"❌ {name} — 年龄不合法：{e}")
+    except UnderageError as e:
+        print(f"❌ {name} — 未成年：{e}")`,
+    '✅ 张三（25岁）注册成功！\n❌ 王五 — 未成年：未满 18 岁（当前 16 岁）\n✅ 赵六（30岁）注册成功！',
+    '在 return 之前加上 if age < 18: raise UnderageError(age)。',
+    changed('def register'),
   ),
 };
 
