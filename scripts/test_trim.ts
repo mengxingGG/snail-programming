@@ -1,1 +1,0 @@
-import { validateLessonOutput } from "../src/renderer/utils/lessonValidation"; const section = { id: "test", chapterId: "c", title: "t", content: "", starterCode: "", expectedOutput: "hello\nworld" }; const result = validateLessonOutput(section, "hello \nworld"); console.log(result);
