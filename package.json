@@ -1,6 +1,7 @@
 {
   "name": "snail-programming",
   "version": "0.1.0",
+  "license": "MIT",
   "description": "🐌 蜗牛编程 — 从零开始学编程的桌面应用",
   "main": "dist/main/index.js",
   "engines": {
